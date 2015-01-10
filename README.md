@@ -14,6 +14,8 @@ There is an example deployment set up [here](https://huxley.apphb.com/).
 If you want to use this proxy then you should deploy the code to your own [App Harbor](https://appharbor.com/) or [Azure](https://azure.microsoft.com/en-gb/) account.
 If you deploy to the App Harbor Europe AWS region then this will run very close to the NRE servers.
 
+SDKs in 9 languages (including Java and Ruby) for this endpoint (generated with [Swagger](https://github.com/swagger-api/swagger-codegen)) are available [here](http://restunited.com/releases/430721415517308710/wrappers). If you use these make sure to change the endpoint for production.
+
 ### Departures
 
 [/departures/[Three letter CRS station code]?accessToken=[Your GUID token]](https://huxley.apphb.com/departures/crs?accessToken=)
