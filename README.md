@@ -31,3 +31,9 @@ SDKs in 9 languages (including Java and Ruby) for this endpoint (generated with 
 The service ID can be found for each service inside the departures and arrivals response.
 
 This endpoint also accepts the [GUID representation of the ID](https://huxley.apphb.com/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=) as /, + and case sensitivity can cause trouble if you're not careful.
+
+---
+
+Made by [James Singleton](https://unop.uk)
+
+![powered by National Rail Enquiries](src/Huxley/NRE_Powered_logo.png "powered by National Rail Enquiries")
