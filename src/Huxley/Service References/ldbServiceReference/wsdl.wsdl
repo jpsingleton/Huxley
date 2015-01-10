@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://thalesgroup.com/RTTI/2014-02-20/ldb/" targetNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/" location="rtti_2014-02-20_ldb.wsdl" />
+  <wsdl:types />
+  <wsdl:service name="ldb">
+    <wsdl:port name="LDBServiceSoap" binding="tns:LDBServiceSoap">
+      <soap:address location="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LDBServiceSoap12" binding="tns:LDBServiceSoap12">
+      <soap12:address location="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

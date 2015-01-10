@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Huxley</title>
+</head>
+<body>
+    <h1>Huxley</h1>
+    <h2>A restful JSON proxy for the UK National Rail Live Departure Board <a href="http://harmful.cat-v.org/software/xml/soap/simple">SOAP</a> <a href="http://www.nationalrail.co.uk/46391.aspx">API</a> (<a href="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/">Darwin</a>)</h2>
+    <p>
+        You will need to add your access token to the URL for this to work. You can register to obtain one <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration">here</a>.
+    </p>
+    <p>
+        Append the accessToken={your token} parameter to the query string for every request.
+    </p>
+    <h3>Departures</h3>
+    <a href="/departures/crs?accessToken=">/departures/[Three letter CRS station code]?accessToken=[Your GUID token]</a>
+    <h3>Arrivals</h3>
+    <a href="/arrivals/crs?accessToken=">/arrivals/[Three letter CRS station code]?accessToken=[Your GUID token]</a>
+    <h3>Service</h3>
+    <a href="/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=">/service/[Service ID]?accessToken=[Your GUID token]</a>
+    <p>
+        The service ID can be found for each service inside the departures and arrivals response.
+    </p>
+    <p>
+        This endpoint also accepts the <a href="/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=">GUID representation of the ID</a> as /, + and case sensitivity can cause trouble if you're not careful.
+    </p>
+</body>
+</html>
