@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="NRE_Powered_logo.png" />
     <Content Include="Service References\ldbServiceReference\configuration91.svcinfo" />
     <Content Include="Service References\ldbServiceReference\configuration.svcinfo" />
     <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.GetArrivalBoardResponse.datasource">
