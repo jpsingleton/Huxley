@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Huxley by jpsingleton</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Huxley</h1>
+        <p>JSON proxy for the UK National Rail Live Departure Board SOAP API</p>
+
+        <p class="view"><a href="https://github.com/jpsingleton/Huxley">View the Project on GitHub <small>jpsingleton/Huxley</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/jpsingleton/Huxley/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jpsingleton/Huxley/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jpsingleton/Huxley">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="huxley" class="anchor" href="#huxley" aria-hidden="true"><span class="octicon octicon-link"></span></a>Huxley</h1>
+
+<p><img src="https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true" alt="Build Status" title="Build Status"></p>
+
+<h2>
+<a id="a-simple-json-proxy-for-the-uk-national-rail-live-departure-board-soap-api-darwin" class="anchor" href="#a-simple-json-proxy-for-the-uk-national-rail-live-departure-board-soap-api-darwin" aria-hidden="true"><span class="octicon octicon-link"></span></a>A simple JSON proxy for the UK National Rail Live Departure Board <a href="http://harmful.cat-v.org/software/xml/soap/simple">SOAP</a> <a href="http://www.nationalrail.co.uk/46391.aspx">API</a> (<a href="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/">Darwin</a>)</h2>
+
+<p>SOAP is a pain to use (you have to POST specially crafted XML) so this proxy allows you to GET nicely formatted JSON instead (REST). It also adds CORS headers so you can access it with JavaScript from a different domain.</p>
+
+<p>You will need to add your access token to the URL for this to work. You can register to obtain one <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration">here</a>.
+Append the accessToken={your token} parameter to the query string for every request.</p>
+
+<h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p>There is an example deployment set up <a href="https://huxley.apphb.com/">here</a>.
+(<strong>DO NOT USE THIS FOR ANYTHING SERIOUS!</strong>)</p>
+
+<p>If you want to use this proxy then you should deploy the code to your own <a href="https://appharbor.com/">App Harbor</a> or <a href="https://azure.microsoft.com/en-gb/">Azure</a> account.
+If you deploy to the App Harbor Europe AWS region then this will run very close to the NRE servers.</p>
+
+<p>SDKs in 9 languages (including Java and Ruby) for this endpoint (generated with <a href="https://github.com/swagger-api/swagger-codegen">Swagger</a>) are available <a href="http://restunited.com/releases/430721415517308710/wrappers">here</a>. If you use these make sure to change the endpoint for production.</p>
+
+<h3>
+<a id="departures" class="anchor" href="#departures" aria-hidden="true"><span class="octicon octicon-link"></span></a>Departures</h3>
+
+<p><a href="https://huxley.apphb.com/departures/crs?accessToken=">/departures/[Three letter CRS station code]?accessToken=[Your GUID token]</a></p>
+
+<h3>
+<a id="arrivals" class="anchor" href="#arrivals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Arrivals</h3>
+
+<p><a href="https://huxley.apphb.com/arrivals/crs?accessToken=">/arrivals/[Three letter CRS station code]?accessToken=[Your GUID token]</a></p>
+
+<h3>
+<a id="service" class="anchor" href="#service" aria-hidden="true"><span class="octicon octicon-link"></span></a>Service</h3>
+
+<p><a href="https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=">/service/[Service ID]?accessToken=[Your GUID token]</a></p>
+
+<p>The service ID can be found for each service inside the departures and arrivals response.</p>
+
+<p>This endpoint also accepts the <a href="https://huxley.apphb.com/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=">GUID representation of the ID</a> as /, + and case sensitivity can cause trouble if you're not careful.</p>
+
+<hr>
+
+<p>Made by <a href="https://unop.uk">James Singleton</a></p>
+
+<p><img src="src/Huxley/NRE_Powered_logo.png" alt="powered by National Rail Enquiries" title="powered by National Rail Enquiries"></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/jpsingleton">jpsingleton</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
