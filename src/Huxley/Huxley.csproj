@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="huxley.png" />
     <Content Include="index.html" />
     <Content Include="NRE_Powered_logo.png" />
     <Content Include="Service References\ldbServiceReference\configuration91.svcinfo" />
