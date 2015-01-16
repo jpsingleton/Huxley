@@ -12,12 +12,24 @@
                 <br />
                 Live Departure Board <a href="http://harmful.cat-v.org/software/xml/soap/simple">SOAP</a> <a href="http://www.nationalrail.co.uk/46391.aspx">API</a> (<a href="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/">Darwin</a>)</h2>
         </div>
+        <h2>Access Tokens</h2>
         <p>
             You will need to add your access token to the URL for this to work. You can register to obtain one <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration">here</a>.
         </p>
         <p>
             Append the <code>accessToken={ your token }</code> parameter to the query string for every request.
         </p>
+        <p>
+            There is optional support for configuring the access token server side. So you don't need to worry about revealing it.
+        </p>
+        <p>
+            You need to configure a random token and send this instead. If the token matches what the proxy has then it is replaced with your official token. Otherwise it is passed straight through.
+            Look in the <code>Web.config</code> file for more details.
+        </p>
+        <p>
+            <strong>N.B.</strong> You should set up these tokens in your deployment platform and not in your source code repository. You'll notice that the values are blank by default.
+        </p>
+        <h2>API Endpoints</h2>
         <h3>Departures</h3>
         <code><a href="/departures/crs?accessToken=">/departures/[Three letter CRS station code]?accessToken=[Your GUID token]</a></code>
         <p>CRS station codes are available <a href="http://www.nationalrail.co.uk/static/documents/content/station_codes.csv">here</a>.</p>
@@ -35,15 +47,16 @@
         <p>
             This endpoint also accepts the <a href="/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=">GUID representation of the ID</a> as /, + and case sensitivity can cause trouble if you're not careful.
         </p>
-        <h3>Source Code</h3>
+        <h2>Source Code</h2>
         <p>All the <a href="https://github.com/jpsingleton/Huxley">source code is available on GitHub</a>.</p>
         <p>
             <a href="https://ci.appveyor.com/project/jpsingleton/huxley">
                 <image src="https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?svg=true" width="256" />
             </a>
         </p>
+        <h2>SDKs</h2>
         <p>
-            SDKs in 9 languages (including Java and Ruby) for this endpoint (generated with <a href="https://github.com/swagger-api/swagger-codegen">Swagger</a>) are available <a href="http://restunited.com/releases/430721415517308710/wrappers">here</a>.
+            Client library SDKs in 9 languages (including Java and Ruby) for this endpoint (generated with <a href="https://github.com/swagger-api/swagger-codegen">Swagger</a>) are available <a href="http://restunited.com/releases/430721415517308710/wrappers">here</a>.
             <br />
             If you use these make sure to change the endpoint for production.
         </p>
