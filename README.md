@@ -24,6 +24,10 @@ SDKs in 9 languages (including Java and Ruby) for this endpoint (generated with 
 
 [/arrivals/[Three letter CRS station code]?accessToken=[Your GUID token]](https://huxley.apphb.com/arrivals/crs?accessToken=)
 
+### Departures and Arrivals
+
+[/all/[Three letter CRS station code]?accessToken=[Your GUID token]](https://huxley.apphb.com/all/crs?accessToken=)
+
 ### Service
 
 [/service/[Service ID]?accessToken=[Your GUID token]](https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=)
