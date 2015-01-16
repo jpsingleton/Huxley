@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ArrivalsController.cs" />
+    <Compile Include="Controllers\AllController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="WebApiConfig.cs" />
     <Compile Include="Controllers\DeparturesController.cs" />
