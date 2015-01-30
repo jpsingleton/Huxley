@@ -43,3 +43,11 @@ This endpoint also accepts the [GUID representation of the ID](https://huxley.ap
 Made by [James Singleton](https://unop.uk)
 
 ![powered by National Rail Enquiries](src/Huxley/NRE_Powered_logo.png "powered by National Rail Enquiries")
+
+---
+
+© 2015 James Singleton
+
+This program is licensed under the terms of the GNU Affero General Public License. This means that you need to share any changes (even if only running on a public server).
+
+If you would like another license (such as a commercial license with an invoice) then this can be provided. Please get in touch (send an email to jpsingleton at gmail dot com). 
