@@ -20,22 +20,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Threading.Tasks;
+using System.Web.Http;
+using Huxley.Models;
 using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class ServiceController : BaseController {
         // GET /service/ID?accessToken=[your token]
-        public async Task<ServiceDetails> Get(string id, Guid accessToken) {
+        public async Task<ServiceDetails> Get([FromUri] ServiceRequest request) {
 
             Guid sid;
-            if (Guid.TryParse(id, out sid)) {
-                id = Convert.ToBase64String(sid.ToByteArray());
+            if (Guid.TryParse(request.ServiceId, out sid)) {
+                request.ServiceId = Convert.ToBase64String(sid.ToByteArray());
             }
 
             var client = new LDBServiceSoapClient();
-            var token = MakeAccessToken(accessToken);
+            var token = MakeAccessToken(request.AccessToken);
 
-            var service = await client.GetServiceDetailsAsync(token, id);
+            var service = await client.GetServiceDetailsAsync(token, request.ServiceId);
             return service.GetServiceDetailsResult;
 
         }

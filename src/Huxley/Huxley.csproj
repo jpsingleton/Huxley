@@ -85,6 +85,9 @@
     <Compile Include="Controllers\AllController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Models\BaseRequest.cs" />
+    <Compile Include="Models\ServiceRequest.cs" />
+    <Compile Include="Models\StationBoardRequest.cs" />
     <Compile Include="WebApiConfig.cs" />
     <Compile Include="Controllers\DeparturesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -145,9 +148,7 @@
     </None>
     <Content Include="Service References\ldbServiceReference\wsdl.wsdl" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

@@ -18,19 +18,25 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System;
 using System.Threading.Tasks;
+using System.Web.Http;
+using Huxley.Models;
 using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class AllController : BaseController {
         // GET /all/CRS?accessToken=[your token]
-        public async Task<StationBoard> Get(string id, Guid accessToken) {
+        public async Task<StationBoard> Get([FromUri] StationBoardRequest request) {
 
             var client = new LDBServiceSoapClient();
-            var token = MakeAccessToken(accessToken);
+            var token = MakeAccessToken(request.AccessToken);
 
-            var board = await client.GetArrivalDepartureBoardAsync(token, 42, id.ToUpperInvariant(), null, FilterType.to, 0, 0);
+            var board = await client.GetArrivalDepartureBoardAsync(token,
+                                                         request.NumRows,
+                                                             request.Crs,
+                                                       request.FilterCrs,
+                                                      request.FilterType,
+                                                                       0, 0);
             return board.GetStationBoardResult;
 
         }

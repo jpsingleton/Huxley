@@ -23,7 +23,14 @@ using System.Web.Http;
 namespace Huxley {
     public static class WebApiConfig {
         public static void Register(HttpConfiguration config) {
-            config.Routes.MapHttpRoute("DefaultApi", "{controller}/{*id}");
+            config.Routes.MapHttpRoute("ServiceDetailsApi", "service/{*serviceid}", new { controller = "Service" });
+            config.Routes.MapHttpRoute("StationBoardApiSimple", "{controller}/{crs}/{numrows}");
+            config.Routes.MapHttpRoute("StationBoardApi", "{controller}/{crs}/{filtertype}/{filtercrs}/{numrows}",
+                new {
+                    filtertype = RouteParameter.Optional,
+                    filtercrs = RouteParameter.Optional,
+                    numrows = RouteParameter.Optional
+                });
         }
     }
 }
