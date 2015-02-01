@@ -57,14 +57,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <strong>N.B.</strong> You should set up these tokens in your deployment platform and not in your source code repository. You'll notice that the values are blank by default.
         </p>
         <h2>API Endpoints</h2>
-        <h3>Departures</h3>
+        <h3>Station Boards</h3>
+        <h4>URL Format</h4>
+        The URL format is <code>{board}/{crs}/{filtertype}/{filtercrs}/{numrows}</code> or <code>{board}/{crs}/{numrows}</code> where only board and CRS are required.
+        <h5>Examples:</h5>
+        <ul>
+            <li>10 (default value) Arrivals and Departures at Clapham Junction: <code><a href="/all/clj?accessToken=">/all/clj</a></code></li>
+            <li>15 Arrivals and Departures at Clapham Junction: <code><a href="/all/clj/15?accessToken=">/all/clj/15</a></code></li>
+            <li>10 (default value) Departures at Clapham Junction to Waterloo: <code><a href="/departures/clj/to/wat?accessToken=">/departures/clj/to/wat</a></code></li>
+            <li>15 Arrivals at Clapham Junction from Waterloo: <code><a href="/arrivals/clj/from/wat/15?accessToken=">/arrivals/clj/from/wat/15</a></code></li>
+        </ul>
+        <h4>Boards</h4>
+        <h5>Departures</h5>
         <code><a href="/departures/crs?accessToken=">/departures/[Three letter CRS station code]?accessToken=[Your GUID token]</a></code>
-        <p>CRS station codes are available <a href="http://www.nationalrail.co.uk/static/documents/content/station_codes.csv">here</a>.</p>
-        <h3>Arrivals</h3>
+        <h5>Arrivals</h5>
         <code><a href="/arrivals/crs?accessToken=">/arrivals/[Three letter CRS station code]?accessToken=[Your GUID token]</a></code>
-        <p>CRS station codes are available <a href="http://www.nationalrail.co.uk/static/documents/content/station_codes.csv">here</a>.</p>
-        <h3>Departures and Arrivals</h3>
+        <h5>Departures and Arrivals</h5>
         <code><a href="/all/crs?accessToken=">/all/[Three letter CRS station code]?accessToken=[Your GUID token]</a></code>
+        <h4>CRS station codes</h4>
         <p>CRS station codes are available <a href="http://www.nationalrail.co.uk/static/documents/content/station_codes.csv">here</a>.</p>
         <h3>Service</h3>
         <code><a href="/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=">/service/[Service ID]?accessToken=[Your GUID token]</a></code>
