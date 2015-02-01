@@ -81,15 +81,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ArrivalsController.cs" />
-    <Compile Include="Controllers\AllController.cs" />
+    <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Models\BaseRequest.cs" />
     <Compile Include="Models\ServiceRequest.cs" />
     <Compile Include="Models\StationBoardRequest.cs" />
     <Compile Include="WebApiConfig.cs" />
-    <Compile Include="Controllers\DeparturesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

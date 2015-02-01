@@ -25,6 +25,7 @@ namespace Huxley.Models {
         private string crs;
         private string filterCrs;
         private ushort numRows;
+        public string Board { get; set; }
         public string Crs {
             get { return crs != null ? crs.ToUpperInvariant() : null; }
             set { crs = value; }

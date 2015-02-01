@@ -24,19 +24,23 @@ using Huxley.Models;
 using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
-    public class DeparturesController : BaseController {
-        // GET /departures/CRS?accessToken=[your token]
+    public class StationController : BaseController {
+        // GET /all/CRS?accessToken=[your token]
         public async Task<StationBoard> Get([FromUri] StationBoardRequest request) {
 
             var client = new LDBServiceSoapClient();
             var token = MakeAccessToken(request.AccessToken);
 
-            var board = await client.GetDepartureBoardAsync(token,
-                                                  request.NumRows,
-                                                      request.Crs,
-                                                request.FilterCrs,
-                                               request.FilterType,
-                                                                0, 0);
+            if ("departures" == request.Board) {
+                var departures = await client.GetDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+                return departures.GetStationBoardResult;
+            }
+            if ("arrivals" == request.Board) {
+                var arrivals = await client.GetArrivalBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+                return arrivals.GetStationBoardResult;
+            }
+
+            var board = await client.GetArrivalDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
             return board.GetStationBoardResult;
 
         }
