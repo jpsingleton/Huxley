@@ -22,12 +22,21 @@ using System;
 using System.Web;
 using System.Web.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Huxley {
     public class WebApiApplication : HttpApplication {
         protected void Application_Start() {
+            // Makes the JSON easier to read in a browser without installing an extension like JSONview
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
+
+            // Stops the backing field names being used instead of the public property names (*Field & PropertyChanged etc.)
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            // Returns JSON to the browser without needing to add application/json to the accept request header - remove to use XML (becomes the default)
             GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
+
+            // Pass Register into Configure to support attribute routing in the future
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
 
