@@ -7,7 +7,7 @@
 ## Extremely simple restful JSON proxy for the UK National Rail Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) ([Darwin](https://lite.realtime.nationalrail.co.uk/OpenLDBWS/))
 
 You will need to add your access token to the URL for this to work. You can register to obtain one [here](https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration).
-Append the accessToken={your token} parameter to the query string for every request.
+Append the `accessToken={ your token }` parameter to the query string for every request.
 
 ## Demo
 There is an example deployment set up [here](https://huxley.apphb.com/).
@@ -17,6 +17,16 @@ If you want to use this proxy then you should deploy the code to your own [App H
 If you deploy to the App Harbor Europe AWS region then this will run very close to the NRE servers.
 
 SDKs in 9 languages (including Java and Ruby) for this endpoint (generated with [Swagger](https://github.com/swagger-api/swagger-codegen)) are available [here](http://restunited.com/releases/430721415517308710/wrappers). If you use these make sure to change the endpoint for production.
+
+### URL Format
+
+The URL format is `{board}/{crs}/{filtertype}/{filtercrs}/{numrows}` or `{board}/{crs}/{numrows}` where only board and CRS are required.
+Examples:
+
+* 10 (default value) Arrivals and Departures at Clapham Junction: `/all/clj`
+* 15 Arrivals and Departures at Clapham Junction: `/all/clj/15`
+* 10 (default value) Departures at Clapham Junction to Waterloo: `/departures/clj/to/wat`
+* 15 Arrivals at Clapham Junction from Waterloo: `/arrivals/clj/from/wat/15`
 
 ### Departures
 
