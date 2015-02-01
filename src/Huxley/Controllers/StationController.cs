@@ -31,15 +31,15 @@ namespace Huxley.Controllers {
             var client = new LDBServiceSoapClient();
             var token = MakeAccessToken(request.AccessToken);
 
-            if ("departures" == request.Board) {
+            if (Board.Departures == request.Board) {
                 var departures = await client.GetDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
                 return departures.GetStationBoardResult;
             }
-            if ("arrivals" == request.Board) {
+            if (Board.Arrivals == request.Board) {
                 var arrivals = await client.GetArrivalBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
                 return arrivals.GetStationBoardResult;
             }
-
+            // Default all (departures and arrivals board)
             var board = await client.GetArrivalDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
             return board.GetStationBoardResult;
 

@@ -18,26 +18,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using Huxley.ldbServiceReference;
-
 namespace Huxley.Models {
-    public class StationBoardRequest : BaseRequest {
-        private string crs;
-        private string filterCrs;
-        private ushort numRows;
-        public Board Board { get; set; }
-        public string Crs {
-            get { return crs != null ? crs.ToUpperInvariant() : null; }
-            set { crs = value; }
-        }
-        public FilterType FilterType { get; set; }
-        public string FilterCrs {
-            get { return filterCrs != null ? filterCrs.ToUpperInvariant() : null; }
-            set { filterCrs = value; }
-        }
-        public ushort NumRows {
-            get { return (ushort)(numRows > 0 ? numRows : 10); }
-            set { numRows = value; }
-        }
+    public enum Board {
+        All,
+        Arrivals,
+        Departures
     }
 }
