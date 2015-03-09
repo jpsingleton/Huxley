@@ -13,6 +13,22 @@ Append the `accessToken={ your token }` parameter to the query string for every 
 There is an example deployment set up [here](https://huxley.apphb.com/).
 (**DO NOT USE THIS FOR ANYTHING SERIOUS!**)
 
+Paste this into your web console:
+```javascript
+var r = new XMLHttpRequest();
+r.open("GET", "https://huxley.apphb.com/all/stp/from/bxs/1?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1", true);
+r.onreadystatechange = function () {
+    if (r.readyState != 4 || r.status != 200) return;
+    var resp = JSON.parse(r.response);
+    if (resp.trainServices && resp.trainServices.length > 0) {
+        alert("The next train to arrive at " + resp.locationName + " from " + resp.filterLocationName + " will get in at " + resp.trainServices[0].sta);
+    } else {
+        alert("Sorry, no trains from " + resp.filterLocationName + " arriving soon");
+    }
+};
+r.send();
+```
+
 If you want to use this proxy then you should deploy the code to your own [App Harbor](https://appharbor.com/) or [Azure](https://azure.microsoft.com/en-gb/) account.
 If you deploy to the App Harbor Europe AWS region then this will run very close to the NRE servers.
 
