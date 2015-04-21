@@ -7,7 +7,7 @@
 ## Extremely simple restful JSON proxy for the UK National Rail Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) ([Darwin](https://lite.realtime.nationalrail.co.uk/OpenLDBWS/))
 
 You will need to add your access token to the URL for this to work. You can register to obtain one [here](https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration).
-Append the `accessToken={ your token }` parameter to the query string for every request.
+Append the `accessToken={Your GUID token}` parameter to the query string for every request.
 
 ## Demo
 There is an example deployment set up [here](https://huxley.apphb.com/).
@@ -46,23 +46,27 @@ Examples:
 
 ### Departures
 
-[/departures/[Three letter CRS station code]?accessToken=[Your GUID token]](https://huxley.apphb.com/departures/crs?accessToken=)
+[/departures/{Three letter CRS station code}?accessToken={Your GUID token}](https://huxley.apphb.com/departures/crs?accessToken=)
 
 ### Arrivals
 
-[/arrivals/[Three letter CRS station code]?accessToken=[Your GUID token]](https://huxley.apphb.com/arrivals/crs?accessToken=)
+[/arrivals/{Three letter CRS station code}?accessToken={Your GUID token}](https://huxley.apphb.com/arrivals/crs?accessToken=)
 
 ### Departures and Arrivals
 
-[/all/[Three letter CRS station code]?accessToken=[Your GUID token]](https://huxley.apphb.com/all/crs?accessToken=)
+[/all/{Three letter CRS station code}?accessToken={Your GUID token}](https://huxley.apphb.com/all/crs?accessToken=)
 
 ### Service
 
-[/service/[Service ID]?accessToken=[Your GUID token]](https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=)
+[/service/{Service ID}?accessToken={Your GUID token}](https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=)
 
 The service ID can be found for each service inside the departures and arrivals response.
 
 This endpoint also accepts the [GUID representation of the ID](https://huxley.apphb.com/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=) as /, + and case sensitivity can cause trouble if you're not careful.
+
+### Hosting Quick Start
+
+To get your own instance of Huxley follow the [instructions on the wiki](https://github.com/jpsingleton/Huxley/wiki/Hosting-Quick-Start).
 
 ---
 
