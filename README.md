@@ -63,8 +63,37 @@ Examples:
 The service ID can be found for each service inside the departures and arrivals response.
 
 This endpoint also accepts the [GUID representation of the ID](https://huxley.apphb.com/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=) as /, + and case sensitivity can cause trouble if you're not careful.
+[More information on the wiki](https://github.com/jpsingleton/Huxley/wiki/Train-Service-IDs).
 
-### Hosting Quick Start
+### Delays
+
+The **delays** action performs calculations server side to easily let you know if there are problems on a particular route.
+
+[/delays/{crs}/{filtertype}/{filtercrs}/{numrows}?accessToken={Your GUID token}](https://huxley.apphb.com/delays/gtw/to/lon/50?accessToken=)
+
+**Sample Response:**
+```javascript
+{
+  "generatedAt": "2015-04-24T14:59:29.6198809+01:00",
+  "locationName": "Gatwick Airport",
+  "crs": "GTW",
+  "filterLocationName": "London",
+  "filtercrs": "LON",
+  "delays": true,
+  "totalTrainsDelayed": 8,
+  "totalDelayMinutes": 4,
+  "totalTrains": 20
+}
+```
+
+This action will accept 'lon' or 'London' as a filter CRS to find trains going to or coming from any London terminal.
+
+## CRS Station Codes
+
+CRS (Computer Reservation System) station codes are available [here](http://www.nationalrail.co.uk/static/documents/content/station_codes.csv).
+[More information on the wiki](https://github.com/jpsingleton/Huxley/wiki/CRS-station-codes).
+
+## Hosting Quick Start
 
 To get your own instance of Huxley follow the [instructions on the wiki](https://github.com/jpsingleton/Huxley/wiki/Hosting-Quick-Start).
 

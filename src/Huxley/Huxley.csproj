@@ -8,7 +8,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1CFCC053-BD6C-4205-8F19-CB0680E68B9C}</ProjectGuid>
-    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Huxley</RootNamespace>
@@ -41,6 +41,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Formo, Version=1.4.3.392, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Formo.1.4.3.392\lib\net40\Formo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,11 +85,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DelaysController.cs" />
     <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Models\BaseRequest.cs" />
     <Compile Include="Models\Board.cs" />
+    <Compile Include="Models\DelaysResponse.cs" />
     <Compile Include="Models\ServiceRequest.cs" />
     <Compile Include="Models\StationBoardRequest.cs" />
     <Compile Include="WebApiConfig.cs" />
@@ -146,6 +152,12 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Service References\ldbServiceReference\wsdl.wsdl" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -24,6 +24,7 @@ namespace Huxley {
     public static class WebApiConfig {
         public static void Register(HttpConfiguration config) {
             config.Routes.MapHttpRoute("ServiceDetailsApi", "service/{*serviceid}", new { controller = "Service" });
+            config.Routes.MapHttpRoute("StationDelaysApi", "delays/{crs}/{filtertype}/{filtercrs}/{numrows}", new { controller = "Delays" });
             config.Routes.MapHttpRoute("StationBoardApiSimple", "{board}/{crs}/{numrows}", new { controller = "Station" });
             config.Routes.MapHttpRoute("StationBoardApi", "{board}/{crs}/{filtertype}/{filtercrs}/{numrows}",
                 new {

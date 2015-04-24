@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             You will need to add your access token to the URL for this to work. You can register to obtain one <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration">here</a>.
         </p>
         <p>
-            Append the <code>accessToken={ your token }</code> parameter to the query string for every request.
+            Append the <code>accessToken={Your GUID token}</code> parameter to the query string for every request.
         </p>
         <p>
             There is optional support for configuring the access token server side. So you don't need to worry about revealing it.
@@ -67,17 +67,36 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <li>10 (default value) Departures at Clapham Junction to Waterloo: <code><a href="/departures/clj/to/wat?accessToken=">/departures/clj/to/wat</a></code></li>
             <li>15 Arrivals at Clapham Junction from Waterloo: <code><a href="/arrivals/clj/from/wat/15?accessToken=">/arrivals/clj/from/wat/15</a></code></li>
         </ul>
-        <h4>Boards</h4>
-        <h5>Departures</h5>
-        <code><a href="/departures/crs?accessToken=">/departures/[Three letter CRS station code]?accessToken=[Your GUID token]</a></code>
-        <h5>Arrivals</h5>
-        <code><a href="/arrivals/crs?accessToken=">/arrivals/[Three letter CRS station code]?accessToken=[Your GUID token]</a></code>
-        <h5>Departures and Arrivals</h5>
-        <code><a href="/all/crs?accessToken=">/all/[Three letter CRS station code]?accessToken=[Your GUID token]</a></code>
-        <h4>CRS station codes</h4>
-        <p>CRS station codes are available <a href="http://www.nationalrail.co.uk/static/documents/content/station_codes.csv">here</a>.</p>
+        <h4>Departures</h4>
+        <p><code><a href="/departures/crs?accessToken=">/departures/{crs}?accessToken={Your GUID token}</a></code></p>
+        <h4>Arrivals</h4>
+        <p><code><a href="/arrivals/crs?accessToken=">/arrivals/{crs}?accessToken={Your GUID token}</a></code></p>
+        <h4>Departures and Arrivals</h4>
+        <p><code><a href="/all/crs?accessToken=">/all/{crs}?accessToken={Your GUID token}</a></code></p>
+        <h4>Delays</h4>
+        <p>The <strong>delays</strong> action performs calculations server side to easily let you know if there are problems on a particular route.</p>
+        <p><code><a href="/delays/gtw/to/lon/50?accessToken=">/delays/{crs}/{filtertype}/{filtercrs}/{numrows}?accessToken={Your GUID token}</a></code></p>
+        <strong>Sample Response:</strong>
+        <pre>
+{
+    "generatedAt": "2015-04-24T14:59:29.6198809+01:00",
+    "locationName": "Gatwick Airport",
+    "crs": "GTW",
+    "filterLocationName": "London",
+    "filtercrs": "LON",
+    "delays": true,
+    "totalTrainsDelayed": 8,
+    "totalDelayMinutes": 4,
+    "totalTrains": 20
+}
+</pre>
+        <p>
+            Additionally, This action will accept 'LON' or 'London' as a filter CRS to find trains going to or coming from any London terminal.
+        </p>
+        <h4>CRS Station Codes</h4>
+        <p>CRS (Computer Reservation System) station codes are available <a href="http://www.nationalrail.co.uk/static/documents/content/station_codes.csv">here</a>.</p>
         <h3>Service</h3>
-        <code><a href="/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=">/service/[Service ID]?accessToken=[Your GUID token]</a></code>
+        <p><code><a href="/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=">/service/[Service ID]?accessToken=[Your GUID token]</a></code></p>
         <p>
             The service ID can be found for each service inside the departures and arrivals response.
         </p>
