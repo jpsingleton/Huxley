@@ -29,7 +29,7 @@ using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class DelaysController : BaseController {
-        // GET /delays/CRS?accessToken=[your token]
+        // GET /delays/{crs}/{filtertype}/{filtercrs}/{numrows}?accessToken=[your token]
         public async Task<DelaysResponse> Get([FromUri] StationBoardRequest request) {
 
             var londonTerminals = new List<string> { "BFR", "LBG", "CST", "CHX", "EUS", "FST", "KGX", "LST", "MYB", "PAD", "STP", "SPX", "VIC", "WAT", "WAE", };
@@ -67,11 +67,12 @@ namespace Huxley.Controllers {
 
                 // Parse the response from the web service.
                 foreach (var si in trainServices.Where(si => !si.etd.Equals("On time", StringComparison.InvariantCultureIgnoreCase))) {
-                    if (si.etd.Equals("Cancelled", StringComparison.InvariantCultureIgnoreCase)) {
+                    if (si.etd.Equals("Delayed", StringComparison.InvariantCultureIgnoreCase) ||
+                        si.etd.Equals("Cancelled", StringComparison.InvariantCultureIgnoreCase)) {
                         totalTrainsDelayed++;
                     } else {
                         DateTime etd;
-                        // Could be "Starts Here" or contain a *
+                        // Could be "Starts Here", "No Report" or contain a * (report overdue)
                         if (DateTime.TryParse(si.etd.Replace("*", ""), out etd)) {
                             DateTime std;
                             if (DateTime.TryParse(si.std, out std)) {
