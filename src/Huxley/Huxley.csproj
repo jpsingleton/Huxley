@@ -41,6 +41,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Formo, Version=1.4.3.392, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Formo.1.4.3.392\lib\net40\Formo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,11 +85,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DelaysController.cs" />
     <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Models\BaseRequest.cs" />
     <Compile Include="Models\Board.cs" />
+    <Compile Include="Models\DelaysResponse.cs" />
     <Compile Include="Models\ServiceRequest.cs" />
     <Compile Include="Models\StationBoardRequest.cs" />
     <Compile Include="WebApiConfig.cs" />
