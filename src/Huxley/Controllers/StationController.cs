@@ -18,6 +18,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Huxley.Models;
@@ -25,24 +27,40 @@ using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class StationController : BaseController {
-        // GET /all/CRS?accessToken=[your token]
+        // GET /{board}/CRS?accessToken=[your token]
         public async Task<StationBoard> Get([FromUri] StationBoardRequest request) {
 
             var client = new LDBServiceSoapClient();
-            var token = MakeAccessToken(request.AccessToken);
 
-            if (Board.Departures == request.Board) {
-                var departures = await client.GetDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
-                return departures.GetStationBoardResult;
-            }
-            if (Board.Arrivals == request.Board) {
-                var arrivals = await client.GetArrivalBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
-                return arrivals.GetStationBoardResult;
-            }
-            // Default all (departures and arrivals board)
-            var board = await client.GetArrivalDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
-            return board.GetStationBoardResult;
+            // Avoiding Problems with the Using Statement in WCF clients
+            // https://msdn.microsoft.com/en-us/library/aa355056.aspx
+            try {
+                var token = MakeAccessToken(request.AccessToken);
 
+                if (Board.Departures == request.Board) {
+                    var departures = await client.GetDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+                    return departures.GetStationBoardResult;
+                }
+                if (Board.Arrivals == request.Board) {
+                    var arrivals = await client.GetArrivalBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+                    return arrivals.GetStationBoardResult;
+                }
+
+                // Default all (departures and arrivals board)
+                var board = await client.GetArrivalDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+                return board.GetStationBoardResult;
+
+            } catch (CommunicationException) {
+                client.Abort();
+            } catch (TimeoutException) {
+                client.Abort();
+            } catch (Exception) {
+                client.Abort();
+                throw;
+            } finally {
+                client.Close();
+            }
+            return new StationBoard();
         }
     }
 }

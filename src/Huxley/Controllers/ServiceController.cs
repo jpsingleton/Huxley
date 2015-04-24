@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 using System;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Huxley.Models;
@@ -35,11 +36,25 @@ namespace Huxley.Controllers {
             }
 
             var client = new LDBServiceSoapClient();
-            var token = MakeAccessToken(request.AccessToken);
 
-            var service = await client.GetServiceDetailsAsync(token, request.ServiceId);
-            return service.GetServiceDetailsResult;
+            // Avoiding Problems with the Using Statement in WCF clients
+            // https://msdn.microsoft.com/en-us/library/aa355056.aspx
+            try {
+                var token = MakeAccessToken(request.AccessToken);
 
+                var service = await client.GetServiceDetailsAsync(token, request.ServiceId);
+                return service.GetServiceDetailsResult;
+            } catch (CommunicationException) {
+                client.Abort();
+            } catch (TimeoutException) {
+                client.Abort();
+            } catch (Exception) {
+                client.Abort();
+                throw;
+            } finally {
+                client.Close();
+            }
+            return new ServiceDetails();
         }
     }
 }
