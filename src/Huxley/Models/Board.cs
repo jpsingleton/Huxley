@@ -22,6 +22,6 @@ namespace Huxley.Models {
     public enum Board {
         All,
         Arrivals,
-        Departures
+        Departures,
     }
 }
