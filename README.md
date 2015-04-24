@@ -67,22 +67,26 @@ This endpoint also accepts the [GUID representation of the ID](https://huxley.ap
 
 ### Delays
 
-[/delays/{crs}/{filtertype}/{filtercrs}/{numrows}?accessToken={Your GUID token}](https://huxley.apphb.com/delays/orp/to/lon/50?accessToken=)
+The **delays** action performs calculations server side to easily let you know if there are problems on a particular route.
 
-Response:
+[/delays/{crs}/{filtertype}/{filtercrs}/{numrows}?accessToken={Your GUID token}](https://huxley.apphb.com/delays/gtw/to/lon/50?accessToken=)
+
+**Sample Response:**
 ```javascript
 {
-  "generatedAt": "2015-04-24T13:43:07.4656817+01:00",
-  "locationName": "Orpington",
-  "crs": "ORP",
+  "generatedAt": "2015-04-24T14:59:29.6198809+01:00",
+  "locationName": "Gatwick Airport",
+  "crs": "GTW",
   "filterLocationName": "London",
   "filtercrs": "LON",
-  "delays": false,
-  "totalTrainsDelayed": 0,
-  "totalDelayMinutes": 0,
-  "totalTrains": 24
+  "delays": true,
+  "totalTrainsDelayed": 8,
+  "totalDelayMinutes": 4,
+  "totalTrains": 20
 }
 ```
+
+This action will accept 'lon' or 'London' as a filter CRS to find trains going to or coming from any London terminal.
 
 ## CRS Station Codes
 
