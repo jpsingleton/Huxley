@@ -60,7 +60,18 @@ namespace Huxley.Controllers {
 
                 var trainServices = response.trainServices;
                 if (null == filterCrs) {
-                    trainServices = trainServices.Where(ts => ts.destination.Any(d => londonTerminals.Contains(d.crs.ToUpperInvariant()))).ToArray();
+                    // This only finds trains terminating at London terminals. BFR/STP etc. won't be picked up if called at en-route.
+                    // Could query for every terminal or get service for every train and check calling points. Very chatty either way.
+                    switch (request.FilterType) {
+                        case FilterType.to:
+                            trainServices = trainServices.Where(ts => ts.destination.Any(d => londonTerminals.Contains(d.crs.ToUpperInvariant()))).ToArray();
+                            break;
+                        case FilterType.from:
+                            trainServices = trainServices.Where(ts => ts.origin.Any(d => londonTerminals.Contains(d.crs.ToUpperInvariant()))).ToArray();
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                     filterCrs = "LON";
                     filterLocationName = "London";
                 }
