@@ -39,5 +39,6 @@ namespace Huxley.Models {
             get { return (ushort)(numRows > 0 ? numRows : 10); }
             set { numRows = value; }
         }
+        public string Std { get; set; }
     }
 }

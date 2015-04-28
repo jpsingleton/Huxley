@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
@@ -31,6 +32,20 @@ namespace Huxley.Controllers {
     public class DelaysController : BaseController {
         // GET /delays/{crs}/{filtertype}/{filtercrs}/{numrows}?accessToken=[your token]
         public async Task<DelaysResponse> Get([FromUri] StationBoardRequest request) {
+
+            // Only poll the API for n hours before and after the train time if STD is provided
+            if (!string.IsNullOrWhiteSpace(request.Std)) {
+                DateTime requestStd;
+                // Parse the STD in 24-hour format (with no colon)
+                if (DateTime.TryParseExact(request.Std, "HHmm", CultureInfo.InvariantCulture, DateTimeStyles.None, out requestStd)) {
+                    var ukNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time"));
+                    var diff = requestStd.Subtract(ukNow);
+                    // Don't make a request if train is more than 2 hours in the future or more than 1 hour in the past
+                    if (diff.TotalHours > 2 || diff.TotalHours < -1 ) {
+                        return new DelaysResponse();
+                    }
+                }
+            }
 
             var londonTerminals = new List<string> { "BFR", "LBG", "CST", "CHX", "EUS", "FST", "KGX", "LST", "MYB", "PAD", "STP", "SPX", "VIC", "WAT", "WAE", };
 
@@ -74,6 +89,11 @@ namespace Huxley.Controllers {
                     }
                     filterCrs = "LON";
                     filterLocationName = "London";
+                }
+
+                // If STD is provided then select the train(s) matching that (in almost all cases this will be a single train service)
+                if (!string.IsNullOrWhiteSpace(request.Std)) {
+                    trainServices = trainServices.Where(ts => ts.std.Replace(":", "").Equals(request.Std, StringComparison.InvariantCultureIgnoreCase)).ToArray();
                 }
 
                 // Parse the response from the web service.
