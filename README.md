@@ -13,7 +13,7 @@ Append the `accessToken={Your GUID token}` parameter to the query string for eve
 There is an example deployment set up [here](https://huxley.apphb.com/).
 (**DO NOT USE THIS FOR ANYTHING SERIOUS!**)
 
-Paste this into your web console(`F12`):
+Paste this into your web console <kbd>F12</kbd>:
 ```javascript
 var r = new XMLHttpRequest();
 r.open("GET", "https://huxley.apphb.com/all/stp/from/bxs/1?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1", true);
