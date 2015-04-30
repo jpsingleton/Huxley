@@ -46,30 +46,30 @@ Examples:
 
 ### Departures
 
-[/departures/{Three letter CRS station code}?accessToken={Your GUID token}](https://huxley.apphb.com/departures/crs?accessToken=)
+[`/departures/{Three letter CRS station code}?accessToken={Your GUID token}`](https://huxley.apphb.com/departures/crs?accessToken=)
 
 ### Arrivals
 
-[/arrivals/{Three letter CRS station code}?accessToken={Your GUID token}](https://huxley.apphb.com/arrivals/crs?accessToken=)
+[`/arrivals/{Three letter CRS station code}?accessToken={Your GUID token}`](https://huxley.apphb.com/arrivals/crs?accessToken=)
 
 ### Departures and Arrivals
 
-[/all/{Three letter CRS station code}?accessToken={Your GUID token}](https://huxley.apphb.com/all/crs?accessToken=)
+[`/all/{Three letter CRS station code}?accessToken={Your GUID token}`](https://huxley.apphb.com/all/crs?accessToken=)
 
 ### Service
 
-[/service/{Service ID}?accessToken={Your GUID token}](https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=)
+[`/service/{Service ID}?accessToken={Your GUID token}`](https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=)
 
 The service ID can be found for each service inside the departures and arrivals response.
 
-This endpoint also accepts the [GUID representation of the ID](https://huxley.apphb.com/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=) as /, + and case sensitivity can cause trouble if you're not careful.
+This endpoint also accepts the [GUID representation of the ID](https://huxley.apphb.com/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=) as `/`, `+` and case sensitivity can cause trouble if you're not careful.
 [More information on the wiki](https://github.com/jpsingleton/Huxley/wiki/Train-Service-IDs).
 
 ### Delays
 
 The **delays** action performs calculations server side to easily let you know if there are problems on a particular route.
 
-[/delays/{crs}/{filtertype}/{filtercrs}/{numrows}?accessToken={Your GUID token}](https://huxley.apphb.com/delays/gtw/to/lon/50?accessToken=)
+[`/delays/{crs}/{filtertype}/{filtercrs}/{numrows}?accessToken={Your GUID token}`](https://huxley.apphb.com/delays/gtw/to/lon/50?accessToken=)
 
 **Sample Response:**
 ```javascript
@@ -86,9 +86,9 @@ The **delays** action performs calculations server side to easily let you know i
 }
 ```
 
-This action will accept 'lon' or 'London' as a filter CRS to find trains going to or coming from any London terminal.
+This action will accept `lon` or `London` as a filter CRS to find trains going to or coming from any London terminal.
 
-You can also pass in a comma separated list of 24 hour train times to filter on (e.g. /btn/to/lon/50/0729,0744,0748).
+You can also pass in a comma separated list of 24 hour train times to filter on (e.g. `/btn/to/lon/50/0729,0744,0748`).
 
 ## CRS Station Codes
 
@@ -97,7 +97,7 @@ CRS (Computer Reservation System) station codes are available [here](http://www.
 
 ## Hosting Quick Start
 
-To get your own instance of Huxley follow the [instructions on the wiki](https://github.com/jpsingleton/Huxley/wiki/Hosting-Quick-Start).
+To get your own instance of Huxley (on [App Harbor](https://appharbor.com/) or [Azure](https://azure.microsoft.com/en-gb/)) follow the [instructions on the wiki](https://github.com/jpsingleton/Huxley/wiki/Hosting-Quick-Start).
 
 ---
 
