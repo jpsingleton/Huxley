@@ -88,6 +88,8 @@ The **delays** action performs calculations server side to easily let you know i
 
 This action will accept 'lon' or 'London' as a filter CRS to find trains going to or coming from any London terminal.
 
+You can also pass in a comma separated list of 24 hour train times to filter on (e.g. /btn/to/lon/50/0729,0744,0748).
+
 ## CRS Station Codes
 
 CRS (Computer Reservation System) station codes are available [here](http://www.nationalrail.co.uk/static/documents/content/station_codes.csv).
