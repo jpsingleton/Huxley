@@ -25,6 +25,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Formo;
 using Huxley.Models;
 using Huxley.ldbServiceReference;
 
@@ -71,7 +72,7 @@ namespace Huxley.Controllers {
                 var totalDelayMinutes = 0;
                 var totalTrainsDelayed = 0;
 
-                dynamic config = new Formo.Configuration();
+                dynamic config = new Configuration();
                 int delayMinutesThreshold = config.DelayMinutesThreshold<int>(5);
 
                 var token = MakeAccessToken(request.AccessToken);

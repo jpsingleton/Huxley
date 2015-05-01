@@ -50,7 +50,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             There is optional support for configuring the access token server side. So you don't need to worry about revealing it.
         </p>
         <p>
-            You need to configure a random token and send this instead. If the token matches what the proxy has then it is replaced with your official token. Otherwise it is passed straight through.
+            You can set <code>DarwinAccessToken</code> to your NRE access token. If you leave <code>ClientAccessToken</code> as an empty GUID then no token is required in the Huxley URL.
+            If you set <code>ClientAccessToken</code> to a random GUID and it matches the token in the URL then the <code>DarwinAccessToken</code> will be used instead in the SOAP call.
+            Otherwise the URL token is passed straight through.
             Look in the <code>Web.config</code> file for more details.
         </p>
         <p>
