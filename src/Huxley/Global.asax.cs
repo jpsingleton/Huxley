@@ -50,8 +50,8 @@ namespace Huxley {
             // Pass Register into Configure to support attribute routing in the future
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
-            // Set the CRS dictionary
-            CrsCodes = GetCrsCodes().Result;
+            // Set the CRS dictionary passing in embedded CRS path
+            CrsCodes = GetCrsCodes(Server.MapPath("~/RailReferences.csv")).Result;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e) {
@@ -61,7 +61,7 @@ namespace Huxley {
             }
         }
 
-        private async Task<IList<CrsRecord>> GetCrsCodes() {
+        private static async Task<IList<CrsRecord>> GetCrsCodes(string embeddedCrsPath) {
             List<CrsRecord> codes;
 
             // NRE
@@ -82,7 +82,7 @@ namespace Huxley {
             // Part of http://www.dft.gov.uk/NaPTAN/snapshot/NaPTANcsv.zip
             // Contains public sector information licensed under the Open Government Licence v3.0.
             try {
-                using (var stream = File.OpenRead(Server.MapPath("~/RailReferences.csv"))) {
+                using (var stream = File.OpenRead(embeddedCrsPath)) {
                     using (var csvReader = new CsvReader(new StreamReader(stream))) {
                         // If no codes yet (error from NRE) then all are selected
                         // Otherwise only missing entries are added to the list
