@@ -33,6 +33,10 @@ namespace Huxley.Controllers {
         // GET /delays/{crs}/{filtertype}/{filtercrs}/{numrows}/{stds}?accessToken=[your token]
         public async Task<DelaysResponse> Get([FromUri] StationBoardRequest request) {
 
+            // Process CRS codes
+            request.Crs = MakeCrsCode(request.Crs);
+            request.FilterCrs = MakeCrsCode(request.FilterCrs);
+
             // Parse the list of comma separated STDs if provided (e.g. /btn/to/lon/50/0729,0744,0748)
             var stds = new List<string>();
             if (!string.IsNullOrWhiteSpace(request.Std)) {

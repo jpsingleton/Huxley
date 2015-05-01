@@ -30,6 +30,10 @@ namespace Huxley.Controllers {
         // GET /{board}/CRS?accessToken=[your token]
         public async Task<StationBoard> Get([FromUri] StationBoardRequest request) {
 
+            // Process CRS codes
+            request.Crs = MakeCrsCode(request.Crs);
+            request.FilterCrs = MakeCrsCode(request.FilterCrs);
+
             var client = new LDBServiceSoapClient();
 
             // Avoiding Problems with the Using Statement in WCF clients

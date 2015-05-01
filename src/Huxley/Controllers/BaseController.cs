@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Configuration;
+using System.Linq;
 using System.Web.Http;
 using Huxley.ldbServiceReference;
 
@@ -39,5 +40,30 @@ namespace Huxley.Controllers {
             return token;
         }
 
+        protected static string MakeCrsCode(string query) {
+            // Process CRS codes if query is present
+            if (!string.IsNullOrWhiteSpace(query) &&
+                // If query is not in the list of CRS codes
+                !WebApiApplication.CrsCodes.Any(c =>
+                    c.CrsCode.Equals(query, StringComparison.InvariantCultureIgnoreCase))) {
+                // And query matches a single station name
+                var results = WebApiApplication.CrsCodes.Where(c =>
+                    c.StationName.IndexOf(query, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList();
+                if (results.Count == 1) {
+                    // Return the only possible CRS code
+                    return results[0].CrsCode;
+                }
+                // If more than one match then return one if it matches exactly
+                if (results.Count > 1) {
+                    var bestMatch = results.FirstOrDefault(r =>
+                        r.StationName.Equals(query, StringComparison.InvariantCultureIgnoreCase));
+                    if (null != bestMatch) {
+                        return bestMatch.CrsCode;
+                    }
+                }
+            }
+            // Otherwise return the query as is
+            return query;
+        }
     }
 }
