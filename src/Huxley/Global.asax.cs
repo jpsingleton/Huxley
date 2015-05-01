@@ -27,6 +27,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using CsvHelper;
+using Formo;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -35,6 +36,9 @@ namespace Huxley {
 
         // Singleton to store the station name to CRS lookup
         public static IList<CrsRecord> CrsCodes { get; private set; }
+
+        // Singleton to store the Huxley settings
+        public static HuxleySettings Settings { get; private set; }
 
         protected void Application_Start() {
             // Makes the JSON easier to read in a browser without installing an extension like JSONview
@@ -48,6 +52,10 @@ namespace Huxley {
 
             // Pass Register into Configure to support attribute routing in the future
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            // Load settings
+            dynamic config = new Configuration();
+            Settings = config.Bind<HuxleySettings>();
 
             // Set the CRS dictionary passing in embedded CRS path
             CrsCodes = GetCrsCodes(Server.MapPath("~/RailReferences.csv")).Result;

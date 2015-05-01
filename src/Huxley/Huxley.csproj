@@ -95,6 +95,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="CrsRecord.cs" />
+    <Compile Include="HuxleySettings.cs" />
     <Compile Include="Models\BaseRequest.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\DelaysResponse.cs" />

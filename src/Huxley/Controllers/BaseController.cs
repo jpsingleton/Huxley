@@ -21,20 +21,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Linq;
 using System.Web.Http;
-using Formo;
 using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class BaseController : ApiController {
         protected static AccessToken MakeAccessToken(Guid accessToken) {
-            dynamic config = new Configuration();
-            var darwinAccessToken = config.DarwinAccessToken<Guid>(Guid.Empty);
-            var clientAccessToken = config.ClientAccessToken<Guid>(Guid.Empty);
-            if (clientAccessToken == accessToken) {
-                accessToken = darwinAccessToken;
+            // If ClientAccessToken is an empty GUID then no token is required in the Huxley URL.
+            // If ClientAccessToken matches the token in the URL then the DarwinAccessToken will be used instead in the SOAP call.
+            // Otherwise the URL token is passed straight through
+            if (HuxleyApi.Settings.ClientAccessToken == accessToken) {
+                accessToken = HuxleyApi.Settings.DarwinAccessToken;
             }
-            var token = new AccessToken { TokenValue = accessToken.ToString() };
-            return token;
+            return new AccessToken { TokenValue = accessToken.ToString() };
         }
 
         protected static string MakeCrsCode(string query) {

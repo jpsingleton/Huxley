@@ -25,7 +25,6 @@ using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Formo;
 using Huxley.Models;
 using Huxley.ldbServiceReference;
 
@@ -71,9 +70,6 @@ namespace Huxley.Controllers {
             try {
                 var totalDelayMinutes = 0;
                 var totalTrainsDelayed = 0;
-
-                dynamic config = new Configuration();
-                int delayMinutesThreshold = config.DelayMinutesThreshold<int>(5);
 
                 var token = MakeAccessToken(request.AccessToken);
 
@@ -124,7 +120,7 @@ namespace Huxley.Controllers {
                             if (DateTime.TryParse(si.std, out std)) {
                                 var late = etd.Subtract(std);
                                 totalDelayMinutes += (int)late.TotalMinutes;
-                                if (late.TotalMinutes > delayMinutesThreshold) {
+                                if (late.TotalMinutes > HuxleyApi.Settings.DelayMinutesThreshold) {
                                     totalTrainsDelayed++;
                                 }
                             }
