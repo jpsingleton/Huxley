@@ -94,7 +94,26 @@ You can also pass in a comma separated list of 24 hour train times to filter on 
 
 ## CRS Station Codes
 
-CRS (Computer Reservation System) station codes are available [here](http://www.nationalrail.co.uk/static/documents/content/station_codes.csv).
+CRS (Computer Reservation System) station codes are available from the following endpoint:
+
+[`/crs/{query}`](https://huxley.apphb.com/crs)
+
+If `query` is omitted then all CRS codes are returned along with their respective station names. If `query` is provided then only station names matching it will be returned along with their CRS codes.
+
+Example response for `/crs/oswald`:
+```javascript
+[
+  {
+    "stationName": "Church & Oswaldtwistle",
+    "crsCode": "CTW"
+  },
+  {
+    "stationName": "Lazonby & Kirkoswald",
+    "crsCode": "LZB"
+  }
+]
+```
+
 [More information on the wiki](https://github.com/jpsingleton/Huxley/wiki/CRS-station-codes).
 
 ## Hosting Quick Start
