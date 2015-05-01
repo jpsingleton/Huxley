@@ -31,7 +31,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Huxley {
-    public class WebApiApplication : HttpApplication {
+    public class HuxleyApi : HttpApplication {
 
         // Singleton to store the station name to CRS lookup
         public static IList<CrsRecord> CrsCodes { get; private set; }

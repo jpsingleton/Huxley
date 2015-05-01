@@ -41,10 +41,10 @@ namespace Huxley.Controllers {
             // Process CRS codes if query is present
             if (!string.IsNullOrWhiteSpace(query) &&
                 // If query is not in the list of CRS codes
-                !WebApiApplication.CrsCodes.Any(c =>
+                !HuxleyApi.CrsCodes.Any(c =>
                     c.CrsCode.Equals(query, StringComparison.InvariantCultureIgnoreCase))) {
                 // And query matches a single station name
-                var results = WebApiApplication.CrsCodes.Where(c =>
+                var results = HuxleyApi.CrsCodes.Where(c =>
                     c.StationName.IndexOf(query, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList();
                 if (results.Count == 1) {
                     // Return the only possible CRS code

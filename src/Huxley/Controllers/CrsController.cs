@@ -27,13 +27,13 @@ namespace Huxley.Controllers {
     public class CrsController : ApiController {
         // GET /crs
         public IEnumerable<CrsRecord> Get() {
-            return WebApiApplication.CrsCodes;
+            return HuxleyApi.CrsCodes;
         }
 
         // GET /crs/{query}
         public IEnumerable<CrsRecord> Get(string query) {
             // Could use a RegEx here but putting user input into a RegEx can be dangerous
-            var results = WebApiApplication.CrsCodes.Where(c => c.StationName.IndexOf(query, StringComparison.InvariantCultureIgnoreCase) >= 0);
+            var results = HuxleyApi.CrsCodes.Where(c => c.StationName.IndexOf(query, StringComparison.InvariantCultureIgnoreCase) >= 0);
             return results;
         }
     }
