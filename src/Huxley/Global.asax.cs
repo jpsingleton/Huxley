@@ -27,7 +27,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using CsvHelper;
-using CsvHelper.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -101,18 +100,6 @@ namespace Huxley {
             }
 
             return codes;
-        }
-    }
-
-    public class CrsRecord {
-        public string StationName { get; set; }
-        public string CrsCode { get; set; }
-    }
-
-    public sealed class NreCrsRecordMap : CsvClassMap<CrsRecord> {
-        public NreCrsRecordMap() {
-            Map(m => m.StationName).Name("Station name");
-            Map(m => m.CrsCode).Name("Code");
         }
     }
 }

@@ -94,11 +94,13 @@
     <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="CrsRecord.cs" />
     <Compile Include="Models\BaseRequest.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\DelaysResponse.cs" />
     <Compile Include="Models\ServiceRequest.cs" />
     <Compile Include="Models\StationBoardRequest.cs" />
+    <Compile Include="NreCrsRecordMap.cs" />
     <Compile Include="WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
