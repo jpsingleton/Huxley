@@ -97,7 +97,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             You can also pass in a comma separated list of 24 hour train times to filter on (e.g. <code>/delays/btn/to/lon/50/0729,0744,0748</code>).
         </p>
         <h4>CRS Station Codes</h4>
-        <p>CRS (Computer Reservation System) station codes are available <a href="http://www.nationalrail.co.uk/static/documents/content/station_codes.csv">here</a>.</p>
+        <p>CRS (Computer Reservation System) station codes are available from the following endpoint:</p>
+        <p><code><a href="/crs">/crs/{query}</a></code></p>
+        <p>
+            If <code>query</code> is omitted then all CRS codes are returned along with their respective station names. 
+            <br />
+            If <code>query</code> is provided then only station names matching it will be returned along with their CRS codes.
+        </p>
+        <p>Example response for<code>/crs/oswald</code>:</p>
+        <pre>
+[
+  {
+    "stationName": "Church & Oswaldtwistle",
+    "crsCode": "CTW"
+  },
+  {
+    "stationName": "Lazonby & Kirkoswald",
+    "crsCode": "LZB"
+  }
+]
+</pre>
         <h3>Service</h3>
         <p><code><a href="/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=">/service/[Service ID]?accessToken=[Your GUID token]</a></code></p>
         <p>
