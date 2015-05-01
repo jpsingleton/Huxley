@@ -114,3 +114,5 @@ Made by [James Singleton](https://unop.uk)
 This program is licensed under the terms of the GNU Affero General Public License. This means that you need to share any changes (even if only running on a public server).
 
 If you would like another license (such as a commercial license with an invoice) then this can be provided. Please get in touch (send an email to jpsingleton at gmail dot com). 
+
+Contains public sector information licensed under the Open Government Licence v3.0.

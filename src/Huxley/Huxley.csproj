@@ -41,6 +41,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.13.0.0\lib\net40-client\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Formo, Version=1.4.3.392, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Formo.1.4.3.392\lib\net40\Formo.dll</HintPath>
       <Private>True</Private>
@@ -85,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CrsController.cs" />
     <Compile Include="Controllers\DelaysController.cs" />
     <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -138,6 +143,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Service References\ldbServiceReference\darwin_token_types_2013-11-28.wsdl" />
+    <Content Include="RailReferences.csv" />
     <None Include="Service References\ldbServiceReference\darwin_token_types_2013-11-28.xsd">
       <SubType>Designer</SubType>
     </None>

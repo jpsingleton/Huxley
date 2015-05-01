@@ -19,13 +19,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using CsvHelper;
+using CsvHelper.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Huxley {
     public class WebApiApplication : HttpApplication {
+
+        // Singleton to store the station name to CRS lookup
+        public static IList<CrsRecord> CrsCodes { get; private set; }
+
         protected void Application_Start() {
             // Makes the JSON easier to read in a browser without installing an extension like JSONview
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
@@ -38,6 +49,9 @@ namespace Huxley {
 
             // Pass Register into Configure to support attribute routing in the future
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            // Set the CRS dictionary
+            CrsCodes = GetCrsCodes().Result;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e) {
@@ -45,6 +59,60 @@ namespace Huxley {
             if (application != null && application.Context != null) {
                 application.Context.Response.Headers.Remove("Server");
             }
+        }
+
+        private async Task<IList<CrsRecord>> GetCrsCodes() {
+            List<CrsRecord> codes;
+
+            // NRE
+            const string crsUrl = "http://www.nationalrail.co.uk/static/documents/content/station_codes.csv";
+            try {
+                var client = new HttpClient();
+                var stream = await client.GetStreamAsync(crsUrl);
+                using (var csvReader = new CsvReader(new StreamReader(stream))) {
+                    csvReader.Configuration.RegisterClassMap<NreCrsRecordMap>();
+                    // Get results as reader can only be enumerated once
+                    codes = csvReader.GetRecords<CrsRecord>().ToList();
+                }
+            } catch {
+                codes = new List<CrsRecord>();
+            }
+
+            // NaPTAN
+            // Part of http://www.dft.gov.uk/NaPTAN/snapshot/NaPTANcsv.zip
+            // Contains public sector information licensed under the Open Government Licence v3.0.
+            try {
+                using (var stream = File.OpenRead(Server.MapPath("~/RailReferences.csv"))) {
+                    using (var csvReader = new CsvReader(new StreamReader(stream))) {
+                        // If no codes yet (error from NRE) then all are selected
+                        // Otherwise only missing entries are added to the list
+                        codes.AddRange(csvReader.GetRecords<CrsRecord>().Where(c =>
+                            codes.All(code => code.CrsCode != c.CrsCode)).Select(c =>
+                                new CrsRecord {
+                                    StationName = c.StationName.Replace("Rail Station", "").Trim(),
+                                    CrsCode = c.CrsCode,
+                                }));
+                    }
+                }
+                // ReSharper disable EmptyGeneralCatchClause
+            } catch {
+                // If this doesn't work continue to start up
+                // ReSharper restore EmptyGeneralCatchClause
+            }
+
+            return codes;
+        }
+    }
+
+    public class CrsRecord {
+        public string StationName { get; set; }
+        public string CrsCode { get; set; }
+    }
+
+    public sealed class NreCrsRecordMap : CsvClassMap<CrsRecord> {
+        public NreCrsRecordMap() {
+            Map(m => m.StationName).Name("Station name");
+            Map(m => m.CrsCode).Name("Code");
         }
     }
 }
