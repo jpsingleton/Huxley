@@ -38,13 +38,18 @@ There is an additional Python (v2) [example for a Raspberry Pi and Blinky Tape R
 
 ### URL Format
 
-The URL format is `{board}/{crs}/{filtertype}/{filtercrs}/{numrows}` or `{board}/{crs}/{numrows}` where only board and CRS are required.
+The URL format is `{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}` or `{board}/{CRS|StationName}/{numRows}` where only board and CRS (or a station name) are required. The filter type can be either `to` or `from` (case is not important).
+
+A station name can be used in place of CRS codes if the name matches only one station (or matches one exactly) but case is not important. See the [CRS section](#crs-station-codes) below for more information.
+
 Examples:
 
 * 10 (default value) Arrivals and Departures at Clapham Junction: `/all/clj`
 * 15 Arrivals and Departures at Clapham Junction: `/all/clj/15`
 * 10 (default value) Departures at Clapham Junction to Waterloo: `/departures/clj/to/wat`
 * 15 Arrivals at Clapham Junction from Waterloo: `/arrivals/clj/from/wat/15`
+* 10 (default value) Arrivals and Departures at Wandsworth Common to Clapham Junction: `/all/wandsworth common/to/clapham junction`
+* 20 Departures at East Croydon to London Victoria: `/departures/east croydon/to/london victoria/20`
 
 ### Departures
 
@@ -94,7 +99,26 @@ You can also pass in a comma separated list of 24 hour train times to filter on 
 
 ## CRS Station Codes
 
-CRS (Computer Reservation System) station codes are available [here](http://www.nationalrail.co.uk/static/documents/content/station_codes.csv).
+CRS (Computer Reservation System) station codes are available from the following endpoint:
+
+[`/crs/{query}`](https://huxley.apphb.com/crs)
+
+If `query` is omitted then all CRS codes are returned along with their respective station names. If `query` is provided then only station names matching it will be returned along with their CRS codes.
+
+Example response for `/crs/oswald`:
+```javascript
+[
+  {
+    "stationName": "Church & Oswaldtwistle",
+    "crsCode": "CTW"
+  },
+  {
+    "stationName": "Lazonby & Kirkoswald",
+    "crsCode": "LZB"
+  }
+]
+```
+
 [More information on the wiki](https://github.com/jpsingleton/Huxley/wiki/CRS-station-codes).
 
 ## Hosting Quick Start
@@ -114,3 +138,5 @@ Made by [James Singleton](https://unop.uk)
 This program is licensed under the terms of the GNU Affero General Public License. This means that you need to share any changes (even if only running on a public server).
 
 If you would like another license (such as a commercial license with an invoice) then this can be provided. Please get in touch (send an email to jpsingleton at gmail dot com). 
+
+Contains public sector information licensed under the Open Government Licence v3.0.

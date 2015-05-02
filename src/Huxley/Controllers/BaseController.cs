@@ -19,25 +19,46 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 using System;
-using System.Configuration;
+using System.Linq;
 using System.Web.Http;
 using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class BaseController : ApiController {
         protected static AccessToken MakeAccessToken(Guid accessToken) {
-            var darwinAccessToken = ConfigurationManager.AppSettings["DarwinAccessToken"];
-            var clientAccessToken = ConfigurationManager.AppSettings["ClientAccessToken"];
-            Guid dat;
-            Guid cat;
-            if (Guid.TryParse(darwinAccessToken, out dat) &&
-                Guid.TryParse(clientAccessToken, out cat) &&
-                cat == accessToken) {
-                accessToken = dat;
+            // If ClientAccessToken is an empty GUID then no token is required in the Huxley URL.
+            // If ClientAccessToken matches the token in the URL then the DarwinAccessToken will be used instead in the SOAP call.
+            // Otherwise the URL token is passed straight through
+            if (HuxleyApi.Settings.ClientAccessToken == accessToken) {
+                accessToken = HuxleyApi.Settings.DarwinAccessToken;
             }
-            var token = new AccessToken { TokenValue = accessToken.ToString() };
-            return token;
+            return new AccessToken { TokenValue = accessToken.ToString() };
         }
 
+        protected static string MakeCrsCode(string query) {
+            // Process CRS codes if query is present
+            if (!string.IsNullOrWhiteSpace(query) &&
+                // If query is not in the list of CRS codes
+                !HuxleyApi.CrsCodes.Any(c =>
+                    c.CrsCode.Equals(query, StringComparison.InvariantCultureIgnoreCase))) {
+                // And query matches a single station name
+                var results = HuxleyApi.CrsCodes.Where(c =>
+                    c.StationName.IndexOf(query, StringComparison.InvariantCultureIgnoreCase) >= 0).ToList();
+                if (results.Count == 1) {
+                    // Return the only possible CRS code
+                    return results[0].CrsCode;
+                }
+                // If more than one match then return one if it matches exactly
+                if (results.Count > 1) {
+                    var bestMatch = results.FirstOrDefault(r =>
+                        r.StationName.Equals(query, StringComparison.InvariantCultureIgnoreCase));
+                    if (null != bestMatch) {
+                        return bestMatch.CrsCode;
+                    }
+                }
+            }
+            // Otherwise return the query as is
+            return query;
+        }
     }
 }
