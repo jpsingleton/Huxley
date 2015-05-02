@@ -38,13 +38,18 @@ There is an additional Python (v2) [example for a Raspberry Pi and Blinky Tape R
 
 ### URL Format
 
-The URL format is `{board}/{crs}/{filtertype}/{filtercrs}/{numrows}` or `{board}/{crs}/{numrows}` where only board and CRS are required.
+The URL format is `{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}` or `{board}/{CRS|StationName}/{numRows}` where only board and CRS (or a station name) are required. The filter type can be either `to` or `from` (case is not important).
+
+A station name can be used in place of CRS codes if the name matches only one station (or matches one exactly) but case is not important. See the [CRS section](#crs-station-codes) below for more information.
+
 Examples:
 
 * 10 (default value) Arrivals and Departures at Clapham Junction: `/all/clj`
 * 15 Arrivals and Departures at Clapham Junction: `/all/clj/15`
 * 10 (default value) Departures at Clapham Junction to Waterloo: `/departures/clj/to/wat`
 * 15 Arrivals at Clapham Junction from Waterloo: `/arrivals/clj/from/wat/15`
+* 10 (default value) Arrivals and Departures at Wandsworth Common to Clapham Junction: `/all/wandsworth common/to/clapham junction`
+* 20 Departures at East Croydon to London Victoria: `/departures/east croydon/to/london victoria/20`
 
 ### Departures
 
