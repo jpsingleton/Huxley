@@ -61,23 +61,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <h2>API Endpoints</h2>
         <h3>Station Boards</h3>
         <h4>URL Format</h4>
-        The URL format is <code>{board}/{crs}/{filtertype}/{filtercrs}/{numrows}</code> or <code>{board}/{crs}/{numrows}</code> where only board and CRS are required.
+        <p>
+            The URL format is <code>{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}</code> or <code>{board}/{CRS|StationName}/{numRows}</code> where only board and CRS (or a station name) are required.
+            The filter type can be either <code>to</code> or <code>from</code> (case is not important).
+        </p>
+        <p>
+            A station name can be used in place of CRS codes if the name matches only one station (or matches one exactly) but case is not important.
+            See the CRS section below for more information.
+        </p>
         <h5>Examples:</h5>
         <ul>
             <li>10 (default value) Arrivals and Departures at Clapham Junction: <code><a href="/all/clj?accessToken=">/all/clj</a></code></li>
             <li>15 Arrivals and Departures at Clapham Junction: <code><a href="/all/clj/15?accessToken=">/all/clj/15</a></code></li>
             <li>10 (default value) Departures at Clapham Junction to Waterloo: <code><a href="/departures/clj/to/wat?accessToken=">/departures/clj/to/wat</a></code></li>
             <li>15 Arrivals at Clapham Junction from Waterloo: <code><a href="/arrivals/clj/from/wat/15?accessToken=">/arrivals/clj/from/wat/15</a></code></li>
+            <li>10 (default value) Arrivals and Departures at Wandsworth Common to Clapham Junction: <code><a href="/all/wandsworth common/to/clapham junction?accessToken=">/all/wandsworth common/to/clapham junction</a></code></li>
+            <li>20 Departures at East Croydon to London Victoria: <code><a href="/departures/east croydon/to/london victoria/20?accessToken=">/departures/east croydon/to/london victoria/20</a></code></li>
         </ul>
         <h4>Departures</h4>
-        <p><code><a href="/departures/crs?accessToken=">/departures/{crs}?accessToken={Your GUID token}</a></code></p>
+        <p><code><a href="/departures/crs?accessToken=">/departures/{CRS|StationName}?accessToken={Your GUID token}</a></code></p>
         <h4>Arrivals</h4>
-        <p><code><a href="/arrivals/crs?accessToken=">/arrivals/{crs}?accessToken={Your GUID token}</a></code></p>
+        <p><code><a href="/arrivals/crs?accessToken=">/arrivals/{CRS|StationName}?accessToken={Your GUID token}</a></code></p>
         <h4>Departures and Arrivals</h4>
-        <p><code><a href="/all/crs?accessToken=">/all/{crs}?accessToken={Your GUID token}</a></code></p>
+        <p><code><a href="/all/crs?accessToken=">/all/{CRS|StationName}?accessToken={Your GUID token}</a></code></p>
         <h4>Delays</h4>
         <p>The <strong>delays</strong> action performs calculations server side to easily let you know if there are problems on a particular route.</p>
-        <p><code><a href="/delays/gtw/to/lon/50?accessToken=">/delays/{crs}/{filtertype}/{filtercrs}/{numrows}?accessToken={Your GUID token}</a></code></p>
+        <p><code><a href="/delays/gtw/to/lon/50?accessToken=">/delays/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}?accessToken={Your GUID token}</a></code></p>
         <strong>Sample Response:</strong>
         <pre>
 {
