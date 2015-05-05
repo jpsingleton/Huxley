@@ -84,7 +84,10 @@ namespace Huxley.Controllers {
                 var response = board.GetStationBoardResult;
                 var filterLocationName = response.filterLocationName;
 
-                var trainServices = response.trainServices;
+                var trainServices = response.trainServices ?? new ServiceItem[0];
+                var railReplacement = null != response.busServices && !trainServices.Any() && response.busServices.Any();
+                var messagesPresent = null != response.nrccMessages && response.nrccMessages.Any();
+
                 if (null == filterCrs) {
                     // This only finds trains terminating at London terminals. BFR/STP etc. won't be picked up if called at en-route.
                     // Could query for every terminal or get service for every train and check calling points. Very chatty either way.
@@ -134,7 +137,7 @@ namespace Huxley.Controllers {
                     LocationName = response.locationName,
                     Filtercrs = filterCrs,
                     FilterLocationName = filterLocationName,
-                    Delays = totalTrainsDelayed > 0,
+                    Delays = totalTrainsDelayed > 0 || railReplacement || messagesPresent,
                     TotalTrainsDelayed = totalTrainsDelayed,
                     TotalDelayMinutes = totalDelayMinutes,
                     TotalTrains = trainServices.Length,
