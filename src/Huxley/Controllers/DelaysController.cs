@@ -69,7 +69,7 @@ namespace Huxley.Controllers {
             // https://msdn.microsoft.com/en-us/library/aa355056.aspx
             try {
                 var totalDelayMinutes = 0;
-                var totalTrainsDelayed = 0;
+                var delayedTrains = new List<ServiceItem>();
 
                 var token = MakeAccessToken(request.AccessToken);
 
@@ -114,7 +114,7 @@ namespace Huxley.Controllers {
                 foreach (var si in trainServices.Where(si => !si.etd.Equals("On time", StringComparison.InvariantCultureIgnoreCase))) {
                     if (si.etd.Equals("Delayed", StringComparison.InvariantCultureIgnoreCase) ||
                         si.etd.Equals("Cancelled", StringComparison.InvariantCultureIgnoreCase)) {
-                        totalTrainsDelayed++;
+                        delayedTrains.Add(si);
                     } else {
                         DateTime etd;
                         // Could be "Starts Here", "No Report" or contain a * (report overdue)
@@ -124,7 +124,7 @@ namespace Huxley.Controllers {
                                 var late = etd.Subtract(std);
                                 totalDelayMinutes += (int)late.TotalMinutes;
                                 if (late.TotalMinutes > HuxleyApi.Settings.DelayMinutesThreshold) {
-                                    totalTrainsDelayed++;
+                                    delayedTrains.Add(si);
                                 }
                             }
                         }
@@ -137,10 +137,11 @@ namespace Huxley.Controllers {
                     LocationName = response.locationName,
                     Filtercrs = filterCrs,
                     FilterLocationName = filterLocationName,
-                    Delays = totalTrainsDelayed > 0 || railReplacement || messagesPresent,
-                    TotalTrainsDelayed = totalTrainsDelayed,
+                    Delays = delayedTrains.Count > 0 || railReplacement || messagesPresent,
+                    TotalTrainsDelayed = delayedTrains.Count,
                     TotalDelayMinutes = totalDelayMinutes,
                     TotalTrains = trainServices.Length,
+                    DelayedTrains = delayedTrains,
                 };
 
             } catch (CommunicationException) {

@@ -86,19 +86,53 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <p><code><a href="/all/crs?accessToken=">/all/{CRS|StationName}?accessToken={Your GUID token}</a></code></p>
         <h4>Delays</h4>
         <p>The <strong>delays</strong> action performs calculations server side to easily let you know if there are problems on a particular route.</p>
-        <p><code><a href="/delays/gtw/to/lon/50?accessToken=">/delays/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}?accessToken={Your GUID token}</a></code></p>
+        <p><code><a href="/delays/clapham junction/from/london/20?accessToken=">/delays/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}?accessToken={Your GUID token}</a></code></p>
         <strong>Sample Response:</strong>
         <pre>
 {
-    "generatedAt": "2015-04-24T14:59:29.6198809+01:00",
-    "locationName": "Gatwick Airport",
-    "crs": "GTW",
-    "filterLocationName": "London",
-    "filtercrs": "LON",
-    "delays": true,
-    "totalTrainsDelayed": 8,
-    "totalDelayMinutes": 4,
-    "totalTrains": 20
+  "generatedAt": "2015-05-08T11:28:33.7187169+01:00",
+  "locationName": "Clapham Junction",
+  "crs": "CLJ",
+  "filterLocationName": "London",
+  "filtercrs": "LON",
+  "delays": true,
+  "totalTrainsDelayed": 1,
+  "totalDelayMinutes": 16,
+  "totalTrains": 12,
+  "delayedTrains": [
+    {
+      "origin": [
+        {
+          "locationName": "London Waterloo",
+          "crs": "WAT",
+          "via": null,
+          "futureChangeTo": null,
+          "assocIsCancelled": false
+        }
+      ],
+      "destination": [
+        {
+          "locationName": "London Waterloo",
+          "crs": "WAT",
+          "via": null,
+          "futureChangeTo": null,
+          "assocIsCancelled": false
+        }
+      ],
+      "currentOrigins": null,
+      "currentDestinations": null,
+      "sta": null,
+      "eta": null,
+      "std": "11:20",
+      "etd": "11:28",
+      "platform": "3",
+      "operator": "South West Trains",
+      "operatorCode": "SW",
+      "isCircularRoute": false,
+      "serviceID": "F4GbTDZuLjb4VlXEYDuakg==",
+      "adhocAlerts": null
+    }
+  ]
 }
 </pre>
         <p>

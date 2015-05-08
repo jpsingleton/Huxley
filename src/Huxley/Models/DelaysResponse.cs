@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 using System;
+using System.Collections.Generic;
+using Huxley.ldbServiceReference;
 
 namespace Huxley.Models {
     public class DelaysResponse {
@@ -32,5 +34,6 @@ namespace Huxley.Models {
         public int TotalTrainsDelayed { get; set; }
         public int TotalDelayMinutes { get; set; }
         public int TotalTrains { get; set; }
+        public IEnumerable<ServiceItem> DelayedTrains { get; set; }
     }
 }
