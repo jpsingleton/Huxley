@@ -4,10 +4,9 @@
 
 ![Build Status](https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true "Build Status")
 
-## Extremely simple restful JSON proxy for the UK National Rail Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) ([Darwin](https://lite.realtime.nationalrail.co.uk/OpenLDBWS/))
+## JSON proxy for UK National Rail Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx)
 
-You will need to add your access token to the URL for this to work. You can register to obtain one [here](https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration).
-Append the `accessToken={Your GUID token}` parameter to the query string for every request.
+Huxley is a CORS enabled JSON ReST proxy for the UK National Rail Enquires Live Departure Board SOAP API (Darwin). 
 
 ## Demo
 There is an example deployment set up [here](https://huxley.apphb.com/).
@@ -35,6 +34,17 @@ If you deploy to the App Harbor Europe AWS region then this will run very close 
 SDKs in 9 languages (including Java, PHP, Python and Ruby) for this endpoint (generated with [Swagger](https://github.com/swagger-api/swagger-codegen)) are available [here](http://restunited.com/releases/430721415517308710/wrappers). If you use these make sure to change the endpoint for production.
 
 There is an additional Python (v2) [example for a Raspberry Pi and Blinky Tape RGB LED strip](https://github.com/Blinkinlabs/BlinkyTape_Python/blob/master/Huxley_UK_Rail_Station_Delays.py).
+
+## Access Token
+
+You will need to add your access token to the URL. You can register to obtain one [here](https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration).
+Append the `accessToken={Your GUID token}` parameter to the query string for every request.
+
+There is optional support for configuring the access token server side. So you don't need to worry about revealing it.
+
+You can set `DarwinAccessToken` to your NRE access token. If you leave `ClientAccessToken` as an empty GUID then no token is required in the Huxley URL. If you set `ClientAccessToken` to a random GUID and it matches the token in the URL then the `DarwinAccessToken` will be used instead in the SOAP call. Otherwise the URL token is passed straight through. Look in the `Web.config` file for more details.
+
+**N.B.** You should set up these tokens in your deployment platform and not in your source code repository. You'll notice that the values are empty GUIDs by default. The example token used above will only work on the demo server and not directly against the SOAP API.
 
 ### URL Format
 
@@ -76,20 +86,54 @@ This endpoint also accepts the [GUID representation of the ID](https://huxley.ap
 
 The **delays** action performs calculations server side to easily let you know if there are problems on a particular route.
 
-[`/delays/{crs}/{filtertype}/{filtercrs}/{numrows}?accessToken={Your GUID token}`](https://huxley.apphb.com/delays/gtw/to/lon/50?accessToken=)
+[`/delays/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}?accessToken={Your GUID token}`](https://huxley.apphb.com/delays/clapham junction/from/london/20?accessToken=)
 
 **Sample Response:**
 ```javascript
 {
-  "generatedAt": "2015-04-24T14:59:29.6198809+01:00",
-  "locationName": "Gatwick Airport",
-  "crs": "GTW",
+  "generatedAt": "2015-05-08T11:28:33.7187169+01:00",
+  "locationName": "Clapham Junction",
+  "crs": "CLJ",
   "filterLocationName": "London",
   "filtercrs": "LON",
   "delays": true,
-  "totalTrainsDelayed": 8,
-  "totalDelayMinutes": 4,
-  "totalTrains": 20
+  "totalTrainsDelayed": 1,
+  "totalDelayMinutes": 16,
+  "totalTrains": 12,
+  "delayedTrains": [
+    {
+      "origin": [
+        {
+          "locationName": "London Waterloo",
+          "crs": "WAT",
+          "via": null,
+          "futureChangeTo": null,
+          "assocIsCancelled": false
+        }
+      ],
+      "destination": [
+        {
+          "locationName": "London Waterloo",
+          "crs": "WAT",
+          "via": null,
+          "futureChangeTo": null,
+          "assocIsCancelled": false
+        }
+      ],
+      "currentOrigins": null,
+      "currentDestinations": null,
+      "sta": null,
+      "eta": null,
+      "std": "11:20",
+      "etd": "11:28",
+      "platform": "3",
+      "operator": "South West Trains",
+      "operatorCode": "SW",
+      "isCircularRoute": false,
+      "serviceID": "F4GbTDZuLjb4VlXEYDuakg==",
+      "adhocAlerts": null
+    }
+  ]
 }
 ```
 
