@@ -4,9 +4,11 @@
 
 ![Build Status](https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true "Build Status")
 
-## JSON proxy for UK National Rail Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx)
+## UK National Rail Live Departure Boards JSON proxy
 
-Huxley is a CORS enabled JSON ReST proxy for the UK National Rail Enquires Live Departure Board SOAP API (Darwin). 
+Huxley is a [CORS](http://enable-cors.org/) enabled JSON [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) proxy for the UK National Rail Enquires Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) (Darwin). 
+
+[SOAP](http://harmful.cat-v.org/software/xml/soap/simple) is a pain to use (you have to POST specially crafted XML) so this proxy allows you to GET nicely formatted JSON instead ([REST](https://en.wikipedia.org/wiki/Representational_state_transfer)). It also adds [CORS](http://enable-cors.org/) headers so you can access it with JavaScript from a different domain.
 
 ## Demo
 There is an example deployment set up [here](https://huxley.apphb.com/).
