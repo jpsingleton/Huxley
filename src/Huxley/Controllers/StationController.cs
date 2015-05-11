@@ -25,6 +25,11 @@ using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class StationController : LdbController {
+
+        public StationController(ILdbClient client)
+            : base(client) {
+        }
+
         // GET /{board}/CRS?accessToken=[your token]
         public async Task<StationBoard> Get([FromUri] StationBoardRequest request) {
 

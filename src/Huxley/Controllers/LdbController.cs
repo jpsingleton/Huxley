@@ -28,8 +28,8 @@ namespace Huxley.Controllers {
 
         protected readonly ILdbClient Client;
 
-        public LdbController() {
-            Client = new LdbClient();
+        public LdbController(ILdbClient client) {
+            Client = client;
         }
 
         protected static AccessToken MakeAccessToken(Guid accessToken) {

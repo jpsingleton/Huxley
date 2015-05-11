@@ -26,6 +26,11 @@ using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class ServiceController : LdbController {
+
+        public ServiceController(ILdbClient client)
+            : base(client) {
+        }
+
         // GET /service/ID?accessToken=[your token]
         public async Task<ServiceDetails> Get([FromUri] ServiceRequest request) {
             Guid sid;

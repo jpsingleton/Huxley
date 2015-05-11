@@ -29,6 +29,11 @@ using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class DelaysController : LdbController {
+
+        public DelaysController(ILdbClient client)
+            : base(client) {
+        }
+
         // GET /delays/{crs}/{filtertype}/{filtercrs}/{numrows}/{stds}?accessToken=[your token]
         public async Task<DelaysResponse> Get([FromUri] StationBoardRequest request) {
 
