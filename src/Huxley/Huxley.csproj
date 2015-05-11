@@ -92,10 +92,12 @@
     <Compile Include="Controllers\CrsController.cs" />
     <Compile Include="Controllers\DelaysController.cs" />
     <Compile Include="Controllers\StationController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\LdbController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="CrsRecord.cs" />
     <Compile Include="HuxleySettings.cs" />
+    <Compile Include="ILdbClient.cs" />
+    <Compile Include="LdbClient.cs" />
     <Compile Include="Models\BaseRequest.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\DelaysResponse.cs" />
