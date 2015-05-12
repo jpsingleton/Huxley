@@ -61,7 +61,8 @@ namespace Huxley.Controllers {
                 }
             }
 
-            var londonTerminals = new List<string> { "BFR", "LBG", "CST", "CHX", "EUS", "FST", "KGX", "LST", "MYB", "PAD", "STP", "SPX", "VIC", "WAT", "WAE", };
+            // https://en.wikipedia.org/wiki/London_station_group (Farringdon [ZFD] is not a London terminal but it probably should be. Maybe when Crossrail opens it will.)
+            var londonTerminals = new List<string> { "BFR", "LBG", "CST", "CTX", "CHX", "EUS", "FST", "KGX", "LST", "MYB", "PAD", "STP", "SPX", "VIC", "VXH", "WAT", "WAE", };
 
             var client = new LDBServiceSoapClient();
 
