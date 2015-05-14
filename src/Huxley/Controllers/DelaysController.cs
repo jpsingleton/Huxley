@@ -61,8 +61,28 @@ namespace Huxley.Controllers {
                 }
             }
 
-            // https://en.wikipedia.org/wiki/London_station_group (Farringdon [ZFD] is not a London terminal but it probably should be. Maybe when Crossrail opens it will.)
-            var londonTerminals = new List<string> { "BFR", "LBG", "CST", "CTX", "CHX", "EUS", "FST", "KGX", "LST", "MYB", "PAD", "STP", "SPX", "VIC", "VXH", "WAT", "WAE", };
+            // https://en.wikipedia.org/wiki/London_station_group 
+            // Farringdon [ZFD] is not a London Terminal but it probably should be (maybe when Crossrail opens it will be)
+            var londonTerminals = new List<string> {
+                "BFR", // Blackfriars
+                "CST", // Cannon Street
+                "CHX", // Charing Cross
+                "CTX", // City Thameslink
+                "EUS", // Euston
+                "FST", // Fenchurch Street
+                "KGX", // King's Cross
+                "LST", // Liverpool Street
+                "LBG", // London Bridge
+                "MYB", // Marylebone
+                "MOG", // Moorgate
+                "OLD", // Old Street
+                "PAD", // Paddington
+                "STP", // St. Pancras
+                "VXH", // Vauxhall
+                "VIC", // Victoria
+                "WAT", // Waterloo
+                "WAE", // Waterloo East
+            };
 
             var client = new LDBServiceSoapClient();
 
