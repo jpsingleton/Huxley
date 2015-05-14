@@ -10,6 +10,12 @@ Huxley is a [CORS](http://enable-cors.org/) enabled JSON [REST](https://en.wikip
 
 [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) is a pain to use (you have to POST specially crafted XML) so this proxy allows you to GET nicely formatted JSON instead ([REST](https://en.wikipedia.org/wiki/Representational_state_transfer)). It also adds [CORS](http://enable-cors.org/) headers so you can access it with JavaScript from a different domain.
 
+Huxley also has a built in CRS code lookup API so you can search for station names from your app. You can also use station names directly in any query. The codes are automatically kept up to date from the official sources.
+
+In addition it has a function for calculating delays which allows you to build useful IoT devices like this [LED strip delay indicator](https://unop.uk/dev/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/). You can specify specific trains and it even knows about London Terminals.
+
+![Train Disruption Indicator](https://unop.uk/wp-content/uploads/2015/05/trains.jpg, "Train Disruption Indicator")
+
 ## Demo
 There is an example deployment set up [here](https://huxley.apphb.com/).
 (**DO NOT USE THIS FOR ANYTHING SERIOUS!**)
