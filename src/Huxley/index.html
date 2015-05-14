@@ -136,7 +136,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 }
 </pre>
         <p>
-            Additionally, this action will accept <code>LON</code> or <code>London</code> as a filter CRS to find trains going to or coming from any London terminal.
+            Additionally, this action will accept <code>LON</code> or <code>London</code> as a filter CRS to find trains going to or coming from any of the <a href="http://www.nationalrail.co.uk/times_fares/ticket_types/46587.aspx#terminals">London Terminals</a>.
         </p>
         <p>
             You can also pass in a comma separated list of 24 hour train times to filter on (e.g. <code>/delays/btn/to/lon/50/0729,0744,0748</code>).
@@ -159,6 +159,83 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   {
     "stationName": "Lazonby & Kirkoswald",
     "crsCode": "LZB"
+  }
+]
+</pre>
+        <p><code><a href="/crs/london terminals">/crs/london terminals</a></code> returns all codes in the <a href="https://en.wikipedia.org/wiki/London_station_group">London station group</a>.</p>
+        <pre>
+[
+  {
+    "stationName": "London Blackfriars",
+    "crsCode": "BFR"
+  },
+  {
+    "stationName": "London Cannon Street",
+    "crsCode": "CST"
+  },
+  {
+    "stationName": "London Charing Cross",
+    "crsCode": "CHX"
+  },
+  {
+    "stationName": "City Thameslink",
+    "crsCode": "CTX"
+  },
+  {
+    "stationName": "London Euston",
+    "crsCode": "EUS"
+  },
+  {
+    "stationName": "London Fenchurch Street",
+    "crsCode": "FST"
+  },
+  {
+    "stationName": "London Kings Cross",
+    "crsCode": "KGX"
+  },
+  {
+    "stationName": "London Liverpool Street",
+    "crsCode": "LST"
+  },
+  {
+    "stationName": "London Bridge",
+    "crsCode": "LBG"
+  },
+  {
+    "stationName": "London Marylebone",
+    "crsCode": "MYB"
+  },
+  {
+    "stationName": "Moorgate",
+    "crsCode": "MOG"
+  },
+  {
+    "stationName": "Old Street",
+    "crsCode": "OLD"
+  },
+  {
+    "stationName": "London Paddington",
+    "crsCode": "PAD"
+  },
+  {
+    "stationName": "London St Pancras International",
+    "crsCode": "STP"
+  },
+  {
+    "stationName": "Vauxhall",
+    "crsCode": "VXH"
+  },
+  {
+    "stationName": "London Victoria",
+    "crsCode": "VIC"
+  },
+  {
+    "stationName": "London Waterloo",
+    "crsCode": "WAT"
+  },
+  {
+    "stationName": "London Waterloo East",
+    "crsCode": "WAE"
   }
 ]
 </pre>

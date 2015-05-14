@@ -32,6 +32,9 @@ namespace Huxley.Controllers {
 
         // GET /crs/{query}
         public IEnumerable<CrsRecord> Get(string query) {
+            if (query.Equals("London Terminals", StringComparison.InvariantCultureIgnoreCase)) {
+                return HuxleyApi.LondonTerminals;
+            }
             // Could use a RegEx here but putting user input into a RegEx can be dangerous
             var results = HuxleyApi.CrsCodes.Where(c => c.StationName.IndexOf(query, StringComparison.InvariantCultureIgnoreCase) >= 0);
             return results;

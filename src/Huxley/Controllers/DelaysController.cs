@@ -65,29 +65,6 @@ namespace Huxley.Controllers {
                 }
             }
 
-            // https://en.wikipedia.org/wiki/London_station_group 
-            // Farringdon [ZFD] is not a London Terminal but it probably should be (maybe when Crossrail opens it will be)
-            var londonTerminals = new List<string> {
-                "BFR", // Blackfriars
-                "CST", // Cannon Street
-                "CHX", // Charing Cross
-                "CTX", // City Thameslink
-                "EUS", // Euston
-                "FST", // Fenchurch Street
-                "KGX", // King's Cross
-                "LST", // Liverpool Street
-                "LBG", // London Bridge
-                "MYB", // Marylebone
-                "MOG", // Moorgate
-                "OLD", // Old Street
-                "PAD", // Paddington
-                "STP", // St. Pancras
-                "VXH", // Vauxhall
-                "VIC", // Victoria
-                "WAT", // Waterloo
-                "WAE", // Waterloo East
-            };
-
             var totalDelayMinutes = 0;
             var delayedTrains = new List<ServiceItem>();
 
@@ -113,10 +90,10 @@ namespace Huxley.Controllers {
                 // Could query for every terminal or get service for every train and check calling points. Very chatty either way.
                 switch (request.FilterType) {
                     case FilterType.to:
-                        trainServices = trainServices.Where(ts => ts.destination.Any(d => londonTerminals.Contains(d.crs.ToUpperInvariant()))).ToArray();
+                        trainServices = trainServices.Where(ts => ts.destination.Any(d => HuxleyApi.LondonTerminals.Any(lt => lt.CrsCode == d.crs.ToUpperInvariant()))).ToArray();
                         break;
                     case FilterType.from:
-                        trainServices = trainServices.Where(ts => ts.origin.Any(d => londonTerminals.Contains(d.crs.ToUpperInvariant()))).ToArray();
+                        trainServices = trainServices.Where(ts => ts.origin.Any(o => HuxleyApi.LondonTerminals.Any(lt => lt.CrsCode == o.crs.ToUpperInvariant()))).ToArray();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
