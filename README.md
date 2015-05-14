@@ -1,8 +1,8 @@
 # Huxley
 
-![Huxley](src/Huxley/huxley.png "Huxley")
+[![Huxley](https://huxley.apphb.com/huxley.png "Huxley")](https://huxley.apphb.com/)
 
-![Build Status](https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true "Build Status")
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true "Build Status")](https://ci.appveyor.com/project/jpsingleton/huxley)
 
 ## UK National Rail Live Departure Boards JSON proxy
 
@@ -14,7 +14,7 @@ Huxley also has a built in CRS code lookup API so you can search for station nam
 
 In addition it has a function for calculating delays which allows you to build useful IoT devices like this [LED strip delay indicator](https://unop.uk/dev/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/). You can specify specific trains and it even knows about London Terminals.
 
-![Train Disruption Indicator](https://unop.uk/wp-content/uploads/2015/05/trains.jpg, "Train Disruption Indicator")
+[![Train Disruption Indicator](https://unop.uk/wp-content/uploads/2015/05/trains.jpg "Train Disruption Indicator")](https://unop.uk/dev/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/)
 
 ## Demo
 There is an example deployment set up [here](https://huxley.apphb.com/).
