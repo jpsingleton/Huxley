@@ -22,9 +22,9 @@
       <h1>
 <a id="huxley" class="anchor" href="#huxley" aria-hidden="true"><span class="octicon octicon-link"></span></a>Huxley</h1>
 
-<p><img src="https://huxley.apphb.com/huxley.png" alt="Huxley" title="Huxley"></p>
+<p><a href="https://huxley.apphb.com/"><img src="https://huxley.apphb.com/huxley.png" alt="Huxley" title="Huxley"></a></p>
 
-<p><img src="https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true" alt="Build Status" title="Build Status"></p>
+<p><a href="https://ci.appveyor.com/project/jpsingleton/huxley"><img src="https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true" alt="Build Status" title="Build Status"></a></p>
 
 <h2>
 <a id="uk-national-rail-live-departure-boards-json-proxy" class="anchor" href="#uk-national-rail-live-departure-boards-json-proxy" aria-hidden="true"><span class="octicon octicon-link"></span></a>UK National Rail Live Departure Boards JSON proxy</h2>
@@ -32,6 +32,12 @@
 <p>Huxley is a <a href="http://enable-cors.org/">CORS</a> enabled JSON <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> proxy for the UK National Rail Enquires Live Departure Board <a href="http://harmful.cat-v.org/software/xml/soap/simple">SOAP</a> <a href="http://www.nationalrail.co.uk/46391.aspx">API</a> (Darwin). </p>
 
 <p><a href="http://harmful.cat-v.org/software/xml/soap/simple">SOAP</a> is a pain to use (you have to POST specially crafted XML) so this proxy allows you to GET nicely formatted JSON instead (<a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a>). It also adds <a href="http://enable-cors.org/">CORS</a> headers so you can access it with JavaScript from a different domain.</p>
+
+<p>Huxley also has a built in CRS code lookup API so you can search for station names from your app. You can also use station names directly in any query. The codes are automatically kept up to date from the official sources.</p>
+
+<p>In addition it has a function for calculating delays which allows you to build useful IoT devices like this <a href="https://unop.uk/dev/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/">LED strip delay indicator</a>. You can specify specific trains and it even knows about London Terminals.</p>
+
+<p><a href="https://unop.uk/dev/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/"><img src="https://unop.uk/wp-content/uploads/2015/05/trains.jpg" alt="Train Disruption Indicator" title="Train Disruption Indicator"></a></p>
 
 <h2>
 <a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
