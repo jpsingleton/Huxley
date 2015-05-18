@@ -24,7 +24,14 @@ using System.Web.Http;
 using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
-    public class BaseController : ApiController {
+    public class LdbController : ApiController {
+
+        protected readonly ILdbClient Client;
+
+        public LdbController(ILdbClient client) {
+            Client = client;
+        }
+
         protected static AccessToken MakeAccessToken(Guid accessToken) {
             // If ClientAccessToken is an empty GUID then no token is required in the Huxley URL.
             // If ClientAccessToken matches the token in the URL then the DarwinAccessToken will be used instead in the SOAP call.

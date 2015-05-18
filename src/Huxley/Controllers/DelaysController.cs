@@ -22,14 +22,18 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Huxley.Models;
 using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
-    public class DelaysController : BaseController {
+    public class DelaysController : LdbController {
+
+        public DelaysController(ILdbClient client)
+            : base(client) {
+        }
+
         // GET /delays/{crs}/{filtertype}/{filtercrs}/{numrows}/{stds}?accessToken=[your token]
         public async Task<DelaysResponse> Get([FromUri] StationBoardRequest request) {
 
@@ -61,121 +65,81 @@ namespace Huxley.Controllers {
                 }
             }
 
-            // https://en.wikipedia.org/wiki/London_station_group 
-            // Farringdon [ZFD] is not a London Terminal but it probably should be (maybe when Crossrail opens it will be)
-            var londonTerminals = new List<string> {
-                "BFR", // Blackfriars
-                "CST", // Cannon Street
-                "CHX", // Charing Cross
-                "CTX", // City Thameslink
-                "EUS", // Euston
-                "FST", // Fenchurch Street
-                "KGX", // King's Cross
-                "LST", // Liverpool Street
-                "LBG", // London Bridge
-                "MYB", // Marylebone
-                "MOG", // Moorgate
-                "OLD", // Old Street
-                "PAD", // Paddington
-                "STP", // St. Pancras
-                "VXH", // Vauxhall
-                "VIC", // Victoria
-                "WAT", // Waterloo
-                "WAE", // Waterloo East
-            };
+            var totalDelayMinutes = 0;
+            var delayedTrains = new List<ServiceItem>();
 
-            var client = new LDBServiceSoapClient();
+            var token = MakeAccessToken(request.AccessToken);
 
-            // Avoiding Problems with the Using Statement in WCF clients
-            // https://msdn.microsoft.com/en-us/library/aa355056.aspx
-            try {
-                var totalDelayMinutes = 0;
-                var delayedTrains = new List<ServiceItem>();
+            var filterCrs = request.FilterCrs;
+            if (request.FilterCrs.Equals("LON", StringComparison.InvariantCultureIgnoreCase) ||
+                request.FilterCrs.Equals("London", StringComparison.InvariantCultureIgnoreCase)) {
+                filterCrs = null;
+            }
 
-                var token = MakeAccessToken(request.AccessToken);
+            var board = await Client.GetDepartureBoardAsync(token, request.NumRows, request.Crs, filterCrs, request.FilterType, 0, 0);
 
-                var filterCrs = request.FilterCrs;
-                if (request.FilterCrs.Equals("LON", StringComparison.InvariantCultureIgnoreCase) ||
-                    request.FilterCrs.Equals("London", StringComparison.InvariantCultureIgnoreCase)) {
-                    filterCrs = null;
+            var response = board.GetStationBoardResult;
+            var filterLocationName = response.filterLocationName;
+
+            var trainServices = response.trainServices ?? new ServiceItem[0];
+            var railReplacement = null != response.busServices && !trainServices.Any() && response.busServices.Any();
+            var messagesPresent = null != response.nrccMessages && response.nrccMessages.Any();
+
+            if (null == filterCrs) {
+                // This only finds trains terminating at London terminals. BFR/STP etc. won't be picked up if called at en-route.
+                // Could query for every terminal or get service for every train and check calling points. Very chatty either way.
+                switch (request.FilterType) {
+                    case FilterType.to:
+                        trainServices = trainServices.Where(ts => ts.destination.Any(d => HuxleyApi.LondonTerminals.Any(lt => lt.CrsCode == d.crs.ToUpperInvariant()))).ToArray();
+                        break;
+                    case FilterType.from:
+                        trainServices = trainServices.Where(ts => ts.origin.Any(o => HuxleyApi.LondonTerminals.Any(lt => lt.CrsCode == o.crs.ToUpperInvariant()))).ToArray();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
+                filterCrs = "LON";
+                filterLocationName = "London";
+            }
 
-                var board = await client.GetDepartureBoardAsync(token, request.NumRows, request.Crs, filterCrs, request.FilterType, 0, 0);
+            // If STDs are provided then select only the train(s) matching them
+            if (stds.Count > 0) {
+                trainServices = trainServices.Where(ts => stds.Contains(ts.std.Replace(":", ""))).ToArray();
+            }
 
-                var response = board.GetStationBoardResult;
-                var filterLocationName = response.filterLocationName;
-
-                var trainServices = response.trainServices ?? new ServiceItem[0];
-                var railReplacement = null != response.busServices && !trainServices.Any() && response.busServices.Any();
-                var messagesPresent = null != response.nrccMessages && response.nrccMessages.Any();
-
-                if (null == filterCrs) {
-                    // This only finds trains terminating at London terminals. BFR/STP etc. won't be picked up if called at en-route.
-                    // Could query for every terminal or get service for every train and check calling points. Very chatty either way.
-                    switch (request.FilterType) {
-                        case FilterType.to:
-                            trainServices = trainServices.Where(ts => ts.destination.Any(d => londonTerminals.Contains(d.crs.ToUpperInvariant()))).ToArray();
-                            break;
-                        case FilterType.from:
-                            trainServices = trainServices.Where(ts => ts.origin.Any(d => londonTerminals.Contains(d.crs.ToUpperInvariant()))).ToArray();
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                    filterCrs = "LON";
-                    filterLocationName = "London";
-                }
-
-                // If STDs are provided then select only the train(s) matching them
-                if (stds.Count > 0) {
-                    trainServices = trainServices.Where(ts => stds.Contains(ts.std.Replace(":", ""))).ToArray();
-                }
-
-                // Parse the response from the web service.
-                foreach (var si in trainServices.Where(si => !si.etd.Equals("On time", StringComparison.InvariantCultureIgnoreCase))) {
-                    if (si.etd.Equals("Delayed", StringComparison.InvariantCultureIgnoreCase) ||
-                        si.etd.Equals("Cancelled", StringComparison.InvariantCultureIgnoreCase)) {
-                        delayedTrains.Add(si);
-                    } else {
-                        DateTime etd;
-                        // Could be "Starts Here", "No Report" or contain a * (report overdue)
-                        if (DateTime.TryParse(si.etd.Replace("*", ""), out etd)) {
-                            DateTime std;
-                            if (DateTime.TryParse(si.std, out std)) {
-                                var late = etd.Subtract(std);
-                                totalDelayMinutes += (int)late.TotalMinutes;
-                                if (late.TotalMinutes > HuxleyApi.Settings.DelayMinutesThreshold) {
-                                    delayedTrains.Add(si);
-                                }
+            // Parse the response from the web service.
+            foreach (var si in trainServices.Where(si => !si.etd.Equals("On time", StringComparison.InvariantCultureIgnoreCase))) {
+                if (si.etd.Equals("Delayed", StringComparison.InvariantCultureIgnoreCase) ||
+                    si.etd.Equals("Cancelled", StringComparison.InvariantCultureIgnoreCase)) {
+                    delayedTrains.Add(si);
+                } else {
+                    DateTime etd;
+                    // Could be "Starts Here", "No Report" or contain a * (report overdue)
+                    if (DateTime.TryParse(si.etd.Replace("*", ""), out etd)) {
+                        DateTime std;
+                        if (DateTime.TryParse(si.std, out std)) {
+                            var late = etd.Subtract(std);
+                            totalDelayMinutes += (int)late.TotalMinutes;
+                            if (late.TotalMinutes > HuxleyApi.Settings.DelayMinutesThreshold) {
+                                delayedTrains.Add(si);
                             }
                         }
                     }
                 }
-
-                return new DelaysResponse {
-                    GeneratedAt = response.generatedAt,
-                    Crs = response.crs,
-                    LocationName = response.locationName,
-                    Filtercrs = filterCrs,
-                    FilterLocationName = filterLocationName,
-                    Delays = delayedTrains.Count > 0 || railReplacement || messagesPresent,
-                    TotalTrainsDelayed = delayedTrains.Count,
-                    TotalDelayMinutes = totalDelayMinutes,
-                    TotalTrains = trainServices.Length,
-                    DelayedTrains = delayedTrains,
-                };
-
-            } catch (CommunicationException) {
-                client.Abort();
-            } catch (TimeoutException) {
-                client.Abort();
-            } catch (Exception) {
-                client.Abort();
-                throw;
-            } finally {
-                client.Close();
             }
-            return new DelaysResponse();
+
+            return new DelaysResponse {
+                GeneratedAt = response.generatedAt,
+                Crs = response.crs,
+                LocationName = response.locationName,
+                Filtercrs = filterCrs,
+                FilterLocationName = filterLocationName,
+                Delays = delayedTrains.Count > 0 || railReplacement || messagesPresent,
+                TotalTrainsDelayed = delayedTrains.Count,
+                TotalDelayMinutes = totalDelayMinutes,
+                TotalTrains = trainServices.Length,
+                DelayedTrains = delayedTrains,
+            };
         }
     }
 }

@@ -18,28 +18,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System;
 using System.Threading.Tasks;
-using System.Web.Http;
-using Huxley.Models;
 using Huxley.ldbServiceReference;
 
-namespace Huxley.Controllers {
-    public class ServiceController : LdbController {
-
-        public ServiceController(ILdbClient client)
-            : base(client) {
-        }
-
-        // GET /service/ID?accessToken=[your token]
-        public async Task<ServiceDetails> Get([FromUri] ServiceRequest request) {
-            Guid sid;
-            if (Guid.TryParse(request.ServiceId, out sid)) {
-                request.ServiceId = Convert.ToBase64String(sid.ToByteArray());
-            }
-            var token = MakeAccessToken(request.AccessToken);
-            var service = await Client.GetServiceDetailsAsync(token, request.ServiceId);
-            return service.GetServiceDetailsResult;
-        }
+namespace Huxley {
+    public interface ILdbClient {
+        Task<GetDepartureBoardResponse> GetDepartureBoardAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType, int timeOffset, int timeWindow);
+        Task<GetArrivalBoardResponse> GetArrivalBoardAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType, int timeOffset, int timeWindow);
+        Task<GetArrivalDepartureBoardResponse> GetArrivalDepartureBoardAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType, int timeOffset, int timeWindow);
+        Task<GetServiceDetailsResponse> GetServiceDetailsAsync(AccessToken accessToken, string serviceId);
     }
 }

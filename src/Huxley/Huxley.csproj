@@ -50,9 +50,29 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.WebApi, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.WebApi.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.WebApi.WebHost, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.WebApi.WebHost.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.WebHost.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -87,15 +107,22 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\CrsController.cs" />
     <Compile Include="Controllers\DelaysController.cs" />
     <Compile Include="Controllers\StationController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\LdbController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="CrsRecord.cs" />
     <Compile Include="HuxleySettings.cs" />
+    <Compile Include="ILdbClient.cs" />
+    <Compile Include="LdbClient.cs" />
     <Compile Include="Models\BaseRequest.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\DelaysResponse.cs" />
@@ -114,9 +141,35 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="android-icon-144x144.png" />
+    <Content Include="android-icon-192x192.png" />
+    <Content Include="android-icon-36x36.png" />
+    <Content Include="android-icon-48x48.png" />
+    <Content Include="android-icon-72x72.png" />
+    <Content Include="android-icon-96x96.png" />
+    <Content Include="apple-icon-114x114.png" />
+    <Content Include="apple-icon-120x120.png" />
+    <Content Include="apple-icon-144x144.png" />
+    <Content Include="apple-icon-152x152.png" />
+    <Content Include="apple-icon-180x180.png" />
+    <Content Include="apple-icon-57x57.png" />
+    <Content Include="apple-icon-60x60.png" />
+    <Content Include="apple-icon-72x72.png" />
+    <Content Include="apple-icon-76x76.png" />
+    <Content Include="apple-icon-precomposed.png" />
+    <Content Include="apple-icon.png" />
+    <Content Include="browserconfig.xml" />
+    <Content Include="favicon-16x16.png" />
+    <Content Include="favicon-32x32.png" />
+    <Content Include="favicon-96x96.png" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="huxley.png" />
     <Content Include="index.html" />
+    <Content Include="ms-icon-144x144.png" />
+    <Content Include="ms-icon-150x150.png" />
+    <Content Include="ms-icon-310x310.png" />
+    <Content Include="ms-icon-70x70.png" />
     <Content Include="NRE_Powered_logo.png" />
     <Content Include="Service References\ldbServiceReference\configuration91.svcinfo" />
     <Content Include="Service References\ldbServiceReference\configuration.svcinfo" />
@@ -147,6 +200,7 @@
     </Content>
     <Content Include="Service References\ldbServiceReference\darwin_token_types_2013-11-28.wsdl" />
     <Content Include="RailReferences.csv" />
+    <Content Include="manifest.json" />
     <None Include="Service References\ldbServiceReference\darwin_token_types_2013-11-28.xsd">
       <SubType>Designer</SubType>
     </None>
