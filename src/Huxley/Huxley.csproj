@@ -141,9 +141,35 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="android-icon-144x144.png" />
+    <Content Include="android-icon-192x192.png" />
+    <Content Include="android-icon-36x36.png" />
+    <Content Include="android-icon-48x48.png" />
+    <Content Include="android-icon-72x72.png" />
+    <Content Include="android-icon-96x96.png" />
+    <Content Include="apple-icon-114x114.png" />
+    <Content Include="apple-icon-120x120.png" />
+    <Content Include="apple-icon-144x144.png" />
+    <Content Include="apple-icon-152x152.png" />
+    <Content Include="apple-icon-180x180.png" />
+    <Content Include="apple-icon-57x57.png" />
+    <Content Include="apple-icon-60x60.png" />
+    <Content Include="apple-icon-72x72.png" />
+    <Content Include="apple-icon-76x76.png" />
+    <Content Include="apple-icon-precomposed.png" />
+    <Content Include="apple-icon.png" />
+    <Content Include="browserconfig.xml" />
+    <Content Include="favicon-16x16.png" />
+    <Content Include="favicon-32x32.png" />
+    <Content Include="favicon-96x96.png" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="huxley.png" />
     <Content Include="index.html" />
+    <Content Include="ms-icon-144x144.png" />
+    <Content Include="ms-icon-150x150.png" />
+    <Content Include="ms-icon-310x310.png" />
+    <Content Include="ms-icon-70x70.png" />
     <Content Include="NRE_Powered_logo.png" />
     <Content Include="Service References\ldbServiceReference\configuration91.svcinfo" />
     <Content Include="Service References\ldbServiceReference\configuration.svcinfo" />
@@ -174,6 +200,7 @@
     </Content>
     <Content Include="Service References\ldbServiceReference\darwin_token_types_2013-11-28.wsdl" />
     <Content Include="RailReferences.csv" />
+    <Content Include="manifest.json" />
     <None Include="Service References\ldbServiceReference\darwin_token_types_2013-11-28.xsd">
       <SubType>Designer</SubType>
     </None>
