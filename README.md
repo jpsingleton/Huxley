@@ -4,6 +4,8 @@
 
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true "Build Status")](https://ci.appveyor.com/project/jpsingleton/huxley)
 
+[![Slack Chat](https://openraildata.herokuapp.com/badge.svg "Slack Chat")](https://openraildata.herokuapp.com)
+
 ## UK National Rail Live Departure Boards JSON proxy
 
 Huxley is a [CORS](http://enable-cors.org/) enabled JSON [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) proxy for the UK National Rail Enquires Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) (Darwin). 
