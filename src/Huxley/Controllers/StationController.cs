@@ -31,7 +31,7 @@ namespace Huxley.Controllers {
         }
 
         // GET /{board}/CRS?accessToken=[your token]
-        public async Task<StationBoard> Get([FromUri] StationBoardRequest request) {
+        public async Task<BaseStationBoard> Get([FromUri] StationBoardRequest request) {
 
             // Process CRS codes
             request.Crs = MakeCrsCode(request.Crs);
@@ -40,16 +40,28 @@ namespace Huxley.Controllers {
             var token = MakeAccessToken(request.AccessToken);
 
             if (Board.Departures == request.Board) {
+                if (request.Expand) {
+                    var departuresWithDetails = await Client.GetDepBoardWithDetailsAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+                    return departuresWithDetails.GetStationBoardResult;
+                }
                 var departures = await Client.GetDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
                 return departures.GetStationBoardResult;
             }
 
             if (Board.Arrivals == request.Board) {
+                if (request.Expand) {
+                    var arrivalsWithDetails = await Client.GetArrBoardWithDetailsAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+                    return arrivalsWithDetails.GetStationBoardResult;
+                }
                 var arrivals = await Client.GetArrivalBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
                 return arrivals.GetStationBoardResult;
             }
 
             // Default all (departures and arrivals board)
+            if (request.Expand) {
+                var boardWithDetails = await Client.GetArrDepBoardWithDetailsAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+                return boardWithDetails.GetStationBoardResult;
+            }
             var board = await Client.GetArrivalDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
             return board.GetStationBoardResult;
         }

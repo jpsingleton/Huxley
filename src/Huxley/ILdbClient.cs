@@ -23,9 +23,34 @@ using Huxley.ldbServiceReference;
 
 namespace Huxley {
     public interface ILdbClient {
-        Task<GetDepartureBoardResponse> GetDepartureBoardAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType, int timeOffset, int timeWindow);
-        Task<GetArrivalBoardResponse> GetArrivalBoardAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType, int timeOffset, int timeWindow);
-        Task<GetArrivalDepartureBoardResponse> GetArrivalDepartureBoardAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType, int timeOffset, int timeWindow);
+        Task<GetDepartureBoardResponse> GetDepartureBoardAsync(AccessToken accessToken, ushort numRows, string crs,
+                                                               string filterCrs, FilterType filterType, int timeOffset,
+                                                               int timeWindow);
+
+        Task<GetDepBoardWithDetailsResponse> GetDepBoardWithDetailsAsync(AccessToken accessToken, ushort numRows,
+                                                                         string crs, string filterCrs,
+                                                                         FilterType filterType, int timeOffset,
+                                                                         int timeWindow);
+
+        Task<GetArrivalBoardResponse> GetArrivalBoardAsync(AccessToken accessToken, ushort numRows, string crs,
+                                                           string filterCrs, FilterType filterType, int timeOffset,
+                                                           int timeWindow);
+
+        Task<GetArrBoardWithDetailsResponse> GetArrBoardWithDetailsAsync(AccessToken accessToken, ushort numRows,
+                                                                         string crs, string filterCrs,
+                                                                         FilterType filterType, int timeOffset,
+                                                                         int timeWindow);
+
+        Task<GetArrivalDepartureBoardResponse> GetArrivalDepartureBoardAsync(AccessToken accessToken, ushort numRows,
+                                                                             string crs, string filterCrs,
+                                                                             FilterType filterType, int timeOffset,
+                                                                             int timeWindow);
+
+        Task<GetArrDepBoardWithDetailsResponse> GetArrDepBoardWithDetailsAsync(AccessToken accessToken, ushort numRows,
+                                                                               string crs, string filterCrs,
+                                                                               FilterType filterType, int timeOffset,
+                                                                               int timeWindow);
+
         Task<GetServiceDetailsResponse> GetServiceDetailsAsync(AccessToken accessToken, string serviceId);
     }
 }

@@ -243,11 +243,11 @@
     <None Include="Service References\ldbServiceReference\RTTI_2014-02-20_ldb_types.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\ldbServiceReference\rtti_2015-05-14_ldb.wsdl" />
+    <None Include="Service References\ldbServiceReference\rtti_2015-05-14_ldb.wsdl" />
     <None Include="Service References\ldbServiceReference\RTTI_2015-05-15_ldb_types.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\ldbServiceReference\wsdl1.wsdl" />
+    <None Include="Service References\ldbServiceReference\wsdl1.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
