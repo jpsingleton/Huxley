@@ -92,9 +92,13 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 <h3>
 <a id="url-format" class="anchor" href="#url-format" aria-hidden="true"><span class="octicon octicon-link"></span></a>URL Format</h3>
 
-<p>The URL format is <code>{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}</code> or <code>{board}/{CRS|StationName}/{numRows}</code> where only board and CRS (or a station name) are required. The filter type can be either <code>to</code> or <code>from</code> (case is not important).</p>
+<p>The URL format is <code>{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}</code> or <code>{board}/{CRS|StationName}/{numRows}</code> (arrivals/departures only) where only board and CRS (or a station name) are required. The filter type can be either <code>to</code> or <code>from</code> (case is not important).</p>
 
 <p>A station name can be used in place of CRS codes if the name matches only one station (or matches one exactly) but case is not important. See the <a href="#crs-station-codes">CRS section</a> below for more information.</p>
+
+<p>For all boards you can add an <code>expand=true</code> parameter to embed all service details into the board response.</p>
+
+<p><a href="https://huxley.apphb.com/all/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1&amp;expand=true"><code>/all/{CRS|StationName}?accessToken={token}&amp;expand=true</code></a></p>
 
 <p>Examples:</p>
 
@@ -116,17 +120,31 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 <h3>
 <a id="departures" class="anchor" href="#departures" aria-hidden="true"><span class="octicon octicon-link"></span></a>Departures</h3>
 
-<p><a href="https://huxley.apphb.com/departures/crs?accessToken="><code>/departures/{Three letter CRS station code}?accessToken={Your GUID token}</code></a></p>
+<p><a href="https://huxley.apphb.com/departures/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/departures/{CRS|StationName}/{filterType}/{filterCRS|StationName}</code></a></p>
 
 <h3>
 <a id="arrivals" class="anchor" href="#arrivals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Arrivals</h3>
 
-<p><a href="https://huxley.apphb.com/arrivals/crs?accessToken="><code>/arrivals/{Three letter CRS station code}?accessToken={Your GUID token}</code></a></p>
+<p><a href="https://huxley.apphb.com/arrivals/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/arrivals/{CRS|StationName}/{filterType}/{filterCRS|StationName}</code></a></p>
 
 <h3>
 <a id="departures-and-arrivals" class="anchor" href="#departures-and-arrivals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Departures and Arrivals</h3>
 
-<p><a href="https://huxley.apphb.com/all/crs?accessToken="><code>/all/{Three letter CRS station code}?accessToken={Your GUID token}</code></a></p>
+<p><a href="https://huxley.apphb.com/all/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/all/{CRS|StationName}/{filterType}/{filterCRS|StationName}</code></a></p>
+
+<h3>
+<a id="next" class="anchor" href="#next" aria-hidden="true"><span class="octicon octicon-link"></span></a>Next</h3>
+
+<p><a href="https://huxley.apphb.com/next/crs/to/edb?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/next/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}</code></a></p>
+
+<p>Filter stations can be a comma separated list. Filter type and number of rows are ignored.</p>
+
+<h3>
+<a id="fastest" class="anchor" href="#fastest" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fastest</h3>
+
+<p><a href="https://huxley.apphb.com/fastest/crs/to/edb?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/fastest/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}</code></a></p>
+
+<p>Filter stations can be a comma separated list. Filter type and number of rows are ignored.</p>
 
 <h3>
 <a id="service" class="anchor" href="#service" aria-hidden="true"><span class="octicon octicon-link"></span></a>Service</h3>
