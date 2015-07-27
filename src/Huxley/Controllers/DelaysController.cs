@@ -76,24 +76,28 @@ namespace Huxley.Controllers {
                 filterCrs = null;
             }
 
-            var board = await Client.GetDepartureBoardAsync(token, request.NumRows, request.Crs, filterCrs, request.FilterType, 0, 0);
+            var board = await Client.GetArrDepBoardWithDetailsAsync(token, request.NumRows, request.Crs, filterCrs, request.FilterType, 0, 0);
 
             var response = board.GetStationBoardResult;
             var filterLocationName = response.filterLocationName;
 
-            var trainServices = response.trainServices ?? new ServiceItem[0];
+            var trainServices = response.trainServices ?? new ServiceItemWithCallingPoints[0];
             var railReplacement = null != response.busServices && !trainServices.Any() && response.busServices.Any();
             var messagesPresent = null != response.nrccMessages && response.nrccMessages.Any();
 
             if (null == filterCrs) {
-                // This only finds trains terminating at London terminals. BFR/STP etc. won't be picked up if called at en-route.
-                // Could query for every terminal or get service for every train and check calling points. Very chatty either way.
                 switch (request.FilterType) {
                     case FilterType.to:
-                        trainServices = trainServices.Where(ts => ts.destination.Any(d => HuxleyApi.LondonTerminals.Any(lt => lt.CrsCode == d.crs.ToUpperInvariant()))).ToArray();
+                        trainServices = trainServices.Where(ts => ts.subsequentCallingPoints != null && ts.subsequentCallingPoints.Any(
+                            scp => scp.callingPoint != null && scp.callingPoint.Any(
+                                d => HuxleyApi.LondonTerminals.Any(
+                                    lt => lt.CrsCode == d.crs.ToUpperInvariant())))).ToArray();
                         break;
                     case FilterType.from:
-                        trainServices = trainServices.Where(ts => ts.origin.Any(o => HuxleyApi.LondonTerminals.Any(lt => lt.CrsCode == o.crs.ToUpperInvariant()))).ToArray();
+                        trainServices = trainServices.Where(ts => ts.previousCallingPoints != null && ts.previousCallingPoints.Any(
+                            pcp => pcp.callingPoint != null && pcp.callingPoint.Any(
+                                d => HuxleyApi.LondonTerminals.Any(
+                                    lt => lt.CrsCode == d.crs.ToUpperInvariant())))).ToArray();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -108,7 +112,7 @@ namespace Huxley.Controllers {
             }
 
             // Parse the response from the web service.
-            foreach (var si in trainServices.Where(si => !si.etd.Equals("On time", StringComparison.InvariantCultureIgnoreCase))) {
+            foreach (var si in trainServices.Where(si => si.etd != null && !si.etd.Equals("On time", StringComparison.InvariantCultureIgnoreCase))) {
                 if (si.etd.Equals("Delayed", StringComparison.InvariantCultureIgnoreCase) ||
                     si.etd.Equals("Cancelled", StringComparison.InvariantCultureIgnoreCase)) {
                     delayedTrains.Add(si);
