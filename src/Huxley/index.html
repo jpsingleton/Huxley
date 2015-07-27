@@ -83,12 +83,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <h3>Station Boards</h3>
         <h4>URL Format</h4>
         <p>
-            The URL format is <code>{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}</code> or <code>{board}/{CRS|StationName}/{numRows}</code> where only board and CRS (or a station name) are required.
+            The URL format is <code>{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}</code> or <code>{board}/{CRS|StationName}/{numRows}</code> (arrivals/departures only) where only board and CRS (or a station name) are required.
             The filter type can be either <code>to</code> or <code>from</code> (case is not important).
         </p>
         <p>
             A station name can be used in place of CRS codes if the name matches only one station (or matches one exactly) but case is not important.
             See the CRS section below for more information.
+        </p>
+        <p>
+            For all boards you can add an <code>expand=true</code> parameter to embed all service details into the board response.
+        </p>
+        <p>
+            <code><a href="/all/crs?expand=true&accessToken=">/all/{CRS|StationName}?accessToken={Your GUID token}&amp;expand=true</a></code>
         </p>
         <h5>Examples:</h5>
         <ul>
@@ -105,6 +111,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <p><code><a href="/arrivals/crs?accessToken=">/arrivals/{CRS|StationName}?accessToken={Your GUID token}</a></code></p>
         <h4>Departures and Arrivals</h4>
         <p><code><a href="/all/crs?accessToken=">/all/{CRS|StationName}?accessToken={Your GUID token}</a></code></p>
+        <h4>Next</h4>
+        <p><code><a href="/next/crs/to/edb?accessToken=">/next/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}?accessToken={Your GUID token}</a></code></p>
+        <p>Filter stations can be a comma separated list. Filter type and number of rows are ignored.</p>
+        <h4>Fastest</h4>
+        <p><code><a href="/fastest/crs/to/edb?accessToken=">/fastest/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}?accessToken={Your GUID token}</a></code></p>
+        <p>Filter stations can be a comma separated list. Filter type and number of rows are ignored.</p>
         <h4>Delays</h4>
         <p>The <strong>delays</strong> action performs calculations server side to easily let you know if there are problems on a particular route.</p>
         <p><code><a href="/delays/clapham junction/from/london/20?accessToken=">/delays/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}?accessToken={Your GUID token}</a></code></p>
