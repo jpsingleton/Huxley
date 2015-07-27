@@ -51,6 +51,23 @@ namespace Huxley {
                                                                                FilterType filterType, int timeOffset,
                                                                                int timeWindow);
 
+        Task<GetNextDeparturesResponse> GetNextDeparturesAsync(AccessToken accessToken, string crs, string[] filterList,
+                                                               int timeOffset, int timeWindow);
+
+        Task<GetNextDeparturesWithDetailsResponse> GetNextDeparturesWithDetailsAsync(AccessToken accessToken, string crs,
+                                                                                     string[] filterList, int timeOffset,
+                                                                                     int timeWindow);
+
+        Task<GetFastestDeparturesResponse> GetFastestDeparturesAsync(AccessToken accessToken, string crs,
+                                                                                  string[] filterList, int timeOffset,
+                                                                                  int timeWindow);
+
+        Task<GetFastestDeparturesWithDetailsResponse> GetFastestDeparturesWithDetailsAsync(AccessToken accessToken,
+                                                                                           string crs, string[] filterList,
+                                                                                           int timeOffset,
+                                                                                           int timeWindow);
+
+
         Task<GetServiceDetailsResponse> GetServiceDetailsAsync(AccessToken accessToken, string serviceId);
     }
 }

@@ -61,6 +61,22 @@ namespace Huxley {
             return await Execute(() => client.GetArrDepBoardWithDetailsAsync(accessToken, numRows, crs, filterCrs, filterType, timeOffset, timeWindow));
         }
 
+        public async Task<GetNextDeparturesResponse> GetNextDeparturesAsync(AccessToken accessToken, string crs, string[] filterList, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetNextDeparturesAsync(accessToken, crs, filterList, timeOffset, timeWindow));
+        }
+
+        public async Task<GetNextDeparturesWithDetailsResponse> GetNextDeparturesWithDetailsAsync(AccessToken accessToken, string crs, string[] filterList, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetNextDeparturesWithDetailsAsync(accessToken, crs, filterList, timeOffset, timeWindow));
+        }
+
+        public async Task<GetFastestDeparturesResponse> GetFastestDeparturesAsync(AccessToken accessToken, string crs, string[] filterList, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetFastestDeparturesAsync(accessToken, crs, filterList, timeOffset, timeWindow));
+        }
+
+        public async Task<GetFastestDeparturesWithDetailsResponse> GetFastestDeparturesWithDetailsAsync(AccessToken accessToken, string crs, string[] filterList, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetFastestDeparturesWithDetailsAsync(accessToken, crs, filterList, timeOffset, timeWindow));
+        }
+
         public async Task<GetServiceDetailsResponse> GetServiceDetailsAsync(AccessToken accessToken, string serviceId) {
             return await Execute(() => client.GetServiceDetailsAsync(accessToken, serviceId));
         }

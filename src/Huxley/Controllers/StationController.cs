@@ -57,6 +57,24 @@ namespace Huxley.Controllers {
                 return arrivals.GetStationBoardResult;
             }
 
+            if (Board.Next == request.Board) {
+                if (request.Expand) {
+                    var nextWithDetails = await Client.GetNextDeparturesWithDetailsAsync(token, request.Crs, request.FilterCrs.Split(','), 0, 0);
+                    return nextWithDetails.DeparturesBoard;
+                }
+                var next = await Client.GetNextDeparturesAsync(token, request.Crs, request.FilterCrs.Split(','), 0, 0);
+                return next.DeparturesBoard;
+            }
+
+            if (Board.Fastest == request.Board) {
+                if (request.Expand) {
+                    var nextWithDetails = await Client.GetFastestDeparturesWithDetailsAsync(token, request.Crs, request.FilterCrs.Split(','), 0, 0);
+                    return nextWithDetails.DeparturesBoard;
+                }
+                var next = await Client.GetFastestDeparturesAsync(token, request.Crs, request.FilterCrs.Split(','), 0, 0);
+                return next.DeparturesBoard;
+            }
+
             // Default all (departures and arrivals board)
             if (request.Expand) {
                 var boardWithDetails = await Client.GetArrDepBoardWithDetailsAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
