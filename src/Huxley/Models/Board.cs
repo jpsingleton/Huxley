@@ -23,5 +23,7 @@ namespace Huxley.Models {
         All,
         Arrivals,
         Departures,
+        Next,
+        Fastest
     }
 }

@@ -171,8 +171,8 @@
     <Content Include="ms-icon-310x310.png" />
     <Content Include="ms-icon-70x70.png" />
     <Content Include="NRE_Powered_logo.png" />
-    <Content Include="Service References\ldbServiceReference\configuration91.svcinfo" />
-    <Content Include="Service References\ldbServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ldbServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\ldbServiceReference\configuration.svcinfo" />
     <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.GetArrivalBoardResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -191,14 +191,44 @@
     <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.StationBoard.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ldbServiceReference\Reference.svcmap">
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.DeparturesBoard.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.DeparturesBoardWithDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.GetArrBoardWithDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.GetArrDepBoardWithDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.GetDepBoardWithDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.GetFastestDeparturesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.GetFastestDeparturesWithDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.GetNextDeparturesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.GetNextDeparturesWithDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.StationBoardWithDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ldbServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Service References\ldbServiceReference\darwin_token_types_2013-11-28.wsdl" />
+    <None Include="Service References\ldbServiceReference\darwin_token_types_2013-11-28.wsdl" />
     <Content Include="RailReferences.csv" />
     <Content Include="manifest.json" />
     <None Include="Service References\ldbServiceReference\darwin_token_types_2013-11-28.xsd">
@@ -210,11 +240,14 @@
     <None Include="Service References\ldbServiceReference\RTTI_2012-01-13_ldb_types.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\ldbServiceReference\rtti_2014-02-20_ldb.wsdl" />
     <None Include="Service References\ldbServiceReference\RTTI_2014-02-20_ldb_types.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\ldbServiceReference\wsdl.wsdl" />
+    <None Include="Service References\ldbServiceReference\rtti_2015-05-14_ldb.wsdl" />
+    <None Include="Service References\ldbServiceReference\RTTI_2015-05-15_ldb_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbServiceReference\wsdl1.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

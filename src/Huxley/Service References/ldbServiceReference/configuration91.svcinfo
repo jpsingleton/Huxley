@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="I0whDRmNrtYkA0iQ1mvzNpNlOWM=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="vBEKXMVXbJcaK10znF2Js42aazk=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="LDBServiceSoap">
       <properties>
@@ -372,10 +372,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="LDBServiceSoap" contract="ldbServiceReference.LDBServiceSoap" bindingType="basicHttpBinding" address="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx" bindingConfiguration="LDBServiceSoap">
+    <endpoint name="LDBServiceSoap" contract="ldbServiceReference.LDBServiceSoap" bindingType="basicHttpBinding" address="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb7.asmx" bindingConfiguration="LDBServiceSoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx</serializedValue>
+          <serializedValue>https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb7.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

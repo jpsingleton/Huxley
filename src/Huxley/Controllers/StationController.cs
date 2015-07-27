@@ -18,6 +18,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Huxley.Models;
@@ -31,26 +32,59 @@ namespace Huxley.Controllers {
         }
 
         // GET /{board}/CRS?accessToken=[your token]
-        public async Task<StationBoard> Get([FromUri] StationBoardRequest request) {
+        public async Task<BaseStationBoard> Get([FromUri] StationBoardRequest request) {
 
-            // Process CRS codes
-            request.Crs = MakeCrsCode(request.Crs);
-            request.FilterCrs = MakeCrsCode(request.FilterCrs);
+            // Lookup CRS codes from station names
+            var crs = MakeCrsCode(request.Crs);
+            var filterList = new[] { "" };
+            if (!string.IsNullOrWhiteSpace(request.FilterCrs)) {
+                filterList = request.FilterCrs.Split(',').Select(MakeCrsCode).ToArray();
+            }
 
             var token = MakeAccessToken(request.AccessToken);
 
             if (Board.Departures == request.Board) {
-                var departures = await Client.GetDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+                if (request.Expand) {
+                    var departuresWithDetails = await Client.GetDepBoardWithDetailsAsync(token, request.NumRows, crs, filterList[0], request.FilterType, 0, 0);
+                    return departuresWithDetails.GetStationBoardResult;
+                }
+                var departures = await Client.GetDepartureBoardAsync(token, request.NumRows, crs, filterList[0], request.FilterType, 0, 0);
                 return departures.GetStationBoardResult;
             }
 
             if (Board.Arrivals == request.Board) {
-                var arrivals = await Client.GetArrivalBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+                if (request.Expand) {
+                    var arrivalsWithDetails = await Client.GetArrBoardWithDetailsAsync(token, request.NumRows, crs, filterList[0], request.FilterType, 0, 0);
+                    return arrivalsWithDetails.GetStationBoardResult;
+                }
+                var arrivals = await Client.GetArrivalBoardAsync(token, request.NumRows, crs, filterList[0], request.FilterType, 0, 0);
                 return arrivals.GetStationBoardResult;
             }
 
+            if (Board.Next == request.Board) {
+                if (request.Expand) {
+                    var nextWithDetails = await Client.GetNextDeparturesWithDetailsAsync(token, crs, filterList, 0, 0);
+                    return nextWithDetails.DeparturesBoard;
+                }
+                var next = await Client.GetNextDeparturesAsync(token, crs, filterList, 0, 0);
+                return next.DeparturesBoard;
+            }
+
+            if (Board.Fastest == request.Board) {
+                if (request.Expand) {
+                    var nextWithDetails = await Client.GetFastestDeparturesWithDetailsAsync(token, crs, filterList, 0, 0);
+                    return nextWithDetails.DeparturesBoard;
+                }
+                var next = await Client.GetFastestDeparturesAsync(token, crs, filterList, 0, 0);
+                return next.DeparturesBoard;
+            }
+
             // Default all (departures and arrivals board)
-            var board = await Client.GetArrivalDepartureBoardAsync(token, request.NumRows, request.Crs, request.FilterCrs, request.FilterType, 0, 0);
+            if (request.Expand) {
+                var boardWithDetails = await Client.GetArrDepBoardWithDetailsAsync(token, request.NumRows, crs, filterList[0], request.FilterType, 0, 0);
+                return boardWithDetails.GetStationBoardResult;
+            }
+            var board = await Client.GetArrivalDepartureBoardAsync(token, request.NumRows, crs, filterList[0], request.FilterType, 0, 0);
             return board.GetStationBoardResult;
         }
     }

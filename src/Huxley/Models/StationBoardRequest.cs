@@ -40,5 +40,6 @@ namespace Huxley.Models {
             set { numRows = value; }
         }
         public string Std { get; set; }
+        public bool Expand { get; set; }
     }
 }

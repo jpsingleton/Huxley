@@ -34,7 +34,11 @@ namespace Huxley {
         public async Task<GetDepartureBoardResponse> GetDepartureBoardAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs,
                                                                               FilterType filterType, int timeOffset, int timeWindow) {
             return await Execute(() => client.GetDepartureBoardAsync(accessToken, numRows, crs, filterCrs, filterType, timeOffset, timeWindow));
+        }
 
+        public async Task<GetDepBoardWithDetailsResponse> GetDepBoardWithDetailsAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs,
+                                                                      FilterType filterType, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetDepBoardWithDetailsAsync(accessToken, numRows, crs, filterCrs, filterType, timeOffset, timeWindow));
         }
 
         public async Task<GetArrivalBoardResponse> GetArrivalBoardAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs,
@@ -42,9 +46,35 @@ namespace Huxley {
             return await Execute(() => client.GetArrivalBoardAsync(accessToken, numRows, crs, filterCrs, filterType, timeOffset, timeWindow));
         }
 
+        public async Task<GetArrBoardWithDetailsResponse> GetArrBoardWithDetailsAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs,
+                                                                  FilterType filterType, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetArrBoardWithDetailsAsync(accessToken, numRows, crs, filterCrs, filterType, timeOffset, timeWindow));
+        }
+
         public async Task<GetArrivalDepartureBoardResponse> GetArrivalDepartureBoardAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs,
                                                                                             FilterType filterType, int timeOffset, int timeWindow) {
             return await Execute(() => client.GetArrivalDepartureBoardAsync(accessToken, numRows, crs, filterCrs, filterType, timeOffset, timeWindow));
+        }
+
+        public async Task<GetArrDepBoardWithDetailsResponse> GetArrDepBoardWithDetailsAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs,
+                                                                                    FilterType filterType, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetArrDepBoardWithDetailsAsync(accessToken, numRows, crs, filterCrs, filterType, timeOffset, timeWindow));
+        }
+
+        public async Task<GetNextDeparturesResponse> GetNextDeparturesAsync(AccessToken accessToken, string crs, string[] filterList, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetNextDeparturesAsync(accessToken, crs, filterList, timeOffset, timeWindow));
+        }
+
+        public async Task<GetNextDeparturesWithDetailsResponse> GetNextDeparturesWithDetailsAsync(AccessToken accessToken, string crs, string[] filterList, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetNextDeparturesWithDetailsAsync(accessToken, crs, filterList, timeOffset, timeWindow));
+        }
+
+        public async Task<GetFastestDeparturesResponse> GetFastestDeparturesAsync(AccessToken accessToken, string crs, string[] filterList, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetFastestDeparturesAsync(accessToken, crs, filterList, timeOffset, timeWindow));
+        }
+
+        public async Task<GetFastestDeparturesWithDetailsResponse> GetFastestDeparturesWithDetailsAsync(AccessToken accessToken, string crs, string[] filterList, int timeOffset, int timeWindow) {
+            return await Execute(() => client.GetFastestDeparturesWithDetailsAsync(accessToken, crs, filterList, timeOffset, timeWindow));
         }
 
         public async Task<GetServiceDetailsResponse> GetServiceDetailsAsync(AccessToken accessToken, string serviceId) {

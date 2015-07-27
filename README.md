@@ -66,9 +66,13 @@ You can set `DarwinAccessToken` to your NRE access token. If you leave `ClientAc
 
 ### URL Format
 
-The URL format is `{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}` or `{board}/{CRS|StationName}/{numRows}` where only board and CRS (or a station name) are required. The filter type can be either `to` or `from` (case is not important).
+The URL format is `{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}` or `{board}/{CRS|StationName}/{numRows}` (arrivals/departures only) where only board and CRS (or a station name) are required. The filter type can be either `to` or `from` (case is not important).
 
 A station name can be used in place of CRS codes if the name matches only one station (or matches one exactly) but case is not important. See the [CRS section](#crs-station-codes) below for more information.
+
+For all boards you can add an `expand=true` parameter to embed all service details into the board response.
+
+[`/all/{CRS|StationName}?accessToken={token}&expand=true`](https://huxley.apphb.com/all/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1&expand=true)
 
 Examples:
 
@@ -81,15 +85,27 @@ Examples:
 
 ### Departures
 
-[`/departures/{Three letter CRS station code}?accessToken={Your GUID token}`](https://huxley.apphb.com/departures/crs?accessToken=)
+[`/departures/{CRS|StationName}/{filterType}/{filterCRS|StationName}`](https://huxley.apphb.com/departures/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
 
 ### Arrivals
 
-[`/arrivals/{Three letter CRS station code}?accessToken={Your GUID token}`](https://huxley.apphb.com/arrivals/crs?accessToken=)
+[`/arrivals/{CRS|StationName}/{filterType}/{filterCRS|StationName}`](https://huxley.apphb.com/arrivals/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
 
 ### Departures and Arrivals
 
-[`/all/{Three letter CRS station code}?accessToken={Your GUID token}`](https://huxley.apphb.com/all/crs?accessToken=)
+[`/all/{CRS|StationName}/{filterType}/{filterCRS|StationName}`](https://huxley.apphb.com/all/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
+
+### Next
+
+[`/next/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}`](https://huxley.apphb.com/next/crs/to/edb?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
+
+Filter stations can be a comma separated list. Filter type and number of rows are ignored.
+
+### Fastest
+
+[`/fastest/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}`](https://huxley.apphb.com/fastest/crs/to/edb?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
+
+Filter stations can be a comma separated list. Filter type and number of rows are ignored.
 
 ### Service
 
