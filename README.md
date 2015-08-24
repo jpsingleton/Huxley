@@ -207,7 +207,7 @@ To get your own instance of Huxley (on [App Harbor](https://appharbor.com/) or [
 
 Made by [James Singleton](https://unop.uk)
 
-![powered by National Rail Enquiries](src/Huxley/NRE_Powered_logo.png "powered by National Rail Enquiries")
+![powered by National Rail Enquiries](https://huxley.apphb.com/NRE_Powered_logo.png "powered by National Rail Enquiries")
 
 ---
 
