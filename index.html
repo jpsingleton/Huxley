@@ -5,7 +5,7 @@
     <title>Huxley by jpsingleton</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
@@ -61,11 +61,11 @@
 r.<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>https://huxley.apphb.com/all/stp/from/bxs/1?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>);
 <span class="pl-c1">r</span>.<span class="pl-en">onreadystatechange</span> <span class="pl-k">=</span> <span class="pl-k">function</span> () {
     <span class="pl-k">if</span> (r.<span class="pl-c1">readyState</span> <span class="pl-k">!=</span> <span class="pl-c1">4</span> <span class="pl-k">||</span> r.<span class="pl-c1">status</span> <span class="pl-k">!=</span> <span class="pl-c1">200</span>) <span class="pl-k">return</span>;
-    <span class="pl-k">var</span> resp <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(r.response);
-    <span class="pl-k">if</span> (resp.trainServices <span class="pl-k">&amp;&amp;</span> resp.trainServices.<span class="pl-c1">length</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span>) {
-        <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>The next train to arrive at <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.locationName <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> from <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.filterLocationName <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> will get in at <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.trainServices[<span class="pl-c1">0</span>].sta);
+    <span class="pl-k">var</span> resp <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(r.<span class="pl-c1">response</span>);
+    <span class="pl-k">if</span> (resp.<span class="pl-c1">trainServices</span> <span class="pl-k">&amp;&amp;</span> resp.<span class="pl-c1">trainServices</span>.<span class="pl-c1">length</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span>) {
+        <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>The next train to arrive at <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.<span class="pl-c1">locationName</span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> from <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.<span class="pl-c1">filterLocationName</span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> will get in at <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.<span class="pl-c1">trainServices</span>[<span class="pl-c1">0</span>].<span class="pl-c1">sta</span>);
     } <span class="pl-k">else</span> {
-        <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>Sorry, no trains from <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.filterLocationName <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> arriving soon<span class="pl-pds">"</span></span>);
+        <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>Sorry, no trains from <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.<span class="pl-c1">filterLocationName</span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> arriving soon<span class="pl-pds">"</span></span>);
     }
 };
 r.<span class="pl-c1">send</span>();</pre></div>
@@ -268,7 +268,16 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 
     </section>
 
-  
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-23992189-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
-
