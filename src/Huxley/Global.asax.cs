@@ -69,7 +69,7 @@ namespace Huxley {
                 new CrsRecord {CrsCode = "BFR", StationName = "London Blackfriars",},
                 new CrsRecord {CrsCode = "CST", StationName = "London Cannon Street",},
                 new CrsRecord {CrsCode = "CHX", StationName = "London Charing Cross",},
-                new CrsRecord {CrsCode = "CTX", StationName = "City Thameslink",},
+                new CrsRecord {CrsCode = "CTK", StationName = "City Thameslink",},
                 new CrsRecord {CrsCode = "EUS", StationName = "London Euston",},
                 new CrsRecord {CrsCode = "FST", StationName = "London Fenchurch Street",},
                 new CrsRecord {CrsCode = "KGX", StationName = "London Kings Cross",},
