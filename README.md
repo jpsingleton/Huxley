@@ -4,7 +4,7 @@
 
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true "Build Status")](https://ci.appveyor.com/project/jpsingleton/huxley)
 
-[![Slack Chat](https://openraildata.herokuapp.com/badge.svg "Slack Chat")](https://openraildata.herokuapp.com)
+[![AGPL](https://www.gnu.org/graphics/agplv3-155x51.png "AGPL")](LICENSE)
 
 ## UK National Rail Live Departure Boards JSON proxy
 
