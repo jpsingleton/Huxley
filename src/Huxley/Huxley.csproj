@@ -240,11 +240,11 @@
     <None Include="Service References\ldbServiceReference\RTTI_2012-01-13_ldb_types.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ldbServiceReference\RTTI_2014-02-20_ldb_types.xsd">
+    <Content Include="Service References\ldbServiceReference\rtti_2015-11-27_ldb.wsdl" />
+    <None Include="Service References\ldbServiceReference\RTTI_2015-11-27_ldb_common_types.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ldbServiceReference\rtti_2015-05-14_ldb.wsdl" />
-    <None Include="Service References\ldbServiceReference\RTTI_2015-05-15_ldb_types.xsd">
+    <None Include="Service References\ldbServiceReference\RTTI_2015-11-27_ldb_types.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ldbServiceReference\wsdl1.wsdl" />
