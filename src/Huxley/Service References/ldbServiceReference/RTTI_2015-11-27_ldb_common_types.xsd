@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://thalesgroup.com/RTTI/2015-11-27/ldb/commontypes" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thalesgroup.com/RTTI/2015-11-27/ldb/commontypes" id="RTTI_2015-11-27_ldb_common_types" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="TimeType">
+    <xs:annotation>
+      <xs:documentation>Represents a time displayed in a departure board. This will often be a true time in the format HH:MM (possibly with appended characters, such as "*"), but may also be a string, such as "No report" or "cancelled"</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="12" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ServiceIDType">
+    <xs:annotation>
+      <xs:documentation>Represents an individual service in a departure board and can be used to return details of that service</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="TrainLength">
+    <xs:annotation>
+      <xs:documentation>Defines the length of a train</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:unsignedShort">
+      <xs:maxInclusive value="99" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
