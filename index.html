@@ -20,7 +20,7 @@
 
     <section class="main-content">
       <h1>
-<a id="huxley" class="anchor" href="#huxley" aria-hidden="true"><span class="octicon octicon-link"></span></a>Huxley</h1>
+<a id="huxley" class="anchor" href="#huxley" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Huxley</h1>
 
 <p><a href="https://huxley.apphb.com/"><img src="https://huxley.apphb.com/huxley.png" alt="Huxley" title="Huxley"></a></p>
 
@@ -29,11 +29,13 @@
 <p><a href="LICENSE"><img src="https://www.gnu.org/graphics/agplv3-155x51.png" alt="AGPL" title="AGPL"></a></p>
 
 <h2>
-<a id="uk-national-rail-live-departure-boards-json-proxy" class="anchor" href="#uk-national-rail-live-departure-boards-json-proxy" aria-hidden="true"><span class="octicon octicon-link"></span></a>UK National Rail Live Departure Boards JSON proxy</h2>
+<a id="uk-national-rail-live-departure-boards-json-proxy" class="anchor" href="#uk-national-rail-live-departure-boards-json-proxy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UK National Rail Live Departure Boards JSON proxy</h2>
 
-<p>Huxley is a <a href="http://enable-cors.org/">CORS</a> enabled JSON <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> proxy for the UK National Rail Enquires Live Departure Board <a href="http://harmful.cat-v.org/software/xml/soap/simple">SOAP</a> <a href="http://www.nationalrail.co.uk/46391.aspx">API</a> (Darwin). </p>
+<p>Huxley is a <a href="http://enable-cors.org/">CORS</a> enabled JSON <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> proxy for the UK National Rail Enquires Live Departure Board <a href="http://harmful.cat-v.org/software/xml/soap/simple">SOAP</a> <a href="http://www.nationalrail.co.uk/46391.aspx">API</a> (Darwin).</p>
 
-<p>Huxley is being <em>actively</em> developed. If you want to be informed of updates when they are released then watch the project on GitHub and/or <strong><a href="https://twitter.com/shutdownscanner">follow me on Twitter</a></strong>. You can also read about this and other projects on <a href="https://unop.uk/">my blog</a>.</p>
+<p><img src="https://raw.githubusercontent.com/jpsingleton/Huxley/master/HuxleyTechArch.png" alt="Tech arch"></p>
+
+<p>If you want to be informed of updates when they are released then watch the project on GitHub and/or <strong><a href="https://twitter.com/shutdownscanner">follow me on Twitter</a></strong>. You can also read about this and other projects on <a href="https://unop.uk/">my blog</a>.</p>
 
 <hr>
 
@@ -50,7 +52,7 @@
 <p><a href="https://instabail.uk/"><img src="https://unop.uk/wp-content/uploads/2015/07/ios2.png" alt="InstaBail" title="InstaBail"></a></p>
 
 <h2>
-<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo</h2>
 
 <p>There is an example deployment set up <a href="https://huxley.apphb.com/">here</a>.
 (<strong>DO NOT USE THIS FOR ANYTHING SERIOUS!</strong>)</p>
@@ -58,17 +60,17 @@
 <p>Paste this into your web console <kbd>F12</kbd>:</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> r <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">XMLHttpRequest</span>();
-r.<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>https://huxley.apphb.com/all/stp/from/bxs/1?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>);
-<span class="pl-c1">r</span>.<span class="pl-en">onreadystatechange</span> <span class="pl-k">=</span> <span class="pl-k">function</span> () {
-    <span class="pl-k">if</span> (r.<span class="pl-c1">readyState</span> <span class="pl-k">!=</span> <span class="pl-c1">4</span> <span class="pl-k">||</span> r.<span class="pl-c1">status</span> <span class="pl-k">!=</span> <span class="pl-c1">200</span>) <span class="pl-k">return</span>;
-    <span class="pl-k">var</span> resp <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(r.response);
-    <span class="pl-k">if</span> (resp.trainServices <span class="pl-k">&amp;&amp;</span> resp.trainServices.<span class="pl-c1">length</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span>) {
-        <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>The next train to arrive at <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.locationName <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> from <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.filterLocationName <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> will get in at <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.trainServices[<span class="pl-c1">0</span>].sta);
+<span class="pl-smi">r</span>.<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>https://huxley.apphb.com/all/stp/from/bxs/1?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>);
+<span class="pl-smi">r</span>.<span class="pl-en">onreadystatechange</span> <span class="pl-k">=</span> <span class="pl-k">function</span> () {
+    <span class="pl-k">if</span> (<span class="pl-smi">r</span>.<span class="pl-c1">readyState</span> <span class="pl-k">!=</span> <span class="pl-c1">4</span> <span class="pl-k">||</span> <span class="pl-smi">r</span>.<span class="pl-c1">status</span> <span class="pl-k">!=</span> <span class="pl-c1">200</span>) <span class="pl-k">return</span>;
+    <span class="pl-k">var</span> resp <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(<span class="pl-smi">r</span>.<span class="pl-smi">response</span>);
+    <span class="pl-k">if</span> (<span class="pl-smi">resp</span>.<span class="pl-smi">trainServices</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-smi">resp</span>.<span class="pl-smi">trainServices</span>.<span class="pl-c1">length</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span>) {
+        <span class="pl-en">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>The next train to arrive at <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-smi">resp</span>.<span class="pl-smi">locationName</span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> from <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-smi">resp</span>.<span class="pl-smi">filterLocationName</span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> will get in at <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-smi">resp</span>.<span class="pl-smi">trainServices</span>[<span class="pl-c1">0</span>].<span class="pl-smi">sta</span>);
     } <span class="pl-k">else</span> {
-        <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>Sorry, no trains from <span class="pl-pds">"</span></span> <span class="pl-k">+</span> resp.filterLocationName <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> arriving soon<span class="pl-pds">"</span></span>);
+        <span class="pl-en">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>Sorry, no trains from <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-smi">resp</span>.<span class="pl-smi">filterLocationName</span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> arriving soon<span class="pl-pds">"</span></span>);
     }
 };
-r.<span class="pl-c1">send</span>();</pre></div>
+<span class="pl-smi">r</span>.<span class="pl-c1">send</span>();</pre></div>
 
 <p>If you want to use this proxy then you should deploy the code to your own <a href="https://appharbor.com/">App Harbor</a> or <a href="https://azure.microsoft.com/en-gb/">Azure</a> account.
 If you deploy to the App Harbor Europe AWS region then this will run very close to the NRE servers.</p>
@@ -78,7 +80,7 @@ If you deploy to the App Harbor Europe AWS region then this will run very close 
 <p>There is an additional Python (v2) <a href="https://github.com/Blinkinlabs/BlinkyTape_Python/blob/master/Huxley_UK_Rail_Station_Delays.py">example for a Raspberry Pi and Blinky Tape RGB LED strip</a>.</p>
 
 <h2>
-<a id="access-token" class="anchor" href="#access-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>Access Token</h2>
+<a id="access-token" class="anchor" href="#access-token" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Access Token</h2>
 
 <p>You will need to add your access token to the URL. You can register to obtain one <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration">here</a>.
 Append the <code>accessToken={Your GUID token}</code> parameter to the query string for every request.</p>
@@ -90,7 +92,7 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 <p><strong>N.B.</strong> You should set up these tokens in your deployment platform and not in your source code repository. You'll notice that the values are empty GUIDs by default. The example token used above will only work on the demo server and not directly against the SOAP API.</p>
 
 <h3>
-<a id="url-format" class="anchor" href="#url-format" aria-hidden="true"><span class="octicon octicon-link"></span></a>URL Format</h3>
+<a id="url-format" class="anchor" href="#url-format" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>URL Format</h3>
 
 <p>The URL format is <code>{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}</code> or <code>{board}/{CRS|StationName}/{numRows}</code> (arrivals/departures only) where only board and CRS (or a station name) are required. The filter type can be either <code>to</code> or <code>from</code> (case is not important).</p>
 
@@ -118,36 +120,36 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 </ul>
 
 <h3>
-<a id="departures" class="anchor" href="#departures" aria-hidden="true"><span class="octicon octicon-link"></span></a>Departures</h3>
+<a id="departures" class="anchor" href="#departures" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Departures</h3>
 
 <p><a href="https://huxley.apphb.com/departures/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/departures/{CRS|StationName}/{filterType}/{filterCRS|StationName}</code></a></p>
 
 <h3>
-<a id="arrivals" class="anchor" href="#arrivals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Arrivals</h3>
+<a id="arrivals" class="anchor" href="#arrivals" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Arrivals</h3>
 
 <p><a href="https://huxley.apphb.com/arrivals/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/arrivals/{CRS|StationName}/{filterType}/{filterCRS|StationName}</code></a></p>
 
 <h3>
-<a id="departures-and-arrivals" class="anchor" href="#departures-and-arrivals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Departures and Arrivals</h3>
+<a id="departures-and-arrivals" class="anchor" href="#departures-and-arrivals" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Departures and Arrivals</h3>
 
 <p><a href="https://huxley.apphb.com/all/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/all/{CRS|StationName}/{filterType}/{filterCRS|StationName}</code></a></p>
 
 <h3>
-<a id="next" class="anchor" href="#next" aria-hidden="true"><span class="octicon octicon-link"></span></a>Next</h3>
+<a id="next" class="anchor" href="#next" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Next</h3>
 
 <p><a href="https://huxley.apphb.com/next/crs/to/edb?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/next/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}</code></a></p>
 
 <p>Filter stations can be a comma separated list. Filter type and number of rows are ignored.</p>
 
 <h3>
-<a id="fastest" class="anchor" href="#fastest" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fastest</h3>
+<a id="fastest" class="anchor" href="#fastest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fastest</h3>
 
 <p><a href="https://huxley.apphb.com/fastest/crs/to/edb?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/fastest/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}</code></a></p>
 
 <p>Filter stations can be a comma separated list. Filter type and number of rows are ignored.</p>
 
 <h3>
-<a id="service" class="anchor" href="#service" aria-hidden="true"><span class="octicon octicon-link"></span></a>Service</h3>
+<a id="service" class="anchor" href="#service" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Service</h3>
 
 <p><a href="https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken="><code>/service/{Service ID}?accessToken={Your GUID token}</code></a></p>
 
@@ -157,7 +159,7 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 <a href="https://github.com/jpsingleton/Huxley/wiki/Train-Service-IDs">More information on the wiki</a>.</p>
 
 <h3>
-<a id="delays" class="anchor" href="#delays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delays</h3>
+<a id="delays" class="anchor" href="#delays" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Delays</h3>
 
 <p>The <strong>delays</strong> action performs calculations server side to easily let you know if there are problems on a particular route.</p>
 
@@ -216,7 +218,7 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 <p>You can also pass in a comma separated list of 24 hour train times to filter on (e.g. <code>/btn/to/lon/50/0729,0744,0748</code>).</p>
 
 <h2>
-<a id="crs-station-codes" class="anchor" href="#crs-station-codes" aria-hidden="true"><span class="octicon octicon-link"></span></a>CRS Station Codes</h2>
+<a id="crs-station-codes" class="anchor" href="#crs-station-codes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CRS Station Codes</h2>
 
 <p>CRS (Computer Reservation System) station codes are available from the following endpoint:</p>
 
@@ -240,7 +242,7 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 <p><a href="https://github.com/jpsingleton/Huxley/wiki/CRS-station-codes">More information on the wiki</a>.</p>
 
 <h2>
-<a id="hosting-quick-start" class="anchor" href="#hosting-quick-start" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hosting Quick Start</h2>
+<a id="hosting-quick-start" class="anchor" href="#hosting-quick-start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hosting Quick Start</h2>
 
 <p>To get your own instance of Huxley (on <a href="https://appharbor.com/">App Harbor</a> or <a href="https://azure.microsoft.com/en-gb/">Azure</a>) follow the <a href="https://github.com/jpsingleton/Huxley/wiki/Hosting-Quick-Start">instructions on the wiki</a>.</p>
 
@@ -252,7 +254,7 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 
 <hr>
 
-<p>© 2015 James Singleton</p>
+<p>© 2016 James Singleton</p>
 
 <p>This program is licensed under the terms of the GNU Affero General Public License. This means that you need to share any changes (even if only running on a public server).</p>
 
