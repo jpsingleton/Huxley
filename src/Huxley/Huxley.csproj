@@ -186,9 +186,6 @@
     <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.GetServiceDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.ServiceDetails.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.StationBoard.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -222,6 +219,9 @@
     <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.StationBoardWithDetails.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ldbServiceReference\Huxley.ldbServiceReference.ServiceDetails1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ldbServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -241,11 +241,17 @@
     <None Include="Service References\ldbServiceReference\RTTI_2012-01-13_ldb_types.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\ldbServiceReference\rtti_2015-11-27_ldb.wsdl" />
     <None Include="Service References\ldbServiceReference\RTTI_2015-11-27_ldb_common_types.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ldbServiceReference\RTTI_2015-11-27_ldb_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbServiceReference\rtti_2016-02-16_ldb.wsdl" />
+    <None Include="Service References\ldbServiceReference\RTTI_2016-02-16_ldb_common_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbServiceReference\RTTI_2016-02-16_ldb_types.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ldbServiceReference\wsdl1.wsdl" />
