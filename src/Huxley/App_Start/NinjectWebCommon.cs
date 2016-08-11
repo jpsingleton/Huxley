@@ -1,7 +1,7 @@
 using Huxley.ldbServiceReference;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Huxley.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Huxley.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(Huxley.App_Start.NinjectWebCommon), "Stop")]
 
 namespace Huxley.App_Start {
     using System;
