@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" id="RTTI_2007-10-10_ldb_common_types" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="CRSType">
+    <xs:annotation>
+      <xs:documentation>CRS code used to represent a Station location</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LocationNameType">
+    <xs:annotation>
+      <xs:documentation>The display name of a Station location</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="30" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TOCName">
+    <xs:annotation>
+      <xs:documentation>The display name of a Train Operating Company</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="TOCCode">
+    <xs:annotation>
+      <xs:documentation>A Train Operating Company code</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PlatformType">
+    <xs:annotation>
+      <xs:documentation>A Platform number</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FilterType">
+    <xs:annotation>
+      <xs:documentation>Type used to specify which type of service filter to use. This can either be services at a location that have come "from" another location, or services that are going "to" another location</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="to" />
+      <xs:enumeration value="from" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ServiceType">
+    <xs:annotation>
+      <xs:documentation>Specifies whether a service is a train, a bus or a ferry</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="train" />
+      <xs:enumeration value="bus" />
+      <xs:enumeration value="ferry" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TiplocType">
+    <xs:annotation>
+      <xs:documentation>TIPLOC code used to represent an arbitrary schedule location</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="7" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UIDType">
+    <xs:annotation>
+      <xs:documentation>A TSDB service Unique Identifier</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RIDType">
+    <xs:annotation>
+      <xs:documentation>An RTTI service identifier</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="16" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RSIDType">
+    <xs:annotation>
+      <xs:documentation>A Retail Service Identifier</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TrainIDType">
+    <xs:annotation>
+      <xs:documentation>A TSDB Train Identifier (headcode)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="4" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

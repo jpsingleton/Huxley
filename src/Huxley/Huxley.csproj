@@ -130,6 +130,11 @@
     <Compile Include="Models\ServiceRequest.cs" />
     <Compile Include="Models\StationBoardRequest.cs" />
     <Compile Include="NreCrsRecordMap.cs" />
+    <Compile Include="Service References\ldbStaffServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -226,6 +231,138 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ldbStaffServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\ldbStaffServiceReference\configuration.svcinfo" />
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.DeparturesBoard.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.DeparturesBoardWithDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.DisruptionItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetArrBoardWithDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetArrDepBoardWithDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetArrivalBoardByCRSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetArrivalBoardByTIPLOCResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetArrivalDepartureBoardByCRSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetArrivalDepartureBoardByTIPLOCResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetDepartureBoardByCRSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetDepartureBoardByTIPLOCResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetDepBoardWithDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetDisruptionListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetFastestDeparturesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetFastestDeparturesWithDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetHistoricDepartureBoardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetHistoricServiceDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetHistoricTimeLineResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetNextDeparturesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetNextDeparturesWithDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetReasonCodeListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetReasonCodeListResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetReasonCodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetReasonCodeResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetServiceDetailsByRIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetSourceInstanceNamesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetSourceInstanceNamesResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetStationListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.GetTOCListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.HistoricDepartureBoard1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.HistoricServiceDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.HistoricTimeLine.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.QueryHistoricServicesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.QueryServicesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.ReasonDescription.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.ServiceDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.ServiceList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.SourceInstanceName.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.StationBoard1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.StationBoardWithDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.StationRefData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ldbStaffServiceReference\Huxley.ldbStaffServiceReference.TOCRefData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ldbStaffServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -255,6 +392,37 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ldbServiceReference\wsdl1.wsdl" />
+    <None Include="Service References\ldbStaffServiceReference\darwin_token_types_2013-11-28.wsdl" />
+    <None Include="Service References\ldbStaffServiceReference\darwin_token_types_2013-11-28.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbStaffServiceReference\RTTI_2007-10-10_ldb_common_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbStaffServiceReference\RTTI_2012-01-13_ldbsv_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbStaffServiceReference\RTTI_2014-02-20_ldbsv_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbStaffServiceReference\rtti_2015-05-14_ldbsv_ref.wsdl" />
+    <None Include="Service References\ldbStaffServiceReference\RTTI_2015-05-14_ldbsv_ref_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbStaffServiceReference\RTTI_2015-11-27_ldbsv_common_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbStaffServiceReference\RTTI_2015-11-27_ldbsv_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbStaffServiceReference\rtti_2016-02-16_ldbsv.wsdl" />
+    <None Include="Service References\ldbStaffServiceReference\RTTI_2016-02-16_ldbsv_common_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbStaffServiceReference\RTTI_2016-02-16_ldbsv_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ldbStaffServiceReference\wsdl.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -272,6 +440,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ldbServiceReference\" />
+    <WCFMetadataStorage Include="Service References\ldbStaffServiceReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

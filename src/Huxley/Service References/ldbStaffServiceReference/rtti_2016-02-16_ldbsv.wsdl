@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://thalesgroup.com/RTTI/2016-02-16/ldbsv/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tok="http://thalesgroup.com/RTTI/2013-11-28/Token/types" targetNamespace="http://thalesgroup.com/RTTI/2016-02-16/ldbsv/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://thalesgroup.com/RTTI/2013-11-28/Token/types" location="darwin_token_types_2013-11-28.wsdl" />
+  <wsdl:types>
+    <xs:schema xmlns:ct2015="http://thalesgroup.com/RTTI/2015-11-27/ldbsv/commontypes" xmlns:svt2016="http://thalesgroup.com/RTTI/2016-02-16/ldbsv/types" xmlns:svt2012="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/types" xmlns:ct="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" xmlns:ct2016="http://thalesgroup.com/RTTI/2016-02-16/ldbsv/commontypes" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thalesgroup.com/RTTI/2016-02-16/ldbsv/">
+      <xs:import schemaLocation="rtti_2007-10-10_ldb_common_types.xsd" namespace="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" />
+      <xs:import schemaLocation="rtti_2015-11-27_ldbsv_common_types.xsd" namespace="http://thalesgroup.com/RTTI/2015-11-27/ldbsv/commontypes" />
+      <xs:import schemaLocation="rtti_2016-02-16_ldbsv_common_types.xsd" namespace="http://thalesgroup.com/RTTI/2016-02-16/ldbsv/commontypes" />
+      <xs:import schemaLocation="rtti_2012-01-13_ldbsv_types.xsd" namespace="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/types" />
+      <xs:import schemaLocation="rtti_2016-02-16_ldbsv_types.xsd" namespace="http://thalesgroup.com/RTTI/2016-02-16/ldbsv/types" />
+      <xs:complexType name="VoidParams" />
+      <xs:complexType name="GetBoardByCRSParams">
+        <xs:sequence>
+          <xs:element name="numRows" type="xs:unsignedShort">
+            <xs:annotation>
+              <xs:documentation>The maximum number of services that are required to be returned. This will be limited to a maximum value by the server, which may change according to system load or other factors. Only the minimum required number of services should be requested. For example, if only 10 services are displayed in a user interface, then this parameter should be set to 10.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="crs" type="ct:CRSType">
+            <xs:annotation>
+              <xs:documentation>The CRS code for the station departure board that is required.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="time" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The start time of the required departure board. This value must fall within the range of data held in the current RTTI timetable, which is typically for two days.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="timeWindow" type="xs:unsignedShort">
+            <xs:annotation>
+              <xs:documentation>The number of minutes added to the time parameter to give the end time of the departure board. This value may be limited to a maximum value by the server, which may change according to system load or other factors. Only the minimum required value should be used. For example, if a departure board for the period 14:00 to 14:30 is required then set this parameter to 30.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="filtercrs" nillable="true" type="ct:CRSType">
+            <xs:annotation>
+              <xs:documentation>An optional CRS code that will filter the returned departure board. For example, if crs is set to "MAN", filterCRS is set to "EUS" and filterType is set to "to" then the departure board will return a list of services that depart Manchester Piccadilly and call at London Euston.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" default="to" name="filterType" type="ct:FilterType">
+            <xs:annotation>
+              <xs:documentation>The type of filter query that is required, either "from" or "to". This parameter is ignored unless filterCrs is also present.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="filterTOC" nillable="true" type="ct:TOCCode">
+            <xs:annotation>
+              <xs:documentation>An optional TOC code that will filter the returned departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" default="P" name="services" type="ct2015:ServiceMaskType">
+            <xs:annotation>
+              <xs:documentation>The type of services required to be returned in the departure board. This value is a mask of characters that identify each type of service required. The default value is "P", which returns train services only.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" default="false" name="getNonPassengerServices" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Specify this parameter with a value of "true" to return non-passenger services in addition to passenger services. Note that Darwin may be configured to prevent a caller requesting the return of non-passenger services, in which case this parameter will be ignored/.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetBoardByTIPLOCParams">
+        <xs:sequence>
+          <xs:element name="numRows" type="xs:unsignedShort">
+            <xs:annotation>
+              <xs:documentation>The maximum number of services that are required to be returned. This will be limited to a maximum value by the server, which may change according to system load or other factors. Only the minimum required number of services should be requested. For example, if only 10 services are displayed in a user interface, then this parameter should be set to 10.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="tiploc" type="ct:TiplocType">
+            <xs:annotation>
+              <xs:documentation>The Tiploc code for the station departure board that is required. Note that where stations have multiple Tiploc codes, all services that call at that station will be returned, regardless of the actual Tiploc code supplied.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="time" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The start time of the required departure board. This value must fall within the range of data held in the current RTTI timetable, which is typically for two days.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="timeWindow" type="xs:unsignedShort">
+            <xs:annotation>
+              <xs:documentation>The number of minutes added to the time parameter to give the end time of the departure board. This value may be limited to a maximum value by the server, which may change according to system load or other factors. Only the minimum required value should be used. For example, if a departure board for the period 14:00 to 14:30 is required then set this parameter to 30.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="filterTiploc" nillable="true" type="ct:TiplocType">
+            <xs:annotation>
+              <xs:documentation>An optional Tiploc code that will filter the returned departure board. For example, if tiploc is set to "MNCRPIC", filterTiploc is set to "EUSTON" and filterType is set to "to" then the departure board will return a list of services that depart Manchester Piccadilly and call at London Euston. Note that where stations have multiple Tiploc codes, all services that call at that station will be returned, regardless of the actual Tiploc code supplied.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" default="to" name="filterType" type="ct:FilterType">
+            <xs:annotation>
+              <xs:documentation>The type of filter query that is required, either "from" or "to". This parameter is ignored unless filterTiploc is also present.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="filterTOC" nillable="true" type="ct:TOCCode">
+            <xs:annotation>
+              <xs:documentation>An optional TOC code that will filter the returned departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" default="P" name="services" type="ct2015:ServiceMaskType">
+            <xs:annotation>
+              <xs:documentation>The type of services required to be returned in the departure board. This value is a mask of characters that identify each type of service required. The default value is "P", which returns train services only.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" default="false" name="getNonPassengerServices" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Specify this parameter with a value of "true" to return non-passenger services in addition to passenger services. Note that Darwin may be configured to prevent a caller requesting the return of non-passenger services, in which case this parameter will be ignored/.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetServiceDetailsByRIDParams">
+        <xs:sequence>
+          <xs:element name="rid" type="ct:RIDType">
+            <xs:annotation>
+              <xs:documentation>The RTTI ID of the service that is required.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="QueryServicesRequestParams">
+        <xs:sequence>
+          <xs:element name="serviceID" type="ct2016:ServiceIDType">
+            <xs:annotation>
+              <xs:documentation>The ID of the service. Must be a valid UID, Headcode, or RSID.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="sdd" type="xs:date">
+            <xs:annotation>
+              <xs:documentation>The Scheduled Departure Date of the service.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="filterTime" nillable="true" type="xs:time">
+            <xs:annotation>
+              <xs:documentation>A time that will filter the returned list of services. Only services that are scheduled to run during the supplied time will be returned.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="filtercrs" nillable="true" type="ct:CRSType">
+            <xs:annotation>
+              <xs:documentation>A CRS code of a station that will filter the returned list of services. Only services that call at the supplied station will be returned.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="tocFilter" nillable="true" type="ct:TOCCode">
+            <xs:annotation>
+              <xs:documentation>An optional TOC code that will filter the returned services.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetReasonCodeRequestParams">
+        <xs:sequence>
+          <xs:element name="reasonCode" type="ct2015:ReasonCodeType">
+            <xs:annotation>
+              <xs:documentation>The Reason Code for which a description is required.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetDisruptionListRequestParams">
+        <xs:sequence>
+          <xs:element name="CRSList">
+            <xs:complexType>
+              <xs:annotation>
+                <xs:documentation>A list of CRS Codes.</xs:documentation>
+              </xs:annotation>
+              <xs:sequence>
+                <xs:element minOccurs="1" maxOccurs="unbounded" name="crs" type="ct:CRSType" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetHistoricDepartureBoardRequestParams">
+        <xs:sequence>
+          <xs:element name="numRows" type="xs:unsignedShort">
+            <xs:annotation>
+              <xs:documentation>The maximum number of services that are required to be returned. This will be limited to a maximum value by the server, which may change according to system load or other factors. Only the minimum required number of services should be requested. For example, if only 10 services are displayed in a user interface, then this parameter should be set to 10.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="crs" type="ct:CRSType">
+            <xs:annotation>
+              <xs:documentation>The CRS code for the historic departure board that is required.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="historicDateTime" nillable="true" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The start time of the required historic departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="depBoardDate" nillable="true" type="ct2015:DepBoardDateType">
+            <xs:annotation>
+              <xs:documentation>Date of historic departure board. Can be previous day, same day, or next day.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="depBoardTime" nillable="true" type="ct2015:DepBoardTimeType">
+            <xs:annotation>
+              <xs:documentation>Time of historic departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="timeWindow" type="xs:unsignedShort">
+            <xs:annotation>
+              <xs:documentation>The number of minutes added to the time parameter to give the end time of the departure board. This value may be limited to a maximum value by the server, which may change according to system load or other factors. Only the minimum required value should be used. For example, if a departure board for the period 14:00 to 14:30 is required then set this parameter to 30.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="filterCRS" nillable="true" type="ct:CRSType">
+            <xs:annotation>
+              <xs:documentation>An optional CRS code that will filter the returned historic departure board. For example, if crs is set to "MAN", filterCRS is set to "EUS" and filterType is set to "to" then the departure board will return a list of services that depart Manchester Piccadilly and call at London Euston.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="filterCRSType" nillable="true" type="ct:FilterType">
+            <xs:annotation>
+              <xs:documentation>A string to specify the type of CRS filter which can be "to" or "from".</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="filterTOC" nillable="true" type="ct:TOCCode">
+            <xs:annotation>
+              <xs:documentation>An optional TOC code that will filter the returned historic departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" default="PBS" name="services" type="ct2015:ServiceMaskType">
+            <xs:annotation>
+              <xs:documentation>The type of services required to be returned in the departure board. This value is a mask of characters that identify each type of service required. The default value is "PBS", which returns train, bus and ship services.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" default="false" name="getNonPassengerServices" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Specify this parameter with a value of "true" to return non-passenger services in addition to passenger services. Note that Darwin may be configured to prevent a caller requesting the return of non-passenger services, in which case this parameter will be ignored/.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetHistoricServiceDetailsRequestParams">
+        <xs:sequence>
+          <xs:element name="serviceUID" type="ct:UIDType">
+            <xs:annotation>
+              <xs:documentation>The UID of the train service.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="scheduleStartDate" nillable="true" type="ct2015:DepBoardDateType">
+            <xs:annotation>
+              <xs:documentation>The schedule start date of the service. It can be SameDay, PreviousDay or NextDay.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="historicDateTime" nillable="true" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The start date and time of the required historic departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetHistoricTimeLineRequestParams">
+        <xs:sequence>
+          <xs:element name="serviceUID" type="ct:UIDType">
+            <xs:annotation>
+              <xs:documentation>The UID of the train service.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="scheduleStartDate" type="ct2015:DepBoardDateType">
+            <xs:annotation>
+              <xs:documentation>The schedule start date of the service. It can be SameDay, PreviousDay or NextDay. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="historicDateTime" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The start date and time of the required historic departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="fullTiploc" type="ct2015:FullTiplocType">
+            <xs:annotation>
+              <xs:documentation>The FullTiploc of the location for which the timeline is required.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="QueryHistoricServicesRequestParams">
+        <xs:sequence>
+          <xs:element name="serviceID" type="ct2016:ServiceIDType">
+            <xs:annotation>
+              <xs:documentation>The ID of the service. Must be a valid UID, Headcode, or RSID.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="historicDateTime" nillable="true" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The start time of the required historic departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="scheduleStartDate" nillable="true" type="ct2015:DepBoardDateType">
+            <xs:annotation>
+              <xs:documentation>The schedule start date of the service. It can be SameDay, PreviousDay or NextDay.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="timeFilter" nillable="true" type="xs:time">
+            <xs:annotation>
+              <xs:documentation>An optional time filter for when the the service is scheduled to be running.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="routeCRSFilter" nillable="true" type="ct:CRSType">
+            <xs:annotation>
+              <xs:documentation>An optional CRS code filter of location through which the service is scheduled to pass.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="tocFilter" nillable="true" type="ct:TOCCode">
+            <xs:annotation>
+              <xs:documentation>An optional TOC code that will filter the returned services.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetDeparturesParams">
+        <xs:sequence>
+          <xs:element name="crs" type="ct:CRSType">
+            <xs:annotation>
+              <xs:documentation>The CRS code for the next/fastest departure board that is required.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="filterList">
+            <xs:annotation>
+              <xs:documentation>A list of CRS codes for the station destinations that are required. There must be at least one and may be no more than a maximum number of CRS codes in this list. The actual limit may vary and can be found in the documentation.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="1" maxOccurs="unbounded" name="crs" type="ct:CRSType" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="time" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The start time of the required departure board. This value must fall within the range of data held in the current RTTI timetable, which is typically for two days.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="timeWindow" type="xs:unsignedShort">
+            <xs:annotation>
+              <xs:documentation>The number of minutes added to the time parameter to give the end time of the departure board. This value may be limited to a maximum value by the server, which may change according to system load or other factors. Only the minimum required value should be used. For example, if a departure board for the period 14:00 to 14:30 is required then set this parameter to 30.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="filterTOC" nillable="true" type="ct:TOCCode">
+            <xs:annotation>
+              <xs:documentation>An optional TOC code that will filter the returned departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" default="P" name="services" type="ct2015:ServiceMaskType">
+            <xs:annotation>
+              <xs:documentation>The type of services required to be returned in the departure board. This value is a mask of characters that identify each type of service required. The default value is "P", which returns train services only.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetArrivalDepartureBoardByCRSRequest" type="tns:GetBoardByCRSParams" />
+      <xs:element name="GetArrivalBoardByCRSRequest" type="tns:GetBoardByCRSParams" />
+      <xs:element name="GetDepartureBoardByCRSRequest" type="tns:GetBoardByCRSParams" />
+      <xs:element name="GetArrivalDepartureBoardByTIPLOCRequest" type="tns:GetBoardByTIPLOCParams" />
+      <xs:element name="GetArrivalBoardByTIPLOCRequest" type="tns:GetBoardByTIPLOCParams" />
+      <xs:element name="GetDepartureBoardByTIPLOCRequest" type="tns:GetBoardByTIPLOCParams" />
+      <xs:element name="GetServiceDetailsByRIDRequest" type="tns:GetServiceDetailsByRIDParams" />
+      <xs:element name="QueryServicesRequest" type="tns:QueryServicesRequestParams" />
+      <xs:element name="GetReasonCodeRequest" type="tns:GetReasonCodeRequestParams">
+        <xs:annotation>
+          <xs:documentation>This operation should now be called from the reference data endpoint. At some future time this operation may be removed from this endpoint.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GetReasonCodeListRequest" type="tns:VoidParams">
+        <xs:annotation>
+          <xs:documentation>This operation should now be called from the reference data endpoint. At some future time this operation may be removed from this endpoint.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GetDisruptionListRequest" type="tns:GetDisruptionListRequestParams" />
+      <xs:element name="GetSourceInstanceNamesRequest" type="tns:VoidParams">
+        <xs:annotation>
+          <xs:documentation>This operation should now be called from the reference data endpoint. At some future time this operation may be removed from this endpoint.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GetHistoricDepartureBoardRequest" type="tns:GetHistoricDepartureBoardRequestParams" />
+      <xs:element name="GetHistoricServiceDetailsRequest" type="tns:GetHistoricServiceDetailsRequestParams" />
+      <xs:element name="GetHistoricTimeLineRequest" type="tns:GetHistoricTimeLineRequestParams" />
+      <xs:element name="QueryHistoricServicesRequest" type="tns:QueryHistoricServicesRequestParams" />
+      <xs:element name="GetArrDepBoardWithDetailsRequest" type="tns:GetBoardByCRSParams" />
+      <xs:element name="GetArrBoardWithDetailsRequest" type="tns:GetBoardByCRSParams" />
+      <xs:element name="GetDepBoardWithDetailsRequest" type="tns:GetBoardByCRSParams" />
+      <xs:element name="GetNextDeparturesRequest" type="tns:GetDeparturesParams" />
+      <xs:element name="GetFastestDeparturesRequest" type="tns:GetDeparturesParams" />
+      <xs:element name="GetNextDeparturesWithDetailsRequest" type="tns:GetDeparturesParams" />
+      <xs:element name="GetFastestDeparturesWithDetailsRequest" type="tns:GetDeparturesParams" />
+      <xs:complexType name="GetBoardResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GetBoardResult" type="svt2016:StationBoard" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetServiceDetailsResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GetServiceDetailsResult" type="svt2016:ServiceDetails" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="QueryServicesResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="QueryServicesResult" type="svt2016:ServiceList" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetReasonCodeResponseType">
+        <xs:sequence>
+          <xs:element name="GetReasonCodeResult" type="svt2012:ReasonDescription" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetReasonCodeListResponseType">
+        <xs:sequence>
+          <xs:element name="GetReasonCodeListResult" type="svt2012:ArrayOfReasonDescriptions" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetDisruptionListResponseType">
+        <xs:sequence>
+          <xs:element name="GetDisruptionListResult" type="svt2012:ArrayOfDisruptionItems" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetSourceInstanceNamesResponseType">
+        <xs:sequence>
+          <xs:element name="GetSourceInstanceNamesResult" type="svt2012:ArrayOfSourceInstanceNames" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetHistoricDepartureBoardResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GetHistoricDepartureBoardResult" type="svt2016:HistoricDepartureBoard" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetHistoricServiceDetailsResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GetHistoricServiceDetailsResult" type="svt2016:HistoricServiceDetails" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetHistoricTimeLineResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GetHistoricTimeLineResult" type="svt2016:HistoricTimeLine" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="QueryHistoricServicesResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="QueryHistoricServicesResult" type="svt2016:ServiceList" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetStationBoardWithDetailsResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GetBoardWithDetailsResult" type="svt2016:StationBoardWithDetails" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeparturesBoardResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DeparturesBoard" type="svt2016:DeparturesBoard" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeparturesBoardWithDetailsResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DeparturesBoard" type="svt2016:DeparturesBoardWithDetails" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetArrivalDepartureBoardByCRSResponse" type="tns:GetBoardResponseType" />
+      <xs:element name="GetArrivalDepartureBoardByTIPLOCResponse" type="tns:GetBoardResponseType" />
+      <xs:element name="GetArrivalBoardByCRSResponse" type="tns:GetBoardResponseType" />
+      <xs:element name="GetArrivalBoardByTIPLOCResponse" type="tns:GetBoardResponseType" />
+      <xs:element name="GetDepartureBoardByCRSResponse" type="tns:GetBoardResponseType" />
+      <xs:element name="GetDepartureBoardByTIPLOCResponse" type="tns:GetBoardResponseType" />
+      <xs:element name="GetServiceDetailsByRIDResponse" type="tns:GetServiceDetailsResponseType" />
+      <xs:element name="QueryServicesResponse" type="tns:QueryServicesResponseType" />
+      <xs:element name="GetReasonCodeResponse" type="tns:GetReasonCodeResponseType" />
+      <xs:element name="GetReasonCodeListResponse" type="tns:GetReasonCodeListResponseType" />
+      <xs:element name="GetDisruptionListResponse" type="tns:GetDisruptionListResponseType" />
+      <xs:element name="GetSourceInstanceNamesResponse" type="tns:GetSourceInstanceNamesResponseType" />
+      <xs:element name="GetHistoricDepartureBoardResponse" type="tns:GetHistoricDepartureBoardResponseType" />
+      <xs:element name="GetHistoricServiceDetailsResponse" type="tns:GetHistoricServiceDetailsResponseType" />
+      <xs:element name="GetHistoricTimeLineResponse" type="tns:GetHistoricTimeLineResponseType" />
+      <xs:element name="QueryHistoricServicesResponse" type="tns:QueryHistoricServicesResponseType" />
+      <xs:element name="GetArrDepBoardWithDetailsResponse" type="tns:GetStationBoardWithDetailsResponseType" />
+      <xs:element name="GetArrBoardWithDetailsResponse" type="tns:GetStationBoardWithDetailsResponseType" />
+      <xs:element name="GetDepBoardWithDetailsResponse" type="tns:GetStationBoardWithDetailsResponseType" />
+      <xs:element name="GetNextDeparturesResponse" type="tns:DeparturesBoardResponseType" />
+      <xs:element name="GetFastestDeparturesResponse" type="tns:DeparturesBoardResponseType" />
+      <xs:element name="GetNextDeparturesWithDetailsResponse" type="tns:DeparturesBoardWithDetailsResponseType" />
+      <xs:element name="GetFastestDeparturesWithDetailsResponse" type="tns:DeparturesBoardWithDetailsResponseType" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="AccessTokenMessage">
+    <wsdl:part name="AccessToken" element="tok:AccessToken" />
+  </wsdl:message>
+  <wsdl:message name="GetArrivalDepartureBoardByCRSSoapIn">
+    <wsdl:part name="parameters" element="tns:GetArrivalDepartureBoardByCRSRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetArrivalDepartureBoardByCRSSoapOut">
+    <wsdl:part name="parameters" element="tns:GetArrivalDepartureBoardByCRSResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetArrivalDepartureBoardByTIPLOCSoapIn">
+    <wsdl:part name="parameters" element="tns:GetArrivalDepartureBoardByTIPLOCRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetArrivalDepartureBoardByTIPLOCSoapOut">
+    <wsdl:part name="parameters" element="tns:GetArrivalDepartureBoardByTIPLOCResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetArrivalBoardByCRSSoapIn">
+    <wsdl:part name="parameters" element="tns:GetArrivalBoardByCRSRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetArrivalBoardByCRSSoapOut">
+    <wsdl:part name="parameters" element="tns:GetArrivalBoardByCRSResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetArrivalBoardByTIPLOCSoapIn">
+    <wsdl:part name="parameters" element="tns:GetArrivalBoardByTIPLOCRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetArrivalBoardByTIPLOCSoapOut">
+    <wsdl:part name="parameters" element="tns:GetArrivalBoardByTIPLOCResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDepartureBoardByCRSSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDepartureBoardByCRSRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetDepartureBoardByCRSSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDepartureBoardByCRSResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDepartureBoardByTIPLOCSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDepartureBoardByTIPLOCRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetDepartureBoardByTIPLOCSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDepartureBoardByTIPLOCResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceDetailsByRIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServiceDetailsByRIDRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceDetailsByRIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServiceDetailsByRIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryServicesSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryServicesRequest" />
+  </wsdl:message>
+  <wsdl:message name="QueryServicesSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryServicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReasonCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReasonCodeRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetReasonCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReasonCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReasonCodeListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReasonCodeListRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetReasonCodeListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReasonCodeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDisruptionListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDisruptionListRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetDisruptionListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDisruptionListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSourceInstanceNamesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSourceInstanceNamesRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetSourceInstanceNamesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSourceInstanceNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHistoricDepartureBoardSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHistoricDepartureBoardRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetHistoricDepartureBoardSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHistoricDepartureBoardResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHistoricServiceDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHistoricServiceDetailsRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetHistoricServiceDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHistoricServiceDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHistoricTimeLineSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHistoricTimeLineRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetHistoricTimeLineSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHistoricTimeLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryHistoricServicesSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryHistoricServicesRequest" />
+  </wsdl:message>
+  <wsdl:message name="QueryHistoricServicesSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryHistoricServicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetArrDepBoardWithDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetArrDepBoardWithDetailsRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetArrDepBoardWithDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetArrDepBoardWithDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetArrBoardWithDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetArrBoardWithDetailsRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetArrBoardWithDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetArrBoardWithDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDepBoardWithDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDepBoardWithDetailsRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetDepBoardWithDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDepBoardWithDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNextDeparturesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNextDeparturesRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetNextDeparturesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNextDeparturesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFastestDeparturesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFastestDeparturesRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetFastestDeparturesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFastestDeparturesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNextDeparturesWithDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNextDeparturesWithDetailsRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetNextDeparturesWithDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNextDeparturesWithDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFastestDeparturesWithDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFastestDeparturesWithDetailsRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetFastestDeparturesWithDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFastestDeparturesWithDetailsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LDBSVServiceSoap">
+    <wsdl:operation name="GetArrivalDepartureBoardByCRS">
+      <wsdl:input message="tns:GetArrivalDepartureBoardByCRSSoapIn" />
+      <wsdl:output message="tns:GetArrivalDepartureBoardByCRSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArrivalDepartureBoardByTIPLOC">
+      <wsdl:input message="tns:GetArrivalDepartureBoardByTIPLOCSoapIn" />
+      <wsdl:output message="tns:GetArrivalDepartureBoardByTIPLOCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArrivalBoardByCRS">
+      <wsdl:input message="tns:GetArrivalBoardByCRSSoapIn" />
+      <wsdl:output message="tns:GetArrivalBoardByCRSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArrivalBoardByTIPLOC">
+      <wsdl:input message="tns:GetArrivalBoardByTIPLOCSoapIn" />
+      <wsdl:output message="tns:GetArrivalBoardByTIPLOCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartureBoardByCRS">
+      <wsdl:input message="tns:GetDepartureBoardByCRSSoapIn" />
+      <wsdl:output message="tns:GetDepartureBoardByCRSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartureBoardByTIPLOC">
+      <wsdl:input message="tns:GetDepartureBoardByTIPLOCSoapIn" />
+      <wsdl:output message="tns:GetDepartureBoardByTIPLOCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceDetailsByRID">
+      <wsdl:input message="tns:GetServiceDetailsByRIDSoapIn" />
+      <wsdl:output message="tns:GetServiceDetailsByRIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryServices">
+      <wsdl:input message="tns:QueryServicesSoapIn" />
+      <wsdl:output message="tns:QueryServicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReasonCode">
+      <wsdl:input message="tns:GetReasonCodeSoapIn" />
+      <wsdl:output message="tns:GetReasonCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReasonCodeList">
+      <wsdl:input message="tns:GetReasonCodeListSoapIn" />
+      <wsdl:output message="tns:GetReasonCodeListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisruptionList">
+      <wsdl:input message="tns:GetDisruptionListSoapIn" />
+      <wsdl:output message="tns:GetDisruptionListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSourceInstanceNames">
+      <wsdl:input message="tns:GetSourceInstanceNamesSoapIn" />
+      <wsdl:output message="tns:GetSourceInstanceNamesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricDepartureBoard">
+      <wsdl:input message="tns:GetHistoricDepartureBoardSoapIn" />
+      <wsdl:output message="tns:GetHistoricDepartureBoardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricServiceDetails">
+      <wsdl:input message="tns:GetHistoricServiceDetailsSoapIn" />
+      <wsdl:output message="tns:GetHistoricServiceDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricTimeLine">
+      <wsdl:input message="tns:GetHistoricTimeLineSoapIn" />
+      <wsdl:output message="tns:GetHistoricTimeLineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryHistoricServices">
+      <wsdl:input message="tns:QueryHistoricServicesSoapIn" />
+      <wsdl:output message="tns:QueryHistoricServicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArrDepBoardWithDetails">
+      <wsdl:input message="tns:GetArrDepBoardWithDetailsSoapIn" />
+      <wsdl:output message="tns:GetArrDepBoardWithDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArrBoardWithDetails">
+      <wsdl:input message="tns:GetArrBoardWithDetailsSoapIn" />
+      <wsdl:output message="tns:GetArrBoardWithDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepBoardWithDetails">
+      <wsdl:input message="tns:GetDepBoardWithDetailsSoapIn" />
+      <wsdl:output message="tns:GetDepBoardWithDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNextDepartures">
+      <wsdl:input message="tns:GetNextDeparturesSoapIn" />
+      <wsdl:output message="tns:GetNextDeparturesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFastestDepartures">
+      <wsdl:input message="tns:GetFastestDeparturesSoapIn" />
+      <wsdl:output message="tns:GetFastestDeparturesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNextDeparturesWithDetails">
+      <wsdl:input message="tns:GetNextDeparturesWithDetailsSoapIn" />
+      <wsdl:output message="tns:GetNextDeparturesWithDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFastestDeparturesWithDetails">
+      <wsdl:input message="tns:GetFastestDeparturesWithDetailsSoapIn" />
+      <wsdl:output message="tns:GetFastestDeparturesWithDetailsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LDBSVServiceSoap" type="tns:LDBSVServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetArrivalDepartureBoardByCRS">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetArrivalDepartureBoardByCRS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArrivalDepartureBoardByTIPLOC">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetArrivalDepartureBoardByTIPLOC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArrivalBoardByCRS">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetArrivalBoardByCRS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArrivalBoardByTIPLOC">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetArrivalBoardByTIPLOC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartureBoardByCRS">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetDepartureBoardByCRS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartureBoardByTIPLOC">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetDepartureBoardByTIPLOC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceDetailsByRID">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetServiceDetailsByRID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryServices">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/QueryServices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReasonCode">
+      <wsdl:documentation>This operation should now be called from the reference data endpoint. At some future time this operation may be removed from this endpoint.</wsdl:documentation>
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetReasonCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReasonCodeList">
+      <wsdl:documentation>This operation should now be called from the reference data endpoint. At some future time this operation may be removed from this endpoint.</wsdl:documentation>
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetReasonCodeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisruptionList">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetDisruptionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSourceInstanceNames">
+      <wsdl:documentation>This operation should now be called from the reference data endpoint. At some future time this operation may be removed from this endpoint.</wsdl:documentation>
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetSourceInstanceNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricDepartureBoard">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetHistoricDepartureBoard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricServiceDetails">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetHistoricServiceDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricTimeLine">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetHistoricTimeLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryHistoricServices">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/QueryHistoricServices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArrDepBoardWithDetails">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetArrDepBoardWithDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArrBoardWithDetails">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetArrBoardWithDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepBoardWithDetails">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetDepBoardWithDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNextDepartures">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetNextDepartures" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFastestDepartures">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetFastestDepartures" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNextDeparturesWithDetails">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetNextDeparturesWithDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFastestDeparturesWithDetails">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetFastestDeparturesWithDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LDBSVServiceSoap12" type="tns:LDBSVServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetArrivalDepartureBoardByCRS">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetArrivalDepartureBoardByCRS" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArrivalDepartureBoardByTIPLOC">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetArrivalDepartureBoardByTIPLOC" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArrivalBoardByCRS">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetArrivalBoardByCRS" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArrivalBoardByTIPLOC">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetArrivalBoardByTIPLOC" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartureBoardByCRS">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetDepartureBoardByCRS" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartureBoardByTIPLOC">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetDepartureBoardByTIPLOC" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceDetailsByRID">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetServiceDetailsByRID" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryServices">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/QueryServices" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReasonCode">
+      <wsdl:documentation>This operation should now be called from the reference data endpoint. At some future time this operation may be removed from this endpoint.</wsdl:documentation>
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetReasonCode" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReasonCodeList">
+      <wsdl:documentation>This operation should now be called from the reference data endpoint. At some future time this operation may be removed from this endpoint.</wsdl:documentation>
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetReasonCodeList" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisruptionList">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetDisruptionList" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSourceInstanceNames">
+      <wsdl:documentation>This operation should now be called from the reference data endpoint. At some future time this operation may be removed from this endpoint.</wsdl:documentation>
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetSourceInstanceNames" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricDepartureBoard">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetHistoricDepartureBoard" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricServiceDetails">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetHistoricServiceDetails" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricTimeLine">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/GetHistoricTimeLine" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryHistoricServices">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/QueryHistoricServices" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArrDepBoardWithDetails">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetArrDepBoardWithDetails" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArrBoardWithDetails">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetArrBoardWithDetails" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepBoardWithDetails">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetDepBoardWithDetails" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNextDepartures">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetNextDepartures" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFastestDepartures">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetFastestDepartures" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNextDeparturesWithDetails">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetNextDeparturesWithDetails" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFastestDeparturesWithDetails">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv/GetFastestDeparturesWithDetails" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>
