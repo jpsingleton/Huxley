@@ -1,6 +1,6 @@
 ﻿/*
 Huxley - a JSON proxy for the UK National Rail Live Departure Board SOAP API
-Copyright (C) 2015 James Singleton
+Copyright (C) 2016 James Singleton
  * http://huxley.unop.uk
  * https://github.com/jpsingleton/Huxley
 
