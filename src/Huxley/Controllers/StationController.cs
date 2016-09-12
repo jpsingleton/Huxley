@@ -106,6 +106,24 @@ namespace Huxley.Controllers {
                 return staffAll.GetBoardResult;
             }
 
+            if (Board.StaffNext == request.Board) {
+                if (request.Expand) {
+                    var nextWithDetails = await Client.GetStaffFastestDeparturesWithDetailsAsync(staffToken, crs, filterList);
+                    return nextWithDetails.DeparturesBoard;
+                }
+                var next = await Client.GetStaffNextDeparturesAsync(staffToken, crs, filterList);
+                return next.DeparturesBoard;
+            }
+
+            if (Board.StaffFastest == request.Board) {
+                if (request.Expand) {
+                    var nextWithDetails = await Client.GetStaffFastestDeparturesWithDetailsAsync(staffToken, crs, filterList);
+                    return nextWithDetails.DeparturesBoard;
+                }
+                var next = await Client.GetStaffFastestDeparturesAsync(staffToken, crs, filterList);
+                return next.DeparturesBoard;
+            }
+
             // Default all (departures and arrivals board)
             if (request.Expand) {
                 var boardWithDetails = await Client.GetArrDepBoardWithDetailsAsync(token, request.NumRows, crs, filterList[0], request.FilterType, 0, 0);

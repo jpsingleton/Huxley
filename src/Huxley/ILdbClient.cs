@@ -82,5 +82,13 @@ namespace Huxley {
 
         Task<ldbStaffServiceReference.GetArrDepBoardWithDetailsResponse> GetStaffArrivalDepartureBoardWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
 
+        Task<ldbStaffServiceReference.GetNextDeparturesResponse> GetStaffNextDeparturesAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList);
+
+        Task<ldbStaffServiceReference.GetNextDeparturesWithDetailsResponse> GetStaffNextDeparturesWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList);
+
+        Task<ldbStaffServiceReference.GetFastestDeparturesResponse> GetStaffFastestDeparturesAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList);
+
+        Task<ldbStaffServiceReference.GetFastestDeparturesWithDetailsResponse> GetStaffFastestDeparturesWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList);
+
     }
 }

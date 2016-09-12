@@ -107,6 +107,21 @@ namespace Huxley {
             return await Execute(() => staffClient.GetArrDepBoardWithDetailsAsync(accessToken, numRows, crs, DateTime.Now, 120, filterCrs, (ldbStaffServiceReference.FilterType)filterType, null, null, false));
         }
 
+        public async Task<ldbStaffServiceReference.GetNextDeparturesResponse> GetStaffNextDeparturesAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList) {
+            return await Execute(() => staffClient.GetNextDeparturesAsync(accessToken, crs, filterList, DateTime.Now, 120, null, null));
+        }
+
+        public async Task<ldbStaffServiceReference.GetNextDeparturesWithDetailsResponse> GetStaffNextDeparturesWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList) {
+            return await Execute(() => staffClient.GetNextDeparturesWithDetailsAsync(accessToken, crs, filterList, DateTime.Now, 120, null, null));
+        }
+
+        public async Task<ldbStaffServiceReference.GetFastestDeparturesResponse> GetStaffFastestDeparturesAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList) {
+            return await Execute(() => staffClient.GetFastestDeparturesAsync(accessToken, crs, filterList, DateTime.Now, 120, null, null));
+        }
+
+        public async Task<ldbStaffServiceReference.GetFastestDeparturesWithDetailsResponse> GetStaffFastestDeparturesWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList) {
+            return await Execute(() => staffClient.GetFastestDeparturesWithDetailsAsync(accessToken, crs, filterList, DateTime.Now, 120, null, null));
+        }
         private T Execute<T>(Func<T> func) {
             // Avoiding Problems with the Using Statement in WCF clients
             try {
