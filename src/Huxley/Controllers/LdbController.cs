@@ -42,6 +42,15 @@ namespace Huxley.Controllers {
             return new AccessToken { TokenValue = accessToken.ToString() };
         }
 
+        protected static ldbStaffServiceReference.AccessToken MakeStaffAccessToken(Guid accessToken)
+        {
+            if (HuxleyApi.Settings.ClientAccessToken == accessToken)
+            {
+                accessToken = HuxleyApi.Settings.DarwinStaffAccessToken;
+            }
+            return new ldbStaffServiceReference.AccessToken { TokenValue = accessToken.ToString() };
+        }
+
         protected static string MakeCrsCode(string query) {
             // Process CRS codes if query is present
             if (!string.IsNullOrWhiteSpace(query) &&

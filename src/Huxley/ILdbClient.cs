@@ -69,5 +69,18 @@ namespace Huxley {
 
 
         Task<GetServiceDetailsResponse> GetServiceDetailsAsync(AccessToken accessToken, string serviceId);
+
+        Task<ldbStaffServiceReference.GetDepartureBoardByCRSResponse> GetStaffDepartureBoardAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetDepBoardWithDetailsResponse> GetStaffDepartureBoardWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetArrivalBoardByCRSResponse> GetStaffArrivalBoardAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetArrBoardWithDetailsResponse> GetStaffArrivalBoardWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetArrivalDepartureBoardByCRSResponse> GetStaffArrivalDepartureBoardAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetArrDepBoardWithDetailsResponse> GetStaffArrivalDepartureBoardWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
     }
 }

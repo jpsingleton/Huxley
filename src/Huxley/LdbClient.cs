@@ -26,9 +26,11 @@ namespace Huxley {
     public class LdbClient : ILdbClient {
 
         private readonly LDBServiceSoapClient client;
+        private readonly ldbStaffServiceReference.LDBSVServiceSoapClient staffClient;
 
-        public LdbClient(LDBServiceSoapClient client) {
+        public LdbClient(LDBServiceSoapClient client, ldbStaffServiceReference.LDBSVServiceSoapClient staffClient) {
             this.client = client;
+            this.staffClient = staffClient;
         }
 
         public async Task<GetDepartureBoardResponse> GetDepartureBoardAsync(AccessToken accessToken, ushort numRows, string crs, string filterCrs,
@@ -79,6 +81,30 @@ namespace Huxley {
 
         public async Task<GetServiceDetailsResponse> GetServiceDetailsAsync(AccessToken accessToken, string serviceId) {
             return await Execute(() => client.GetServiceDetailsAsync(accessToken, serviceId));
+        }
+
+        public async Task<ldbStaffServiceReference.GetDepartureBoardByCRSResponse> GetStaffDepartureBoardAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType) {
+            return await Execute(() => staffClient.GetDepartureBoardByCRSAsync(accessToken, numRows, crs, DateTime.Now, 120, filterCrs, (ldbStaffServiceReference.FilterType)filterType, null, null, false));
+        }
+
+        public async Task<ldbStaffServiceReference.GetDepBoardWithDetailsResponse> GetStaffDepartureBoardWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType) {
+            return await Execute(() => staffClient.GetDepBoardWithDetailsAsync(accessToken, numRows, crs, DateTime.Now, 120, filterCrs, (ldbStaffServiceReference.FilterType)filterType, null, null, false));
+        }
+
+        public async Task<ldbStaffServiceReference.GetArrivalBoardByCRSResponse> GetStaffArrivalBoardAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType) {
+            return await Execute(() => staffClient.GetArrivalBoardByCRSAsync(accessToken, numRows, crs, DateTime.Now, 120, filterCrs, (ldbStaffServiceReference.FilterType)filterType, null, null, false));
+        }
+
+        public async Task<ldbStaffServiceReference.GetArrBoardWithDetailsResponse> GetStaffArrivalBoardWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType) {
+            return await Execute(() => staffClient.GetArrBoardWithDetailsAsync(accessToken, numRows, crs, DateTime.Now, 120, filterCrs, (ldbStaffServiceReference.FilterType)filterType, null, null, false));
+        }
+
+        public async Task<ldbStaffServiceReference.GetArrivalDepartureBoardByCRSResponse> GetStaffArrivalDepartureBoardAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType) {
+            return await Execute(() => staffClient.GetArrivalDepartureBoardByCRSAsync(accessToken, numRows, crs, DateTime.Now, 120, filterCrs, (ldbStaffServiceReference.FilterType)filterType, null, null, false));
+        }
+
+        public async Task<ldbStaffServiceReference.GetArrDepBoardWithDetailsResponse> GetStaffArrivalDepartureBoardWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType) {
+            return await Execute(() => staffClient.GetArrDepBoardWithDetailsAsync(accessToken, numRows, crs, DateTime.Now, 120, filterCrs, (ldbStaffServiceReference.FilterType)filterType, null, null, false));
         }
 
         private T Execute<T>(Func<T> func) {
