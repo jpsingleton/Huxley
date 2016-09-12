@@ -90,5 +90,7 @@ namespace Huxley {
 
         Task<ldbStaffServiceReference.GetFastestDeparturesWithDetailsResponse> GetStaffFastestDeparturesWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList);
 
+        Task<ldbStaffServiceReference.GetServiceDetailsByRIDResponse> GetStaffServiceDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string rid);
+
     }
 }

@@ -122,6 +122,11 @@ namespace Huxley {
         public async Task<ldbStaffServiceReference.GetFastestDeparturesWithDetailsResponse> GetStaffFastestDeparturesWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList) {
             return await Execute(() => staffClient.GetFastestDeparturesWithDetailsAsync(accessToken, crs, filterList, DateTime.Now, 120, null, null));
         }
+
+        public async Task<ldbStaffServiceReference.GetServiceDetailsByRIDResponse> GetStaffServiceDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string rid) {
+            return await Execute(() => staffClient.GetServiceDetailsByRIDAsync(accessToken, rid));
+        }
+
         private T Execute<T>(Func<T> func) {
             // Avoiding Problems with the Using Statement in WCF clients
             try {

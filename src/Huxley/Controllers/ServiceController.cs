@@ -22,7 +22,6 @@ using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Huxley.Models;
-using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class ServiceController : LdbController {
@@ -32,7 +31,14 @@ namespace Huxley.Controllers {
         }
 
         // GET /service/ID?accessToken=[your token]
-        public async Task<ServiceDetails> Get([FromUri] ServiceRequest request) {
+        public async Task<object> Get([FromUri] ServiceRequest request) {
+            long rid;
+            if(long.TryParse(request.ServiceId, out rid)) {
+                var staffToken = MakeStaffAccessToken(request.AccessToken);
+                var staffService = await Client.GetStaffServiceDetailsAsync(staffToken, request.ServiceId);
+                return staffService.GetServiceDetailsResult;
+            }
+
             Guid sid;
             if (Guid.TryParse(request.ServiceId, out sid)) {
                 request.ServiceId = Convert.ToBase64String(sid.ToByteArray());
