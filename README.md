@@ -8,11 +8,13 @@
 
 ## UK National Rail Live Departure Boards JSON proxy
 
-Huxley is a [CORS](http://enable-cors.org/) enabled JSON [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) proxy for the UK National Rail Enquires Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) (Darwin).
+Huxley is a [CORS](http://enable-cors.org/) enabled JSON [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) proxy for the UK National Rail Enquires Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) (Darwin). 
+It aims to make the API available to many more tools on multiple platforms. You no longer need to be running .NET on Windows to use Darwin.
 
-![Tech arch](https://raw.githubusercontent.com/jpsingleton/Huxley/master/HuxleyTechArch.png)
+[![Tech arch](https://raw.githubusercontent.com/jpsingleton/Huxley/master/HuxleyTechArch.png)](https://huxley.unop.uk)
 
-If you want to be informed of updates when they are released then watch the project on GitHub and/or **[follow me on Twitter](https://twitter.com/shutdownscanner)**. You can also read about this and other projects on [my blog](https://unop.uk/).
+If you want to be informed of updates when they are released then watch the project on GitHub and/or **follow [me on Twitter](https://twitter.com/shutdownscanner)**. You can also read about this and other projects on [my blog](https://unop.uk/). 
+If you are interested in cross-platform .NET then you may enjoy reading [my new book, "ASP.NET Core 1.0 High Performance"](https://unop.uk/book/).
 
 ---
 
@@ -57,12 +59,14 @@ There is an additional Python (v2) [example for a Raspberry Pi and Blinky Tape R
 
 ## Access Token
 
-You will need to add your access token to the URL. You can register to obtain one [here](https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration).
+You will need to add your access token to the URL. You can register to obtain one [here](https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration) 
+(or [here](http://openldbsv.nationalrail.co.uk/self-signup/register) for the staff version). 
 Append the `accessToken={Your GUID token}` parameter to the query string for every request.
 
 There is optional support for configuring the access token server side. So you don't need to worry about revealing it.
 
-You can set `DarwinAccessToken` to your NRE access token. If you leave `ClientAccessToken` as an empty GUID then no token is required in the Huxley URL. If you set `ClientAccessToken` to a random GUID and it matches the token in the URL then the `DarwinAccessToken` will be used instead in the SOAP call. Otherwise the URL token is passed straight through. Look in the `Web.config` file for more details.
+You can set `DarwinAccessToken` to your NRE access token. If you leave `ClientAccessToken` as an empty GUID then no token is required in the Huxley URL. If you set `ClientAccessToken` to a random GUID and it matches the token in the URL then the `DarwinAccessToken` will be used instead in the SOAP call. Otherwise the URL token is passed straight through. Look in the `Web.config` file for more details. 
+You can do the same with `DarwinStaffAccessToken` if you are using the staff version.
 
 **N.B.** You should set up these tokens in your deployment platform and not in your source code repository. You'll notice that the values are empty GUIDs by default. The example token used above will only work on the demo server and not directly against the SOAP API.
 
@@ -72,7 +76,7 @@ The URL format is `{board}/{CRS|StationName}/{filterType}/{filterCRS|StationName
 
 A station name can be used in place of CRS codes if the name matches only one station (or matches one exactly) but case is not important. See the [CRS section](#crs-station-codes) below for more information.
 
-For all boards you can add an `expand=true` parameter to embed all service details into the board response.
+For all boards (except delays) you can add an `expand=true` parameter to embed all service details into the board response. The delays board is expanded by default.
 
 [`/all/{CRS|StationName}?accessToken={token}&expand=true`](https://huxley.apphb.com/all/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1&expand=true)
 
@@ -109,14 +113,38 @@ Filter stations can be a comma separated list. Filter type and number of rows ar
 
 Filter stations can be a comma separated list. Filter type and number of rows are ignored.
 
+### Staff Departures
+
+[`/staffdepartures/{CRS|StationName}/{filterType}/{filterCRS|StationName}`](https://huxley.apphb.com/staffdepartures/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
+
+### Staff Arrivals
+
+[`/staffarrivals/{CRS|StationName}/{filterType}/{filterCRS|StationName}`](https://huxley.apphb.com/staffarrivals/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
+
+### Staff Departures and Arrivals
+
+[`/staffall/{CRS|StationName}/{filterType}/{filterCRS|StationName}`](https://huxley.apphb.com/staffall/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
+
+### Staff Next
+
+[`/staffnext/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}`](https://huxley.apphb.com/staffnext/crs/to/edb?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
+
+### Staff Fastest
+
+[`/stafffastest/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}`](https://huxley.apphb.com/stafffastest/crs/to/edb?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
+
 ### Service
 
 [`/service/{Service ID}?accessToken={Your GUID token}`](https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=)
 
-The service ID can be found for each service inside the departures and arrivals response.
+The service ID can be found for each service inside the departures and arrivals response. 
+Huxley also returns the ID in URL percent encoded, GUID and [URL safe Base64](https://en.wikipedia.org/wiki/Base64#URL_applications) representations (for non-staff boards).
+Likewise, the service endpoint will accept [URL safe Base64](https://tools.ietf.org/html/rfc4648#section-5) service IDs, from various different encoders.
 
 This endpoint also accepts the [GUID representation of the ID](https://huxley.apphb.com/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=) as `/`, `+` and case sensitivity can cause trouble if you're not careful.
 [More information on the wiki](https://github.com/jpsingleton/Huxley/wiki/Train-Service-IDs).
+
+If the ID is a RID (a 15 digit long integer) then the staff API will be used. In this case a staff access token must be used (unless configured server side).
 
 ### Delays
 
