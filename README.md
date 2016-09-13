@@ -8,12 +8,12 @@
 
 ## UK National Rail Live Departure Boards JSON proxy
 
-Huxley is a [CORS](http://enable-cors.org/) enabled JSON [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) proxy for the UK National Rail Enquires Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) (Darwin). 
-It aims to make the API available to many more tools on multiple platforms. You no longer need to be running .NET on Windows to use Darwin.
+Huxley is a [CORS](http://enable-cors.org/) enabled JSON proxy for the UK National Rail Enquires Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) (Darwin). 
+It aims to make the API available to many more tools on multiple platforms. You no longer need .NET on Windows to use Darwin.
 
 [![Tech arch](https://raw.githubusercontent.com/jpsingleton/Huxley/master/HuxleyTechArch.png)](https://huxley.unop.uk)
 
-If you want to be informed of updates when they are released then watch the project on GitHub and/or **follow [me on Twitter](https://twitter.com/shutdownscanner)**. You can also read about this and other projects on [my blog](https://unop.uk/). 
+If you want to be informed of updates when they are released then watch the project on GitHub and **follow [me on Twitter](https://twitter.com/shutdownscanner)**. You can also read about this and other projects on [my blog](https://unop.uk/). 
 If you are interested in cross-platform .NET then you may enjoy reading [my new book, "ASP.NET Core 1.0 High Performance"](https://unop.uk/book/).
 
 ---
@@ -22,9 +22,9 @@ If you are interested in cross-platform .NET then you may enjoy reading [my new 
 
 Huxley also has a built in CRS code lookup API so you can search for station names from your app. You can also use station names directly in any query. The codes are automatically kept up to date from the official sources.
 
-In addition it has a function for calculating delays which allows you to build useful IoT devices like this [LED strip delay indicator](https://unop.uk/dev/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/). You can specify specific trains and it even knows about London Terminals.
+In addition it has a function for calculating delays which allows you to build useful IoT devices like this [LED strip delay indicator](https://unop.uk/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/). You can specify specific trains and it even knows about London Terminals.
 
-[![Train Disruption Indicator](https://unop.uk/wp-content/uploads/2015/05/trains.jpg "Train Disruption Indicator")](https://unop.uk/dev/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/)
+[![Train Disruption Indicator](https://unop.uk/wp-content/uploads/2015/05/trains.jpg "Train Disruption Indicator")](https://unop.uk/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/)
 
 You can also use it to build mobile web apps such as [InstaBail](https://instabail.uk/), which generates excuses based on real transport disruptions.
 
@@ -34,10 +34,10 @@ You can also use it to build mobile web apps such as [InstaBail](https://instaba
 There is an example deployment set up [here](https://huxley.apphb.com/).
 (**DO NOT USE THIS FOR ANYTHING SERIOUS!**)
 
-Paste this into your web console <kbd>F12</kbd>:
+Paste this into your browser developer console <kbd>F12</kbd> (this may not work if the tab is on GitHub due to the Content Security Policy):
 ```javascript
 var r = new XMLHttpRequest();
-r.open("GET", "https://huxley.apphb.com/all/stp/from/bxs/1?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1", true);
+r.open("GET", "https://huxley.apphb.com/all/gtw/from/vic/1?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1", true);
 r.onreadystatechange = function () {
     if (r.readyState != 4 || r.status != 200) return;
     var resp = JSON.parse(r.response);
