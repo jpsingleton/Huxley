@@ -8,6 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Web;
+
 namespace Huxley.ldbServiceReference {
     
     
@@ -1315,7 +1318,31 @@ namespace Huxley.ldbServiceReference {
                 this.RaisePropertyChanged("serviceID");
             }
         }
-        
+
+        public string serviceIdPercentEncoded
+        {
+            get
+            {
+                return HttpUtility.UrlEncode(this.serviceIDField);
+            }
+        }
+
+        public Guid serviceIdGuid
+        {
+            get
+            {
+                return new Guid(Convert.FromBase64String(this.serviceIDField));
+            }
+        }
+
+        public string serviceIdUrlSafe
+        {
+            get
+            {
+                return HttpServerUtility.UrlTokenEncode(Convert.FromBase64String(this.serviceIDField)).Substring(0, 22);
+            }
+        }
+
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Order=17)]
         [System.Xml.Serialization.XmlArrayItemAttribute("adhocAlertText", Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types")]
