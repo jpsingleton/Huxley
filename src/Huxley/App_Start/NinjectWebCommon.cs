@@ -1,7 +1,7 @@
 using Huxley.ldbServiceReference;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Huxley.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Huxley.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(Huxley.App_Start.NinjectWebCommon), "Stop")]
 
 namespace Huxley.App_Start {
     using System;
@@ -9,6 +9,7 @@ namespace Huxley.App_Start {
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Common;
+    using ldbStaffServiceReference;
 
     public static class NinjectWebCommon {
         private static readonly Bootstrapper Bootstrapper = new Bootstrapper();
@@ -40,6 +41,7 @@ namespace Huxley.App_Start {
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
                 kernel.Bind<ILdbClient>().To<LdbClient>().InRequestScope();
                 kernel.Bind<LDBServiceSoapClient>().To<LDBServiceSoapClient>().InRequestScope();
+                kernel.Bind<LDBSVServiceSoapClient>().To<LDBSVServiceSoapClient>().InRequestScope();
                 return kernel;
             } catch {
                 kernel.Dispose();

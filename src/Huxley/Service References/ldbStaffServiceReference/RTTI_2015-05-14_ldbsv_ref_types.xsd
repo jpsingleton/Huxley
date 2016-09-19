@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ct="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" xmlns:tns="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/types" id="RTTI_2015-05-14_ldbsv_ref_types" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="rtti_2007-10-10_ldb_common_types.xsd" namespace="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" />
+  <xs:simpleType name="RefDataVersion">
+    <xs:annotation>
+      <xs:documentation>A version identifier for a set of reference data.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="16" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TOCName">
+    <xs:annotation>
+      <xs:documentation>A TOC name reference data item.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="ct:TOCName">
+        <xs:attribute name="toc" type="ct:TOCCode" use="required">
+          <xs:annotation>
+            <xs:documentation>The TOC code for this item of reference data.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TOCRefData">
+    <xs:annotation>
+      <xs:documentation>Reference data giving all the known TOC codes and their display names.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="version" type="tns:RefDataVersion">
+        <xs:annotation>
+          <xs:documentation>The version of the current TOC reference data held by Darwin.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TOCList" nillable="true">
+        <xs:annotation>
+          <xs:documentation>A list of TOC reference data items. This element will be null (xsi:nil) if the reference data version provided by the caller matches the current version, i.e. the caller's reference data is up to date.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="TOC" type="tns:TOCName">
+              <xs:annotation>
+                <xs:documentation>A TOC code / TOC name reference data item.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StationName">
+    <xs:annotation>
+      <xs:documentation>A Station name reference data item.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="ct:LocationNameType">
+        <xs:attribute name="crs" type="ct:CRSType" use="required">
+          <xs:annotation>
+            <xs:documentation>The CRS code for this item of reference data.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="StationRefData">
+    <xs:annotation>
+      <xs:documentation>Reference data giving all the known Station CRS codes and their display names.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="version" type="tns:RefDataVersion">
+        <xs:annotation>
+          <xs:documentation>The version of the current Station reference data held by Darwin.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="StationList" nillable="true">
+        <xs:annotation>
+          <xs:documentation>A list of Station reference data items. This element will be null (xsi:nil) if the reference data version provided by the caller matches the current version, i.e. the caller's reference data is up to date.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Station" type="tns:StationName">
+              <xs:annotation>
+                <xs:documentation>A CRS code / Station name reference data item.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

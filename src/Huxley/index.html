@@ -2,7 +2,7 @@
 <!--
 Huxley - a JSON proxy for the UK National Rail Live Departure Board SOAP API
 Copyright (C) 2016 James Singleton
- * http://huxley.unop.uk
+ * https://huxley.unop.uk
  * https://github.com/jpsingleton/Huxley
 
 This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <html>
 <head>
     <title>Huxley</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -45,27 +45,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <div class="jumbotron">
             <img src="huxley.png" alt="Huxley" class="pull-right" />
             <h1>Huxley</h1>
-            <h2>A JSON REST proxy for the UK National Rail
+            <h2>
+                A JSON REST proxy for the UK National Rail
                 <br />
                 Live Departure Board <a href="http://harmful.cat-v.org/software/xml/soap/simple">SOAP</a>
                 <a href="http://www.nationalrail.co.uk/46391.aspx">API</a>
                 (<a href="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/">Darwin</a>)
-
             </h2>
         </div>
         <p>
             Huxley is a CORS enabled JSON REST proxy for the UK National Rail Enquires Live Departure Board SOAP API (Darwin).
-            It is being actively developed so if you want to be informed of updates when they are released then watch the 
-            <a href="https://github.com/jpsingleton/Huxley">project on GitHub</a> and/or <a href="https://twitter.com/shutdownscanner">follow me on Twitter</a>.
-            You can also join the Open Rail Data chat rooms on Slack.
+            It aims to make the API available to many more tools on multiple platforms.
+            You no longer need to be running .NET on Windows to use Darwin.
         </p>
-        <script async defer src="https://openraildata.herokuapp.com/slackin.js?large"></script>
+        <p>
+            If you want to be informed of updates when they are released then watch the
+            <a href="https://github.com/jpsingleton/Huxley">project on GitHub</a> and
+            follow <a href="https://twitter.com/shutdownscanner">me on Twitter</a>.
+            If you are interested in cross-platform .NET then you may enjoy reading
+            <a href="https://unop.uk/book/">my new book, "ASP.NET Core 1.0 High Performance"</a>.
+        </p>
+        <div>
+            <a href="https://huxley.unop.uk"><img src="https://raw.githubusercontent.com/jpsingleton/Huxley/master/HuxleyTechArch.png" alt="Huxley Technical Architecture" /></a>
+        </div>
         <h2>Access Tokens</h2>
         <p>
-            You will need to add your access token to the URL for this to work. You can register to obtain one <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration">here</a>.
+            You will need to add your access token to the URL for this to work.
+            You can register to obtain one <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration">here</a>
+            (or <a href="http://openldbsv.nationalrail.co.uk/self-signup/register">here</a> for the staff version).
         </p>
         <p>
             Append the <code>accessToken={Your GUID token}</code> parameter to the query string for every request.
+            If using the staff versions then you will need to use your staff token.
         </p>
         <p>
             There is optional support for configuring the access token server side. So you don't need to worry about revealing it.
@@ -75,6 +86,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             If you set <code>ClientAccessToken</code> to a random GUID and it matches the token in the URL then the <code>DarwinAccessToken</code> will be used instead in the SOAP call.
             Otherwise the URL token is passed straight through.
             Look in the <code>Web.config</code> file for more details.
+        </p>
+        <p>
+            You can do the same with <code>DarwinStaffAccessToken</code> if you are using the staff version of the API.
+            Both share a <code>ClientAccessToken</code> so your client only needs one token (or none).
         </p>
         <p>
             <strong>N.B.</strong> You should set up these tokens in your deployment platform and not in your source code repository. You'll notice that the values are blank by default.
@@ -91,7 +106,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             See the CRS section below for more information.
         </p>
         <p>
-            For all boards you can add an <code>expand=true</code> parameter to embed all service details into the board response.
+            For all boards (except delays) you can add an <code>expand=true</code> parameter to embed all service details into the board response. The delays board is expanded by default.
         </p>
         <p>
             <code><a href="/all/crs?expand=true&accessToken=">/all/{CRS|StationName}?accessToken={Your GUID token}&amp;expand=true</a></code>
@@ -117,6 +132,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <h4>Fastest</h4>
         <p><code><a href="/fastest/crs/to/edb?accessToken=">/fastest/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}?accessToken={Your GUID token}</a></code></p>
         <p>Filter stations can be a comma separated list. Filter type and number of rows are ignored.</p>
+
+        <h4>Staff Departures</h4>
+        <p><code><a href="/staffdepartures/crs?accessToken=">/staffdepartures/{CRS|StationName}?accessToken={Your GUID token}</a></code></p>
+        <h4>Staff Arrivals</h4>
+        <p><code><a href="/staffarrivals/crs?accessToken=">/staffarrivals/{CRS|StationName}?accessToken={Your GUID token}</a></code></p>
+        <h4>Staff Departures and Arrivals</h4>
+        <p><code><a href="/staffall/crs?accessToken=">/staffall/{CRS|StationName}?accessToken={Your GUID token}</a></code></p>
+        <h4>Staff Next</h4>
+        <p><code><a href="/staffnext/crs/to/edb?accessToken=">/staffnext/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}?accessToken={Your GUID token}</a></code></p>
+        <h4>Staff Fastest</h4>
+        <p><code><a href="/stafffastest/crs/to/edb?accessToken=">/stafffastest/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}?accessToken={Your GUID token}</a></code></p>
+
         <h4>Delays</h4>
         <p>The <strong>delays</strong> action performs calculations server side to easily let you know if there are problems on a particular route.</p>
         <p><code><a href="/delays/clapham junction/from/london/20?accessToken=">/delays/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}?accessToken={Your GUID token}</a></code></p>
@@ -178,7 +205,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <p>CRS (Computer Reservation System) station codes are available from the following endpoint:</p>
         <p><code><a href="/crs">/crs/{query}</a></code></p>
         <p>
-            If <code>query</code> is omitted then all CRS codes are returned along with their respective station names. 
+            If <code>query</code> is omitted then all CRS codes are returned along with their respective station names.
             <br />
             If <code>query</code> is provided then only station names matching it will be returned along with their CRS codes.
         </p>
@@ -276,9 +303,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <p><code><a href="/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=">/service/[Service ID]?accessToken=[Your GUID token]</a></code></p>
         <p>
             The service ID can be found for each service inside the departures and arrivals response.
+            Huxley also returns the ID in URL percent encoded, GUID and <a href="https://en.wikipedia.org/wiki/Base64#URL_applications">URL safe Base64</a> representations (for non-staff boards).
+            Likewise, the service endpoint will accept <a href="https://tools.ietf.org/html/rfc4648#section-5">URL safe Base64</a> service IDs, from various different encoders.
         </p>
         <p>
             This endpoint also accepts the <a href="/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=">GUID representation of the ID</a> as <code>/</code>, <code>+</code> and case sensitivity can cause trouble if you're not careful.
+        </p>
+        <p>
+            If the ID is a RID (a 15 digit long integer) then the staff API will be used. In this case a staff access token must be used (unless configured server side).
         </p>
         <h2>Source Code</h2>
         <p>All the <a href="https://github.com/jpsingleton/Huxley">source code is available on GitHub</a>.</p>
@@ -301,11 +333,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <hr />
         <p>&copy; 2016 <a href="https://github.com/jpsingleton">James Singleton</a></p>
         <p>
-            This program is licensed under the terms of the GNU Affero General Public License. 
+            <img src="https://www.gnu.org/graphics/agplv3-155x51.png" alt="AGPL" title="AGPL">
+        </p>
+        <p>
+            This program is licensed under the terms of the GNU Affero General Public License.
             This means that you need to share any changes (even if only running on a public server).
         </p>
         <p>
-            If you would like another license (such as a commercial license with an invoice) then this can be provided. 
+            If you would like another license (such as a commercial license with an invoice) then this can be provided.
             Please get in touch (send an email to jpsingleton at gmail dot com).
         </p>
         <p>

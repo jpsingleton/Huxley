@@ -22,11 +22,13 @@
     <MetadataSource Address="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/wsdl.aspx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="RTTI_2016-02-16_ldb_types.xsd" MetadataType="Schema" ID="308376eb-f9ac-40e9-aee0-f42c154a08e4" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/rtti_2016-02-16_ldb_types.xsd" />
     <MetadataFile FileName="darwin_token_types_2013-11-28.wsdl" MetadataType="Wsdl" ID="6c1acf29-ac23-4e3c-806c-e575990459cd" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/darwin_token_types_2013-11-28.wsdl" />
+    <MetadataFile FileName="RTTI_2016-02-16_ldb_common_types.xsd" MetadataType="Schema" ID="45ad98c9-f021-43fc-b4b8-7be2c94f4586" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/rtti_2016-02-16_ldb_common_types.xsd" />
     <MetadataFile FileName="darwin_token_types_2013-11-28.xsd" MetadataType="Schema" ID="fe47be72-2d8f-4c5a-ad04-322069de7159" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/darwin_token_types_2013-11-28.xsd" />
     <MetadataFile FileName="RTTI_2012-01-13_ldb_types.xsd" MetadataType="Schema" ID="43ea89ba-22b8-43cb-ac2d-fa1e980d9b1b" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/rtti_2012-01-13_ldb_types.xsd" />
-    <MetadataFile FileName="rtti_2015-11-27_ldb.wsdl" MetadataType="Wsdl" ID="089f385b-3f78-4d74-af43-c19c51cfd981" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/rtti_2015-11-27_ldb.wsdl" />
     <MetadataFile FileName="wsdl1.wsdl" MetadataType="Wsdl" ID="edbdf3af-421f-493d-8c28-759f4be7a79e" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/wsdl.aspx" />
+    <MetadataFile FileName="rtti_2016-02-16_ldb.wsdl" MetadataType="Wsdl" ID="701fdbc9-4413-41e6-8e5a-8dddc37637c9" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/rtti_2016-02-16_ldb.wsdl" />
     <MetadataFile FileName="RTTI_2007-10-10_ldb_common_types.xsd" MetadataType="Schema" ID="9d801f07-601d-4d74-8485-bd97e9820a27" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/rtti_2007-10-10_ldb_common_types.xsd" />
     <MetadataFile FileName="RTTI_2015-11-27_ldb_common_types.xsd" MetadataType="Schema" ID="789663c0-da6e-403c-8873-7db205f762fb" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/rtti_2015-11-27_ldb_common_types.xsd" />
     <MetadataFile FileName="RTTI_2015-11-27_ldb_types.xsd" MetadataType="Schema" ID="7748e6f0-52b6-481b-ac16-27f17dbce979" SourceId="1" SourceUrl="https://lite.realtime.nationalrail.co.uk/OpenLDBWS/rtti_2015-11-27_ldb_types.xsd" />

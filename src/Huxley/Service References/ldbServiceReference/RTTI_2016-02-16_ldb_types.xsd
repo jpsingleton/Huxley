@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ldbt2015="http://thalesgroup.com/RTTI/2015-11-27/ldb/types" xmlns:tns="http://thalesgroup.com/RTTI/2016-02-16/ldb/types" xmlns:ct2016="http://thalesgroup.com/RTTI/2016-02-16/ldb/commontypes" xmlns:ct2007="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thalesgroup.com/RTTI/2016-02-16/ldb/types" id="RTTI_2016-02-16_ldb_types" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="rtti_2007-10-10_ldb_common_types.xsd" namespace="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" />
+  <xs:import schemaLocation="rtti_2016-02-16_ldb_common_types.xsd" namespace="http://thalesgroup.com/RTTI/2016-02-16/ldb/commontypes" />
+  <xs:import schemaLocation="rtti_2015-11-27_ldb_types.xsd" namespace="http://thalesgroup.com/RTTI/2015-11-27/ldb/types" />
+  <xs:complexType name="StationBoard">
+    <xs:annotation>
+      <xs:documentation>A structure containing details of a basic departure board for a specific location.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ldbt2015:BaseStationBoard">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="trainServices" type="tns:ArrayOfServiceItems">
+            <xs:annotation>
+              <xs:documentation>A list of train services for this departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="busServices" type="tns:ArrayOfServiceItems">
+            <xs:annotation>
+              <xs:documentation>A list of scheduled or replacement rail bus services for this departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ferryServices" type="tns:ArrayOfServiceItems">
+            <xs:annotation>
+              <xs:documentation>A list of ferry services for this departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="StationBoardWithDetails">
+    <xs:annotation>
+      <xs:documentation>A structure containing details of a "WithDetails" departure board for a specific location.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ldbt2015:BaseStationBoard">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="trainServices" type="tns:ArrayOfServiceItemsWithCallingPoints">
+            <xs:annotation>
+              <xs:documentation>A list of train services for this departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="busServices" type="tns:ArrayOfServiceItemsWithCallingPoints">
+            <xs:annotation>
+              <xs:documentation>A list of scheduled or replacement rail bus services for this departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ferryServices" type="tns:ArrayOfServiceItemsWithCallingPoints">
+            <xs:annotation>
+              <xs:documentation>A list of ferry services for this departure board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ServiceDetails">
+    <xs:annotation>
+      <xs:documentation>A structure containing details of an individual service obtained from a departure board.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ldbt2015:ServiceDetails">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="rsid" type="ct2016:RSIDType">
+            <xs:annotation>
+              <xs:documentation>The Retail Service ID of the service, if known.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeparturesBoard">
+    <xs:annotation>
+      <xs:documentation>A structure containing details of a basic next/fastest departures board for a specific location.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ldbt2015:BaseStationBoard">
+        <xs:sequence>
+          <xs:element name="departures" type="tns:ArrayOfDepartureItems">
+            <xs:annotation>
+              <xs:documentation>A list of next/fastest services for this departures board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeparturesBoardWithDetails">
+    <xs:annotation>
+      <xs:documentation>A structure containing details of a "WithDetails" next/fastest departures board for a specific location.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ldbt2015:BaseStationBoard">
+        <xs:sequence>
+          <xs:element name="departures" type="tns:ArrayOfDepartureItemsWithCallingPoints">
+            <xs:annotation>
+              <xs:documentation>A list of next/fastest services for this departures board.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfServiceItems">
+    <xs:annotation>
+      <xs:documentation>A list of services on a departure board.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="service" nillable="true" type="tns:ServiceItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfServiceItemsWithCallingPoints">
+    <xs:annotation>
+      <xs:documentation>A list of services on a departure board with details of their calling points.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="service" nillable="true" type="tns:ServiceItemWithCallingPoints" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfDepartureItems">
+    <xs:annotation>
+      <xs:documentation>A list of next/fastest services on a departures board.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="destination" type="tns:DepartureItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfDepartureItemsWithCallingPoints">
+    <xs:annotation>
+      <xs:documentation>A list of next/fastest services with calling points on a departures board.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="destination" type="tns:DepartureItemWithCallingPoints" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BaseServiceItem">
+    <xs:annotation>
+      <xs:documentation>An individual service's summary details for display on a basic departure board.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ldbt2015:BaseServiceItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="rsid" type="ct2016:RSIDType">
+            <xs:annotation>
+              <xs:documentation>The Retail Service ID of the service, if known.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ServiceItem">
+    <xs:annotation>
+      <xs:documentation>An individual service's summary details for display on a basic departure board.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseServiceItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="origin" type="ldbt2015:ArrayOfServiceLocations">
+            <xs:annotation>
+              <xs:documentation>A list of origins of this service. Note that a service may have more than one origin.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="destination" type="ldbt2015:ArrayOfServiceLocations">
+            <xs:annotation>
+              <xs:documentation>A list of destinations of this service. Note that a service may have more than one destination.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="currentOrigins" type="ldbt2015:ArrayOfServiceLocations">
+            <xs:annotation>
+              <xs:documentation>A list of the current origins for this service. Note that a service may have more than one current origin.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="currentDestinations" type="ldbt2015:ArrayOfServiceLocations">
+            <xs:annotation>
+              <xs:documentation>A list of the current destinations for this service. Note that a service may have more than one current destination.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ServiceItemWithCallingPoints">
+    <xs:annotation>
+      <xs:documentation>An individual service's summary details with calling points for display on a "WithDetails" departure board.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ServiceItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="previousCallingPoints" type="ldbt2015:ArrayOfArrayOfCallingPoints">
+            <xs:annotation>
+              <xs:documentation>A list of lists of the previous calling points in the journey. A separate calling point list will be present for each origin of the service, relative to the current location. Refer to the documentation for how these lists should be handled.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="subsequentCallingPoints" type="ldbt2015:ArrayOfArrayOfCallingPoints">
+            <xs:annotation>
+              <xs:documentation>A list of lists of the subsequent calling points in the journey. A separate calling point list will be present for each destination of the service, relative to the current location. Refer to the documentation for how these lists should be handled.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DepartureItem">
+    <xs:annotation>
+      <xs:documentation>An individual service's summary details for display on a basic next/fastest departures board.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="service" nillable="true" type="tns:ServiceItem">
+        <xs:annotation>
+          <xs:documentation>The details of the next/fastest service.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="crs" type="ct2007:CRSType" use="required">
+      <xs:annotation>
+        <xs:documentation>The CRS code from the requested filterList for which this service is the next/fastest departure.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DepartureItemWithCallingPoints">
+    <xs:annotation>
+      <xs:documentation>An individual service's summary details for display on a "WithDetails" next/fastest departures board.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="service" nillable="true" type="tns:ServiceItemWithCallingPoints">
+        <xs:annotation>
+          <xs:documentation>The details of the next/fastest service.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="crs" type="ct2007:CRSType" use="required">
+      <xs:annotation>
+        <xs:documentation>The CRS code from the requested filterList for which this service is the next/fastest departure.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

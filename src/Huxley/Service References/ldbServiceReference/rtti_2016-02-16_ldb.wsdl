@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://thalesgroup.com/RTTI/2015-11-27/ldb/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tok="http://thalesgroup.com/RTTI/2013-11-28/Token/types" targetNamespace="http://thalesgroup.com/RTTI/2015-11-27/ldb/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://thalesgroup.com/RTTI/2016-02-16/ldb/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tok="http://thalesgroup.com/RTTI/2013-11-28/Token/types" targetNamespace="http://thalesgroup.com/RTTI/2016-02-16/ldb/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:import namespace="http://thalesgroup.com/RTTI/2013-11-28/Token/types" location="darwin_token_types_2013-11-28.wsdl" />
   <wsdl:types>
-    <xs:schema xmlns:ct2015="http://thalesgroup.com/RTTI/2015-11-27/ldb/commontypes" xmlns:ct2007="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" xmlns:ldbt2015="http://thalesgroup.com/RTTI/2015-11-27/ldb/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thalesgroup.com/RTTI/2015-11-27/ldb/">
+    <xs:schema xmlns:ct2015="http://thalesgroup.com/RTTI/2015-11-27/ldb/commontypes" xmlns:ldbt2016="http://thalesgroup.com/RTTI/2016-02-16/ldb/types" xmlns:ct2007="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thalesgroup.com/RTTI/2016-02-16/ldb/">
       <xs:import schemaLocation="rtti_2007-10-10_ldb_common_types.xsd" namespace="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" />
       <xs:import schemaLocation="rtti_2015-11-27_ldb_common_types.xsd" namespace="http://thalesgroup.com/RTTI/2015-11-27/ldb/commontypes" />
-      <xs:import schemaLocation="rtti_2015-11-27_ldb_types.xsd" namespace="http://thalesgroup.com/RTTI/2015-11-27/ldb/types" />
+      <xs:import schemaLocation="rtti_2016-02-16_ldb_types.xsd" namespace="http://thalesgroup.com/RTTI/2016-02-16/ldb/types" />
       <xs:complexType name="GetBoardRequestParams">
         <xs:sequence>
           <xs:element name="numRows" type="xs:unsignedShort">
@@ -91,27 +91,27 @@
       <xs:element name="GetFastestDeparturesWithDetailsRequest" type="tns:GetDeparturesRequestParams" />
       <xs:complexType name="StationBoardResponseType">
         <xs:sequence>
-          <xs:element minOccurs="0" name="GetStationBoardResult" type="ldbt2015:StationBoard" />
+          <xs:element minOccurs="0" name="GetStationBoardResult" type="ldbt2016:StationBoard" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="StationBoardWithDetailsResponseType">
         <xs:sequence>
-          <xs:element minOccurs="0" name="GetStationBoardResult" type="ldbt2015:StationBoardWithDetails" />
+          <xs:element minOccurs="0" name="GetStationBoardResult" type="ldbt2016:StationBoardWithDetails" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="ServiceDetailsResponseType">
         <xs:sequence>
-          <xs:element minOccurs="0" name="GetServiceDetailsResult" type="ldbt2015:ServiceDetails" />
+          <xs:element minOccurs="0" name="GetServiceDetailsResult" type="ldbt2016:ServiceDetails" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="DeparturesBoardResponseType">
         <xs:sequence>
-          <xs:element minOccurs="0" name="DeparturesBoard" type="ldbt2015:DeparturesBoard" />
+          <xs:element minOccurs="0" name="DeparturesBoard" type="ldbt2016:DeparturesBoard" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="DeparturesBoardWithDetailsResponseType">
         <xs:sequence>
-          <xs:element minOccurs="0" name="DeparturesBoard" type="ldbt2015:DeparturesBoardWithDetails" />
+          <xs:element minOccurs="0" name="DeparturesBoard" type="ldbt2016:DeparturesBoardWithDetails" />
         </xs:sequence>
       </xs:complexType>
       <xs:element name="GetDepartureBoardResponse" type="tns:StationBoardResponseType" />

@@ -1,7 +1,7 @@
 ﻿/*
 Huxley - a JSON proxy for the UK National Rail Live Departure Board SOAP API
-Copyright (C) 2015 James Singleton
- * http://huxley.unop.uk
+Copyright (C) 2016 James Singleton
+ * https://huxley.unop.uk
  * https://github.com/jpsingleton/Huxley
 
 This program is free software: you can redistribute it and/or modify
@@ -69,5 +69,28 @@ namespace Huxley {
 
 
         Task<GetServiceDetailsResponse> GetServiceDetailsAsync(AccessToken accessToken, string serviceId);
+
+        Task<ldbStaffServiceReference.GetDepartureBoardByCRSResponse> GetStaffDepartureBoardAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetDepBoardWithDetailsResponse> GetStaffDepartureBoardWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetArrivalBoardByCRSResponse> GetStaffArrivalBoardAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetArrBoardWithDetailsResponse> GetStaffArrivalBoardWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetArrivalDepartureBoardByCRSResponse> GetStaffArrivalDepartureBoardAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetArrDepBoardWithDetailsResponse> GetStaffArrivalDepartureBoardWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, ushort numRows, string crs, string filterCrs, FilterType filterType);
+
+        Task<ldbStaffServiceReference.GetNextDeparturesResponse> GetStaffNextDeparturesAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList);
+
+        Task<ldbStaffServiceReference.GetNextDeparturesWithDetailsResponse> GetStaffNextDeparturesWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList);
+
+        Task<ldbStaffServiceReference.GetFastestDeparturesResponse> GetStaffFastestDeparturesAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList);
+
+        Task<ldbStaffServiceReference.GetFastestDeparturesWithDetailsResponse> GetStaffFastestDeparturesWithDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string crs, string[] filterList);
+
+        Task<ldbStaffServiceReference.GetServiceDetailsByRIDResponse> GetStaffServiceDetailsAsync(ldbStaffServiceReference.AccessToken accessToken, string rid);
+
     }
 }

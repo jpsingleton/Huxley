@@ -1,7 +1,7 @@
 ﻿/*
 Huxley - a JSON proxy for the UK National Rail Live Departure Board SOAP API
-Copyright (C) 2015 James Singleton
- * http://huxley.unop.uk
+Copyright (C) 2016 James Singleton
+ * https://huxley.unop.uk
  * https://github.com/jpsingleton/Huxley
 
 This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Huxley.Models;
-using Huxley.ldbServiceReference;
 
 namespace Huxley.Controllers {
     public class StationController : LdbController {
@@ -32,7 +31,7 @@ namespace Huxley.Controllers {
         }
 
         // GET /{board}/CRS?accessToken=[your token]
-        public async Task<BaseStationBoard> Get([FromUri] StationBoardRequest request) {
+        public async Task<object> Get([FromUri] StationBoardRequest request) {
 
             // Lookup CRS codes from station names
             var crs = MakeCrsCode(request.Crs);
@@ -42,6 +41,7 @@ namespace Huxley.Controllers {
             }
 
             var token = MakeAccessToken(request.AccessToken);
+            var staffToken = MakeStaffAccessToken(request.AccessToken);
 
             if (Board.Departures == request.Board) {
                 if (request.Expand) {
@@ -76,6 +76,51 @@ namespace Huxley.Controllers {
                     return nextWithDetails.DeparturesBoard;
                 }
                 var next = await Client.GetFastestDeparturesAsync(token, crs, filterList, 0, 0);
+                return next.DeparturesBoard;
+            }
+
+            if (Board.StaffDepartures == request.Board) {
+                if (request.Expand) {
+                    var staffDeparturesWithDetails = await Client.GetStaffDepartureBoardWithDetailsAsync(staffToken, request.NumRows, crs, filterList[0], request.FilterType);
+                    return staffDeparturesWithDetails.GetBoardWithDetailsResult;
+                }
+                var staffDepartures = await Client.GetStaffDepartureBoardAsync(staffToken, request.NumRows, crs, filterList[0], request.FilterType);
+                return staffDepartures.GetBoardResult;
+            }
+
+            if (Board.StaffArrivals == request.Board) {
+                if (request.Expand) {
+                    var staffArrivalsWithDetails = await Client.GetStaffArrivalBoardWithDetailsAsync(staffToken, request.NumRows, crs, filterList[0], request.FilterType);
+                    return staffArrivalsWithDetails.GetBoardWithDetailsResult;
+                }
+                var staffArrivals = await Client.GetStaffArrivalBoardAsync(staffToken, request.NumRows, crs, filterList[0], request.FilterType);
+                return staffArrivals.GetBoardResult;
+            }
+
+            if (Board.StaffAll == request.Board) {
+                if (request.Expand) {
+                    var staffAllWithDetails = await Client.GetStaffArrivalDepartureBoardWithDetailsAsync(staffToken, request.NumRows, crs, filterList[0], request.FilterType);
+                    return staffAllWithDetails.GetBoardWithDetailsResult;
+                }
+                var staffAll = await Client.GetStaffArrivalDepartureBoardAsync(staffToken, request.NumRows, crs, filterList[0], request.FilterType);
+                return staffAll.GetBoardResult;
+            }
+
+            if (Board.StaffNext == request.Board) {
+                if (request.Expand) {
+                    var nextWithDetails = await Client.GetStaffFastestDeparturesWithDetailsAsync(staffToken, crs, filterList);
+                    return nextWithDetails.DeparturesBoard;
+                }
+                var next = await Client.GetStaffNextDeparturesAsync(staffToken, crs, filterList);
+                return next.DeparturesBoard;
+            }
+
+            if (Board.StaffFastest == request.Board) {
+                if (request.Expand) {
+                    var nextWithDetails = await Client.GetStaffFastestDeparturesWithDetailsAsync(staffToken, crs, filterList);
+                    return nextWithDetails.DeparturesBoard;
+                }
+                var next = await Client.GetStaffFastestDeparturesAsync(staffToken, crs, filterList);
                 return next.DeparturesBoard;
             }
 

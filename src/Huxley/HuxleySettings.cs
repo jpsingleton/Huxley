@@ -1,7 +1,7 @@
 ﻿/*
 Huxley - a JSON proxy for the UK National Rail Live Departure Board SOAP API
-Copyright (C) 2015 James Singleton
- * http://huxley.unop.uk
+Copyright (C) 2016 James Singleton
+ * https://huxley.unop.uk
  * https://github.com/jpsingleton/Huxley
 
 This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@ using System;
 namespace Huxley {
     public class HuxleySettings {
         public Guid DarwinAccessToken { get; set; }
+        public Guid DarwinStaffAccessToken { get; set; }
         public Guid ClientAccessToken { get; set; }
         public int DelayMinutesThreshold { get; set; }
     }

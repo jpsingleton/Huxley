@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tok="http://thalesgroup.com/RTTI/2013-11-28/Token/types" targetNamespace="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://thalesgroup.com/RTTI/2013-11-28/Token/types" location="darwin_token_types_2013-11-28.wsdl" />
+  <wsdl:types>
+    <xs:schema xmlns:ref="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/types" xmlns:svt="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/">
+      <xs:import schemaLocation="rtti_2012-01-13_ldbsv_types.xsd" namespace="http://thalesgroup.com/RTTI/2012-01-13/ldbsv/types" />
+      <xs:import schemaLocation="rtti_2015-05-14_ldbsv_ref_types.xsd" namespace="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/types" />
+      <xs:complexType name="VoidParams" />
+      <xs:complexType name="GetReasonCodeRequestParams">
+        <xs:sequence>
+          <xs:element name="reasonCode" type="svt:ReasonCodeType">
+            <xs:annotation>
+              <xs:documentation>The Reason Code for which a description is required.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetVersionedRefDataRequestParams">
+        <xs:sequence>
+          <xs:element name="currentVersion" nillable="true" type="ref:RefDataVersion">
+            <xs:annotation>
+              <xs:documentation>The version identifier of the reference data currently held by the caller. xsi:nil may be passed if the caller currently has no reference data.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetReasonCodeRequest" type="tns:GetReasonCodeRequestParams" />
+      <xs:element name="GetReasonCodeListRequest" type="tns:VoidParams" />
+      <xs:element name="GetSourceInstanceNamesRequest" type="tns:VoidParams" />
+      <xs:element name="GetTOCListRequest" type="tns:GetVersionedRefDataRequestParams" />
+      <xs:element name="GetStationListRequest" type="tns:GetVersionedRefDataRequestParams" />
+      <xs:complexType name="GetReasonCodeResponseType">
+        <xs:sequence>
+          <xs:element name="GetReasonCodeResult" type="svt:ReasonDescription" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetReasonCodeListResponseType">
+        <xs:sequence>
+          <xs:element name="GetReasonCodeListResult" type="svt:ArrayOfReasonDescriptions" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetSourceInstanceNamesResponseType">
+        <xs:sequence>
+          <xs:element name="GetSourceInstanceNamesResult" type="svt:ArrayOfSourceInstanceNames" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetTOCListResponseType">
+        <xs:sequence>
+          <xs:element name="GetTOCListResult" type="ref:TOCRefData" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetStationListResponseType">
+        <xs:sequence>
+          <xs:element name="GetStationListResult" type="ref:StationRefData" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetReasonCodeResponse" type="tns:GetReasonCodeResponseType" />
+      <xs:element name="GetReasonCodeListResponse" type="tns:GetReasonCodeListResponseType" />
+      <xs:element name="GetSourceInstanceNamesResponse" type="tns:GetSourceInstanceNamesResponseType" />
+      <xs:element name="GetTOCListResponse" type="tns:GetTOCListResponseType" />
+      <xs:element name="GetStationListResponse" type="tns:GetStationListResponseType" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="AccessTokenMessage">
+    <wsdl:part name="AccessToken" element="tok:AccessToken" />
+  </wsdl:message>
+  <wsdl:message name="GetReasonCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReasonCodeRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetReasonCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReasonCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReasonCodeListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReasonCodeListRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetReasonCodeListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReasonCodeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSourceInstanceNamesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSourceInstanceNamesRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetSourceInstanceNamesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSourceInstanceNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTOCListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTOCListRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetTOCListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTOCListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStationListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStationListRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetStationListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStationListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LDBSVRefServiceSoap">
+    <wsdl:operation name="GetReasonCode">
+      <wsdl:input message="tns:GetReasonCodeSoapIn" />
+      <wsdl:output message="tns:GetReasonCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReasonCodeList">
+      <wsdl:input message="tns:GetReasonCodeListSoapIn" />
+      <wsdl:output message="tns:GetReasonCodeListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSourceInstanceNames">
+      <wsdl:input message="tns:GetSourceInstanceNamesSoapIn" />
+      <wsdl:output message="tns:GetSourceInstanceNamesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTOCList">
+      <wsdl:input message="tns:GetTOCListSoapIn" />
+      <wsdl:output message="tns:GetTOCListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStationList">
+      <wsdl:input message="tns:GetStationListSoapIn" />
+      <wsdl:output message="tns:GetStationListSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LDBSVRefServiceSoap" type="tns:LDBSVRefServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetReasonCode">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/GetReasonCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReasonCodeList">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/GetReasonCodeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSourceInstanceNames">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/GetSourceInstanceNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTOCList">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/GetTOCList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationList">
+      <soap:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/GetStationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LDBSVRefServiceSoap12" type="tns:LDBSVRefServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetReasonCode">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/GetReasonCode" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReasonCodeList">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/GetReasonCodeList" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSourceInstanceNames">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/GetSourceInstanceNames" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTOCList">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/GetTOCList" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationList">
+      <soap12:operation soapAction="http://thalesgroup.com/RTTI/2015-05-14/ldbsv_ref/GetStationList" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AccessTokenMessage" part="AccessToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

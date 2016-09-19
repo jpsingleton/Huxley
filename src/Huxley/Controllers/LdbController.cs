@@ -1,7 +1,7 @@
 ﻿/*
 Huxley - a JSON proxy for the UK National Rail Live Departure Board SOAP API
-Copyright (C) 2015 James Singleton
- * http://huxley.unop.uk
+Copyright (C) 2016 James Singleton
+ * https://huxley.unop.uk
  * https://github.com/jpsingleton/Huxley
 
 This program is free software: you can redistribute it and/or modify
@@ -40,6 +40,15 @@ namespace Huxley.Controllers {
                 accessToken = HuxleyApi.Settings.DarwinAccessToken;
             }
             return new AccessToken { TokenValue = accessToken.ToString() };
+        }
+
+        protected static ldbStaffServiceReference.AccessToken MakeStaffAccessToken(Guid accessToken)
+        {
+            if (HuxleyApi.Settings.ClientAccessToken == accessToken)
+            {
+                accessToken = HuxleyApi.Settings.DarwinStaffAccessToken;
+            }
+            return new ldbStaffServiceReference.AccessToken { TokenValue = accessToken.ToString() };
         }
 
         protected static string MakeCrsCode(string query) {
