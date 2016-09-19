@@ -31,11 +31,13 @@
 <h2>
 <a id="uk-national-rail-live-departure-boards-json-proxy" class="anchor" href="#uk-national-rail-live-departure-boards-json-proxy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UK National Rail Live Departure Boards JSON proxy</h2>
 
-<p>Huxley is a <a href="http://enable-cors.org/">CORS</a> enabled JSON <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> proxy for the UK National Rail Enquires Live Departure Board <a href="http://harmful.cat-v.org/software/xml/soap/simple">SOAP</a> <a href="http://www.nationalrail.co.uk/46391.aspx">API</a> (Darwin).</p>
+<p>Huxley is a <a href="http://enable-cors.org/">CORS</a> enabled JSON proxy for the UK National Rail Enquires Live Departure Board <a href="http://harmful.cat-v.org/software/xml/soap/simple">SOAP</a> <a href="http://www.nationalrail.co.uk/46391.aspx">API</a> (Darwin). 
+It aims to make the API available to many more tools on multiple platforms. You no longer need .NET on Windows to use Darwin.</p>
 
-<p><img src="https://raw.githubusercontent.com/jpsingleton/Huxley/master/HuxleyTechArch.png" alt="Tech arch"></p>
+<p><a href="https://huxley.unop.uk"><img src="https://raw.githubusercontent.com/jpsingleton/Huxley/master/HuxleyTechArch.png" alt="Tech arch"></a></p>
 
-<p>If you want to be informed of updates when they are released then watch the project on GitHub and/or <strong><a href="https://twitter.com/shutdownscanner">follow me on Twitter</a></strong>. You can also read about this and other projects on <a href="https://unop.uk/">my blog</a>.</p>
+<p>If you want to be informed of updates when they are released then watch the project on GitHub and <strong>follow <a href="https://twitter.com/shutdownscanner">me on Twitter</a></strong>. You can also read about this and other projects on <a href="https://unop.uk/">my blog</a>. 
+If you are interested in cross-platform .NET then you may enjoy reading <a href="https://unop.uk/book/">my new book, "ASP.NET Core 1.0 High Performance"</a>.</p>
 
 <hr>
 
@@ -43,9 +45,9 @@
 
 <p>Huxley also has a built in CRS code lookup API so you can search for station names from your app. You can also use station names directly in any query. The codes are automatically kept up to date from the official sources.</p>
 
-<p>In addition it has a function for calculating delays which allows you to build useful IoT devices like this <a href="https://unop.uk/dev/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/">LED strip delay indicator</a>. You can specify specific trains and it even knows about London Terminals.</p>
+<p>In addition it has a function for calculating delays which allows you to build useful IoT devices like this <a href="https://unop.uk/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/">LED strip delay indicator</a>. You can specify specific trains and it even knows about London Terminals.</p>
 
-<p><a href="https://unop.uk/dev/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/"><img src="https://unop.uk/wp-content/uploads/2015/05/trains.jpg" alt="Train Disruption Indicator" title="Train Disruption Indicator"></a></p>
+<p><a href="https://unop.uk/train-disruption-indicator-with-a-blinky-tape-rgb-led-strip-and-raspberry-pi/"><img src="https://unop.uk/wp-content/uploads/2015/05/trains.jpg" alt="Train Disruption Indicator" title="Train Disruption Indicator"></a></p>
 
 <p>You can also use it to build mobile web apps such as <a href="https://instabail.uk/">InstaBail</a>, which generates excuses based on real transport disruptions.</p>
 
@@ -57,10 +59,10 @@
 <p>There is an example deployment set up <a href="https://huxley.apphb.com/">here</a>.
 (<strong>DO NOT USE THIS FOR ANYTHING SERIOUS!</strong>)</p>
 
-<p>Paste this into your web console <kbd>F12</kbd>:</p>
+<p>Paste this into your browser developer console <kbd>F12</kbd> (this may not work if the tab is on GitHub due to the Content Security Policy):</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> r <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">XMLHttpRequest</span>();
-<span class="pl-smi">r</span>.<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>https://huxley.apphb.com/all/stp/from/bxs/1?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>);
+<span class="pl-smi">r</span>.<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>https://huxley.apphb.com/all/gtw/from/vic/1?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>);
 <span class="pl-smi">r</span>.<span class="pl-en">onreadystatechange</span> <span class="pl-k">=</span> <span class="pl-k">function</span> () {
     <span class="pl-k">if</span> (<span class="pl-smi">r</span>.<span class="pl-c1">readyState</span> <span class="pl-k">!=</span> <span class="pl-c1">4</span> <span class="pl-k">||</span> <span class="pl-smi">r</span>.<span class="pl-c1">status</span> <span class="pl-k">!=</span> <span class="pl-c1">200</span>) <span class="pl-k">return</span>;
     <span class="pl-k">var</span> resp <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(<span class="pl-smi">r</span>.<span class="pl-smi">response</span>);
@@ -82,12 +84,14 @@ If you deploy to the App Harbor Europe AWS region then this will run very close 
 <h2>
 <a id="access-token" class="anchor" href="#access-token" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Access Token</h2>
 
-<p>You will need to add your access token to the URL. You can register to obtain one <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration">here</a>.
+<p>You will need to add your access token to the URL. You can register to obtain one <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration">here</a> 
+(or <a href="http://openldbsv.nationalrail.co.uk/self-signup/register">here</a> for the staff version). 
 Append the <code>accessToken={Your GUID token}</code> parameter to the query string for every request.</p>
 
 <p>There is optional support for configuring the access token server side. So you don't need to worry about revealing it.</p>
 
-<p>You can set <code>DarwinAccessToken</code> to your NRE access token. If you leave <code>ClientAccessToken</code> as an empty GUID then no token is required in the Huxley URL. If you set <code>ClientAccessToken</code> to a random GUID and it matches the token in the URL then the <code>DarwinAccessToken</code> will be used instead in the SOAP call. Otherwise the URL token is passed straight through. Look in the <code>Web.config</code> file for more details.</p>
+<p>You can set <code>DarwinAccessToken</code> to your NRE access token. If you leave <code>ClientAccessToken</code> as an empty GUID then no token is required in the Huxley URL. If you set <code>ClientAccessToken</code> to a random GUID and it matches the token in the URL then the <code>DarwinAccessToken</code> will be used instead in the SOAP call. Otherwise the URL token is passed straight through. Look in the <code>Web.config</code> file for more details. 
+You can do the same with <code>DarwinStaffAccessToken</code> if you are using the staff version.</p>
 
 <p><strong>N.B.</strong> You should set up these tokens in your deployment platform and not in your source code repository. You'll notice that the values are empty GUIDs by default. The example token used above will only work on the demo server and not directly against the SOAP API.</p>
 
@@ -98,7 +102,7 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 
 <p>A station name can be used in place of CRS codes if the name matches only one station (or matches one exactly) but case is not important. See the <a href="#crs-station-codes">CRS section</a> below for more information.</p>
 
-<p>For all boards you can add an <code>expand=true</code> parameter to embed all service details into the board response.</p>
+<p>For all boards (except delays) you can add an <code>expand=true</code> parameter to embed all service details into the board response. The delays board is expanded by default.</p>
 
 <p><a href="https://huxley.apphb.com/all/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1&amp;expand=true"><code>/all/{CRS|StationName}?accessToken={token}&amp;expand=true</code></a></p>
 
@@ -149,14 +153,43 @@ Append the <code>accessToken={Your GUID token}</code> parameter to the query str
 <p>Filter stations can be a comma separated list. Filter type and number of rows are ignored.</p>
 
 <h3>
+<a id="staff-departures" class="anchor" href="#staff-departures" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Staff Departures</h3>
+
+<p><a href="https://huxley.apphb.com/staffdepartures/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/staffdepartures/{CRS|StationName}/{filterType}/{filterCRS|StationName}</code></a></p>
+
+<h3>
+<a id="staff-arrivals" class="anchor" href="#staff-arrivals" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Staff Arrivals</h3>
+
+<p><a href="https://huxley.apphb.com/staffarrivals/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/staffarrivals/{CRS|StationName}/{filterType}/{filterCRS|StationName}</code></a></p>
+
+<h3>
+<a id="staff-departures-and-arrivals" class="anchor" href="#staff-departures-and-arrivals" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Staff Departures and Arrivals</h3>
+
+<p><a href="https://huxley.apphb.com/staffall/crs?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/staffall/{CRS|StationName}/{filterType}/{filterCRS|StationName}</code></a></p>
+
+<h3>
+<a id="staff-next" class="anchor" href="#staff-next" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Staff Next</h3>
+
+<p><a href="https://huxley.apphb.com/staffnext/crs/to/edb?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/staffnext/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}</code></a></p>
+
+<h3>
+<a id="staff-fastest" class="anchor" href="#staff-fastest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Staff Fastest</h3>
+
+<p><a href="https://huxley.apphb.com/stafffastest/crs/to/edb?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1"><code>/stafffastest/{CRS|StationName}/{filterType}/{filterCRSs|StationNames}</code></a></p>
+
+<h3>
 <a id="service" class="anchor" href="#service" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Service</h3>
 
 <p><a href="https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken="><code>/service/{Service ID}?accessToken={Your GUID token}</code></a></p>
 
-<p>The service ID can be found for each service inside the departures and arrivals response.</p>
+<p>The service ID can be found for each service inside the departures and arrivals response. 
+Huxley also returns the ID in URL percent encoded, GUID and <a href="https://en.wikipedia.org/wiki/Base64#URL_applications">URL safe Base64</a> representations (for non-staff boards).
+Likewise, the service endpoint will accept <a href="https://tools.ietf.org/html/rfc4648#section-5">URL safe Base64</a> service IDs, from various different encoders.</p>
 
 <p>This endpoint also accepts the <a href="https://huxley.apphb.com/service/8c105350-4235-44f3-b076-87fe829c577e?accessToken=">GUID representation of the ID</a> as <code>/</code>, <code>+</code> and case sensitivity can cause trouble if you're not careful.
 <a href="https://github.com/jpsingleton/Huxley/wiki/Train-Service-IDs">More information on the wiki</a>.</p>
+
+<p>If the ID is a RID (a 15 digit long integer) then the staff API will be used. In this case a staff access token must be used (unless configured server side).</p>
 
 <h3>
 <a id="delays" class="anchor" href="#delays" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Delays</h3>
