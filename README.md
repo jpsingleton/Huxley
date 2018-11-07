@@ -135,7 +135,7 @@ Filter stations can be a comma separated list. Filter type and number of rows ar
 
 ### Service
 
-[`/service/{Service ID}?accessToken={Your GUID token}`](https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=)
+[`/service/{Service ID}`](https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=)
 
 The service ID can be found for each service inside the departures and arrivals response. 
 Huxley also returns the ID in URL percent encoded, GUID and [URL safe Base64](https://en.wikipedia.org/wiki/Base64#URL_applications) representations (for non-staff boards).
@@ -150,10 +150,12 @@ If the ID is a RID (a 15 digit long integer) then the staff API will be used. In
 
 The **delays** action performs calculations server side to easily let you know if there are problems on a particular route.
 
-[`/delays/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}?accessToken={Your GUID token}`](https://huxley.apphb.com/delays/clapham junction/from/london/20?accessToken=)
+[`/delays/{CRS|StationName}/{filterType}/{filterCRS|StationName}/{numRows}`](https://huxley.apphb.com/delays/clapham%20junction/from/london/20?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1)
+
+`numRows` is mandatory
 
 **Sample Response:**
-```javascript
+```json
 {
   "generatedAt": "2015-05-08T11:28:33.7187169+01:00",
   "locationName": "Clapham Junction",
@@ -214,7 +216,7 @@ CRS (Computer Reservation System) station codes are available from the following
 If `query` is omitted then all CRS codes are returned along with their respective station names. If `query` is provided then only station names matching it will be returned along with their CRS codes.
 
 Example response for `/crs/oswald`:
-```javascript
+```json
 [
   {
     "stationName": "Church & Oswaldtwistle",
