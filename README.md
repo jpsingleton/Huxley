@@ -8,12 +8,12 @@
 
 ## UK National Rail Live Departure Boards JSON proxy
 
-Huxley is a [CORS](http://enable-cors.org/) enabled JSON proxy for the UK National Rail Enquires Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) (Darwin), including the staff version. 
+Huxley is a [CORS](http://enable-cors.org/) enabled JSON proxy for the UK National Rail Enquiries Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) (Darwin), including the staff version.
 It aims to make the API available to many more tools on multiple platforms. You no longer need .NET on Windows to use Darwin.
 
 [![Tech arch](https://raw.githubusercontent.com/jpsingleton/Huxley/master/HuxleyTechArch.png)](https://huxley.unop.uk)
 
-If you want to be informed of updates when they are released then watch the project on GitHub and **follow [me on Twitter](https://twitter.com/shutdownscanner)**. You can also read about this and other projects on [my blog](https://unop.uk/). 
+If you want to be informed of updates when they are released then watch the project on GitHub and **follow [me on Twitter](https://twitter.com/shutdownscanner)**. You can also read about this and other projects on [my blog](https://unop.uk/).
 If you are interested in cross-platform .NET then you may enjoy reading [my book, "ASP.NET Core 2 High Performance"](https://unop.uk/book/).
 
 ---
@@ -31,10 +31,12 @@ You can also use it to build mobile web apps such as [InstaBail](https://instaba
 [![InstaBail](https://unop.uk/wp-content/uploads/2015/07/ios2.png "InstaBail")](https://instabail.uk/)
 
 ## Demo
+
 There is an example deployment set up [here](https://huxley.apphb.com/).
 (**DO NOT USE THIS FOR ANYTHING SERIOUS!**)
 
 Paste this into your browser developer console <kbd>F12</kbd> (this may not work if the tab is on GitHub due to the Content Security Policy):
+
 ```javascript
 var r = new XMLHttpRequest();
 r.open("GET", "https://huxley.apphb.com/all/gtw/from/vic/1?accessToken=DA1C7740-9DA0-11E4-80E6-A920340000B1", true);
@@ -50,22 +52,20 @@ r.onreadystatechange = function () {
 r.send();
 ```
 
+There is a Python (v2) [example for a Raspberry Pi and Blinky Tape RGB LED strip](https://github.com/Blinkinlabs/BlinkyTape_Python/blob/master/Huxley_UK_Rail_Station_Delays.py).
+
 If you want to use this proxy then you should deploy the code to your own [App Harbor](https://appharbor.com/) or [Azure](https://azure.microsoft.com/en-gb/) account.
 If you deploy to the App Harbor Europe AWS region then this will run very close to the NRE servers.
 
-SDKs in 9 languages (including Java, PHP, Python and Ruby) for this endpoint (generated with [Swagger](https://github.com/swagger-api/swagger-codegen)) are available [here](http://restunited.com/releases/430721415517308710/wrappers). If you use these make sure to change the endpoint for production.
-
-There is an additional Python (v2) [example for a Raspberry Pi and Blinky Tape RGB LED strip](https://github.com/Blinkinlabs/BlinkyTape_Python/blob/master/Huxley_UK_Rail_Station_Delays.py).
-
 ## Access Token
 
-You will need to add your access token to the URL. You can register to obtain one [here](https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration) 
-(or [here](http://openldbsv.nationalrail.co.uk/self-signup/register) for the staff version). 
+You will need to add your access token to the URL. You can register to obtain one [here](https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/Registration)
+(or [here](http://openldbsv.nationalrail.co.uk/self-signup/register) for the staff version).
 Append the `accessToken={Your GUID token}` parameter to the query string for every request.
 
 There is optional support for configuring the access token server side. So you don't need to worry about revealing it.
 
-You can set `DarwinAccessToken` to your NRE access token. If you leave `ClientAccessToken` as an empty GUID then no token is required in the Huxley URL. If you set `ClientAccessToken` to a random GUID and it matches the token in the URL then the `DarwinAccessToken` will be used instead in the SOAP call. Otherwise the URL token is passed straight through. Look in the `Web.config` file for more details. 
+You can set `DarwinAccessToken` to your NRE access token. If you leave `ClientAccessToken` as an empty GUID then no token is required in the Huxley URL. If you set `ClientAccessToken` to a random GUID and it matches the token in the URL then the `DarwinAccessToken` will be used instead in the SOAP call. Otherwise the URL token is passed straight through. Look in the `Web.config` file for more details.
 You can do the same with `DarwinStaffAccessToken` if you are using the staff version.
 
 **N.B.** You should set up these tokens in your deployment platform and not in your source code repository. You'll notice that the values are empty GUIDs by default. The example token used above will only work on the demo server and not directly against the SOAP API.
@@ -137,7 +137,7 @@ Filter stations can be a comma separated list. Filter type and number of rows ar
 
 [`/service/{Service ID}`](https://huxley.apphb.com/service/Z/zlpIG8jJacKayAnOXODw==?accessToken=)
 
-The service ID can be found for each service inside the departures and arrivals response. 
+The service ID can be found for each service inside the departures and arrivals response.
 Huxley also returns the ID in URL percent encoded, GUID and [URL safe Base64](https://en.wikipedia.org/wiki/Base64#URL_applications) representations (for non-staff boards).
 Likewise, the service endpoint will accept [URL safe Base64](https://tools.ietf.org/html/rfc4648#section-5) service IDs, from various different encoders.
 
@@ -155,6 +155,7 @@ The **delays** action performs calculations server side to easily let you know i
 `numRows` is mandatory
 
 **Sample Response:**
+
 ```json
 {
   "generatedAt": "2015-05-08T11:28:33.7187169+01:00",
@@ -216,6 +217,7 @@ CRS (Computer Reservation System) station codes are available from the following
 If `query` is omitted then all CRS codes are returned along with their respective station names. If `query` is provided then only station names matching it will be returned along with their CRS codes.
 
 Example response for `/crs/oswald`:
+
 ```json
 [
   {
@@ -243,10 +245,10 @@ Made by [James Singleton](https://unop.uk)
 
 ---
 
-© 2016 James Singleton
+© 2015 - 2020 James Singleton
 
 This program is licensed under the terms of the GNU Affero General Public License. This means that you need to share any changes (even if only running on a public server).
 
-If you would like another license (such as a commercial license with an invoice) then this can be provided. Please get in touch (send an email to jpsingleton at gmail dot com). 
+If you would like another license (such as a commercial license with an invoice) then this can be provided. Please get in touch (send an email to jpsingleton at gmail dot com).
 
 Contains public sector information licensed under the Open Government Licence v3.0.
