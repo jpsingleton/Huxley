@@ -252,3 +252,5 @@ This program is licensed under the terms of the GNU Affero General Public Licens
 If you would like another license (such as a commercial license with an invoice) then this can be provided. Please get in touch (send an email to jpsingleton at gmail dot com).
 
 Contains public sector information licensed under the Open Government Licence v3.0.
+
+<script data-goatcounter="https://huxley.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
