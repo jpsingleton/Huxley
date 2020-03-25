@@ -6,6 +6,10 @@
 
 [![AGPL](https://www.gnu.org/graphics/agplv3-155x51.png "AGPL")](LICENSE)
 
+This project is treeware! If you found it useful then please [plant a tree for me](https://offset.earth/unitsetsoftware).
+
+[![Buy me a tree!](buy-me-a-tree.svg)](https://offset.earth/unitsetsoftware)
+
 ## UK National Rail Live Departure Boards JSON proxy
 
 Huxley is a [CORS](http://enable-cors.org/) enabled JSON proxy for the UK National Rail Enquiries Live Departure Board [SOAP](http://harmful.cat-v.org/software/xml/soap/simple) [API](http://www.nationalrail.co.uk/46391.aspx) (Darwin), including the staff version.
@@ -15,6 +19,7 @@ It aims to make the API available to many more tools on multiple platforms. You 
 
 If you want to be informed of updates when they are released then watch the project on GitHub and **follow [me on Twitter](https://twitter.com/shutdownscanner)**. You can also read about this and other projects on [my blog](https://unop.uk/).
 If you are interested in cross-platform .NET then you may enjoy reading [my book, "ASP.NET Core 2 High Performance"](https://unop.uk/book/).
+I'm also [available for hire](https://unop.uk/hire-me/).
 
 ---
 
@@ -28,7 +33,7 @@ In addition it has a function for calculating delays which allows you to build u
 
 You can also use it to build mobile web apps such as [InstaBail](https://instabail.uk/), which generates excuses based on real transport disruptions.
 
-[![InstaBail](https://unop.uk/wp-content/uploads/2015/07/ios2.png "InstaBail")](https://instabail.uk/)
+[![InstaBail](https://unop.uk/wp-content/uploads/2015/07/ios2.png)](https://instabail.uk/)
 
 ## Demo
 
