@@ -1,10 +1,18 @@
 # Huxley
 
+[Huxley 2](https://github.com/jpsingleton/Huxley2) is [out now](https://unop.uk/huxley-2-release/).
+
+---
+
 [![Huxley](https://huxley.apphb.com/huxley.png "Huxley")](https://huxley.apphb.com/)
 
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true "Build Status")](https://ci.appveyor.com/project/jpsingleton/huxley)
 
 [![AGPL](https://www.gnu.org/graphics/agplv3-155x51.png "AGPL")](LICENSE)
+
+This project is treeware! If you found it useful then please [plant a tree for me](https://offset.earth/unitsetsoftware).
+
+[![Buy me a tree!](https://raw.githubusercontent.com/jpsingleton/Huxley2/master/Huxley2/wwwroot/img/buy-me-a-tree.svg?sanitize=true)](https://offset.earth/unitsetsoftware)
 
 ## UK National Rail Live Departure Boards JSON proxy
 
