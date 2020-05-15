@@ -1,5 +1,9 @@
 # Huxley
 
+[Huxley 2](https://github.com/jpsingleton/Huxley2) is [out now](https://unop.uk/huxley-2-release/)!
+
+---
+
 [![Huxley](https://huxley.apphb.com/huxley.png "Huxley")](https://huxley.apphb.com/)
 
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/jpsingleton/huxley?retina=true "Build Status")](https://ci.appveyor.com/project/jpsingleton/huxley)
